@@ -367,3 +367,6 @@
 }
 .gremio__frase { margin-top: clamp(32px, 5vw, 48px); font: 700 clamp(1.5rem, 3.6vw, 2.4rem)/1.2 var(--fonte-titulo); max-width: 24ch; }
 .loja__intro { margin: -6px 0 16px; color: var(--tinta-suave); max-width: 60ch; }
+/* recado em destaque dentro de um item do índice (campo `destaque` do registro) */
+.indice__destaque { display: block; width: fit-content; margin-top: 4px; padding: 1px 8px; border-radius: 999px; background: var(--sol); color: var(--tinta); font-size: .76rem; font-weight: 800; line-height: 1.4; }
+.indice a[aria-current="page"] .indice__destaque { background: var(--sol); color: var(--tinta); }

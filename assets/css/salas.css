@@ -1,0 +1,127 @@
+/* Salas (aluno/salas/): pulso do campus, mapa de salas livres, busca de aulas e grade.
+   Verde = livre, amarelo = livre por pouco tempo, cinza = ocupada. */
+
+.leiaute--largo { max-width: 1400px; }
+
+/* abertura com o pulso */
+.salas-abertura { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 20px 40px; align-items: center; }
+@container (max-width: 760px) { .salas-abertura { grid-template-columns: 1fr; } }
+.salas-gex { margin-top: 16px; max-width: 52ch; color: rgba(255, 255, 255, .85); }
+.selo-gex { display: inline-block; margin-right: 6px; padding: 2px 10px; border-radius: 999px; background: var(--sol); color: var(--tinta); font-weight: 800; font-size: .85rem; }
+.pulso { display: flex; flex-direction: column; align-items: flex-start; }
+.pulso__numero { font: 800 clamp(4.2rem, 13cqi, 7.5rem)/.9 var(--fonte-titulo); color: var(--sol); letter-spacing: -.03em; }
+.pulso__texto { margin-top: 6px; font: 700 1.35rem var(--fonte-titulo); color: #fff; }
+.pulso__sub { margin-top: 6px; color: rgba(255, 255, 255, .72); font-size: .95rem; }
+.curva { grid-column: 1 / -1; margin: 6px 0 0; }
+.curva svg { display: block; width: 100%; height: 120px; cursor: pointer; touch-action: none; }
+.curva figcaption { margin-top: 6px; font-size: .85rem; color: rgba(255, 255, 255, .7); }
+.curva .area { fill: rgba(255, 216, 77, .22); stroke: var(--sol); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.curva .grade-linha { stroke: rgba(255, 255, 255, .14); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.curva .rotulo { fill: rgba(255, 255, 255, .65); font: 600 11px var(--fonte); }
+.curva .marca { stroke: #fff; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.curva .marca-ponto { fill: var(--sol); stroke: var(--tinta); stroke-width: 2; }
+.curva .marca-agora { stroke: rgba(255, 255, 255, .5); stroke-dasharray: 3 4; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+
+.salas-atalhos { margin-top: 20px; }
+
+/* controles */
+.livres-topo h2 { margin-bottom: 8px; }
+.controles { margin-top: 18px; padding: 16px 18px; border: var(--borda); border-radius: var(--raio); background: var(--papel); display: grid; gap: 12px; position: sticky; top: calc(var(--altura-cabecalho) + 8px); z-index: 5; }
+@container (max-width: 640px) { .controles { position: static; } }
+.controles__linha { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.controles__rotulo { min-width: 64px; font-weight: 800; font-size: .9rem; }
+.controles__sep { width: 1px; height: 24px; background: var(--linha); margin: 0 4px; }
+.seg-dias, .chips-filtro { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg-dias .chip, .chips-filtro .chip, .controles .chip { padding: 4px 12px; font-size: .88rem; }
+.controles__linha--hora input[type="range"] { flex: 1 1 220px; accent-color: var(--azul); height: 28px; }
+.hora-saida { min-width: 64px; font: 800 1.35rem var(--fonte-titulo); }
+.chip--alterna[aria-pressed="true"] { background: var(--tinta); color: #fff; }
+.aviso-dia { margin-top: 12px; padding: 10px 14px; border-radius: var(--raio-pequeno); background: var(--sol-claro); font-size: .95rem; }
+
+.legenda-salas { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 16px 0 10px; font-size: .85rem; color: var(--tinta-suave); }
+.legenda-salas span { display: inline-flex; align-items: center; gap: 6px; }
+.q { width: 14px; height: 14px; border-radius: 4px; display: inline-block; border: 2px solid var(--tinta); }
+.q--livre { background: #2fbf71; } .q--curta { background: var(--sol); } .q--ocupada { background: #d9dce6; border-color: #b9bed0; }
+
+/* mapa de salas: um cartão por prédio, um quadrado por sala */
+.cobertura { margin: 0 0 14px; padding: 10px 14px; border-left: 4px solid var(--sol); background: var(--papel); font-size: .9rem; color: var(--tinta-suave); max-width: 90ch; }
+.mapa-salas { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; align-items: start; }
+.predio { border: var(--borda); border-radius: var(--raio); background: var(--papel); padding: 14px; }
+.predio__topo { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.predio__topo h3 { font-size: 1.15rem; }
+.predio__conta { font-size: .85rem; color: var(--tinta-suave); white-space: nowrap; }
+.predio__conta b { color: var(--tinta); font-size: 1rem; }
+.predio__barra { height: 6px; margin: 10px 0 12px; border-radius: 999px; background: #e3e6ef; overflow: hidden; }
+.predio__barra i { display: block; height: 100%; background: #2fbf71; transition: width .25s ease; }
+.salas-quadro { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 6px; }
+.sala {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-width: 0; text-align: left;
+  padding: 7px 8px 6px; border-radius: var(--raio-pequeno); border: 2px solid transparent; cursor: pointer;
+  font: inherit; color: var(--tinta); background: #d9dce6; transition: background-color .2s ease;
+}
+.sala:hover { border-color: var(--tinta); }
+.sala__nome { display: flex; align-items: baseline; gap: 6px; width: 100%; font: 800 .9rem/1.15 var(--fonte-titulo); white-space: nowrap; overflow: hidden; }
+.sala__cap { margin-left: auto; flex: none; font: 700 .7rem var(--fonte); color: var(--tinta-suave); }
+.sala__cap::before { content: "👥 "; font-size: .65rem; }
+.sala__info { font-size: .72rem; line-height: 1.25; color: var(--tinta-suave); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sala--livre { background: #c9f0d9; }
+.sala--livre .sala__info { color: #155c39; }
+.sala--curta { background: #ffe9a3; }
+.sala--ocupada { background: #e7e9f0; color: #5d6380; }
+.sala--oculta { display: none; }
+.mapa-salas__vazio { grid-column: 1 / -1; padding: 22px; text-align: center; border: 2px dashed var(--linha); border-radius: var(--raio); color: var(--tinta-suave); }
+
+/* detalhe de uma sala */
+.sala-detalhe { width: min(560px, 94vw); border: var(--borda); border-radius: var(--raio); padding: 0; color: var(--tinta); background: var(--fundo); }
+.sala-detalhe::backdrop { background: rgba(18, 23, 53, .5); }
+.sala-detalhe > * { margin-inline: 20px; }
+.sala-detalhe__topo { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin: 0; padding: 16px 20px; background: var(--tinta); color: #fff; }
+.sala-detalhe__topo h2 { font-size: 1.6rem; color: #fff; }
+.sala-detalhe__predio { font-size: .9rem; color: rgba(255, 255, 255, .75); }
+.sala-detalhe__dados { margin-top: 14px; }
+.sala-detalhe__dados li { font-size: .82rem; padding: 3px 10px; }
+.sala-detalhe__estado { margin-top: 14px; font: 700 1.1rem var(--fonte-titulo); }
+.linha-dia { position: relative; height: 34px; margin-top: 12px; border-radius: var(--raio-pequeno); background: #c9f0d9; overflow: hidden; border: 2px solid var(--tinta); }
+.linha-dia i { position: absolute; top: 0; bottom: 0; background: #b9bed0; border-left: 1px solid #fff; }
+.linha-dia i.t1 { background: #f2a2ae; } .linha-dia i.t2, .linha-dia i.t3 { background: #9fb2e8; }
+.linha-dia b { position: absolute; top: -2px; bottom: -2px; width: 3px; background: var(--tinta); }
+.linha-dia__horas { display: flex; justify-content: space-between; margin-top: 4px; font-size: .72rem; color: var(--tinta-suave); }
+.sala-detalhe__lista { list-style: none; padding: 0; margin-top: 14px; display: grid; gap: 6px; max-height: 38vh; overflow-y: auto; }
+.sala-detalhe__lista li { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 10px; padding: 8px 10px; border-radius: var(--raio-pequeno); background: var(--papel); border: 1px solid var(--linha); font-size: .92rem; }
+.sala-detalhe__lista li b { font-variant-numeric: tabular-nums; }
+.sala-detalhe .nota { margin-bottom: 18px; }
+
+/* busca de aulas */
+.busca input { width: 100%; max-width: 560px; padding: 14px 16px; border: var(--borda); border-radius: var(--raio); font: 600 1.05rem var(--fonte); background: var(--papel); color: var(--tinta); }
+.busca__estado { margin-top: 10px; font-size: .9rem; color: var(--tinta-suave); min-height: 1.4em; }
+.resultados { display: grid; gap: 12px; margin-top: 8px; }
+.disciplina { border: 2px solid var(--linha); border-radius: var(--raio); background: var(--papel); padding: 16px; }
+.disciplina h3 { font-size: 1.1rem; }
+.disciplina h3 span { color: var(--azul); margin-right: 6px; }
+.turmas { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 8px; }
+.turma { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 14px; align-items: center; padding: 10px 12px; border-radius: var(--raio-pequeno); background: var(--painel); }
+.turma__cod { font-weight: 800; }
+.turma__prof { font-size: .85rem; color: var(--tinta-suave); }
+.turma__horarios { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.turma__horarios li { font-size: .85rem; padding: 2px 9px; border-radius: 999px; background: var(--papel); border: 1px solid var(--linha); }
+.turma__horarios li.sem-sala { border-style: dashed; color: var(--tinta-suave); }
+.turma .chip[aria-pressed="true"] { background: var(--azul); border-color: var(--azul); color: #fff; }
+
+/* minha grade */
+.grade-topo { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px; }
+.grade { margin-top: 18px; border: var(--borda); border-radius: var(--raio); background: var(--papel); overflow-x: auto; }
+.grade__vazia { padding: 28px; text-align: center; color: var(--tinta-suave); }
+.grade__tabela { display: grid; grid-template-columns: 52px repeat(6, minmax(110px, 1fr)); min-width: 720px; }
+.grade__cab { padding: 10px 8px; font-weight: 800; text-align: center; border-bottom: 2px solid var(--tinta); background: var(--painel); }
+.grade__horas, .grade__dia { position: relative; height: calc(16 * 44px); }
+.grade__horas span { position: absolute; right: 8px; transform: translateY(-50%); font-size: .72rem; color: var(--tinta-suave); }
+.grade__dia { border-left: 1px solid var(--linha); background-image: repeating-linear-gradient(to bottom, transparent 0 43px, var(--linha) 43px 44px); }
+.bloco-aula { position: absolute; left: 4px; right: 4px; padding: 5px 7px; border-radius: 6px; overflow: hidden; font-size: .74rem; line-height: 1.25; border: 2px solid var(--tinta); }
+.bloco-aula b { display: block; font-size: .8rem; }
+.bloco-aula.conflito { outline: 3px dashed #c4304f; outline-offset: 1px; }
+.cor-0 { background: #c9d3ff; } .cor-1 { background: #ffe9a3; } .cor-2 { background: #c9f0d9; } .cor-3 { background: #ffd2c2; } .cor-4 { background: #e3d1ff; } .cor-5 { background: #c6ecf2; }
+.grade__nota { padding: 10px 14px; font-size: .85rem; color: var(--tinta-suave); border-top: 1px solid var(--linha); }
+
+/* GEX e fonte */
+.chamado--gex .selo-gex { margin: 0; }
+.fonte-dados { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--linha); font-size: .88rem; color: var(--tinta-suave); }

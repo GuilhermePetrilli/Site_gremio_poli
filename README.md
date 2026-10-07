@@ -25,6 +25,7 @@ aluno/                     Área do aluno: o portal aberto do Novo Grêmio (pág
   jornal/                  Jornal O Politécnico (estética de papel-jornal, assets/css/jornal.css)
   minerva/                 grandes anúncios e Aulas Magnas
   bandejoes/               guia dos bandejões: cardápio do dia, mapa e caminho a pé
+  salas/                   salas livres, onde é a minha aula e minha grade (dados do USPolis)
   demandas/                demandas para a diretoria (monta um e-mail) e transparência
 admin/                     Área dos administradores: o portal interno
 loja/                      Loja do Grêmio (em breve)
@@ -40,6 +41,7 @@ assets/
     jornal.css             estilos só do Jornal O Politécnico
   dados/
     cardapio.json          cardápio da semana, gerado por ferramentas/cardapio.mjs
+    salas.json             salas e ocupações dos próximos 14 dias, gerado por ferramentas/salas.mjs
   js/
     config.js              menu, contato, redes e autoria
     ramificacoes.js        registro das ramificações em árvore (fonte única de índice, páginas, menu e mapa)
@@ -72,6 +74,10 @@ node ferramentas/cardapio.mjs
 O script consulta o serviço que alimenta o app Cardápio+ da USP. O serviço não aceita chamadas direto do navegador (não envia cabeçalhos CORS), por isso o cardápio passa pelo arquivo. Hoje o agendamento em `.github/workflows/cardapio.yml` roda o script quatro vezes por dia e publica o arquivo quando o cardápio muda. Em outra hospedagem, basta um cron rodando o mesmo comando e publicando o arquivo.
 
 Como esse agendador faz commits no `main`, rode `git pull --rebase` antes de enviar as suas mudanças.
+
+## Salas da Poli
+
+A página `aluno/salas/` lê `assets/dados/salas.json`, gerado por `node ferramentas/salas.mjs` a partir do USPolis (sistema de alocação de salas da Poli). Como o USPolis não aceita chamadas diretas do navegador, o padrão é o mesmo do cardápio: o agendamento em `.github/workflows/salas.yml` roda o script três vezes por dia. De reuniões e eventos o arquivo guarda só o tipo, sem título nem quem reservou. A grade montada pelo aluno fica apenas no navegador dele.
 
 ## Versão dos arquivos (cache)
 

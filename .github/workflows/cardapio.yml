@@ -16,7 +16,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: cardapio
+  group: dados-do-site
   cancel-in-progress: false
 
 jobs:

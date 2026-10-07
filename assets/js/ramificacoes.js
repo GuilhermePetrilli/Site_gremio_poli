@@ -15,6 +15,7 @@
 //   construcao  true enquanto a página não tiver o conteúdo completo
 //   chamada   texto do link no cartão da página (opcional; padrão "Abrir <título>")
 //   estado    "no-ar" (já funciona) ou "em-construcao"; aparece como pílula nos cartões
+//   destaque  frase curta em destaque no índice da área (ex.: um recado para um público)
 //   veja      id de outro nó relacionado (ex.: um projeto que ganhou seção no portal); vira link "Ver também"
 //
 // Para criar páginas novas: adicione o nó com `caminho` e rode `node ferramentas/paginas.mjs`.
@@ -194,6 +195,15 @@ export const ramificacoes = [
         estado: "no-ar",
         resumo: "Cardápio de hoje, horários, preço e o caminho a pé até cada um dos quatro bandejões do campus.",
         chamada: "Ver cardápio e caminho",
+      },
+      {
+        id: "salas",
+        titulo: "Salas",
+        caminho: "aluno/salas/",
+        estado: "no-ar",
+        destaque: "GEX, deem uma olhada: salas livres para o seu grupo",
+        resumo: "Salas livres agora em cada prédio da Poli, onde é a sua aula e a sua grade com as salas, com os dados do USPolis.",
+        chamada: "Encontrar uma sala",
       },
       {
         id: "demandas",

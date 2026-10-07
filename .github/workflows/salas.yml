@@ -1,0 +1,41 @@
+# Atualiza assets/dados/salas.json com as salas e ocupações do USPolis.
+# É só um agendador: todo o trabalho está em ferramentas/salas.mjs, que roda igual
+# em qualquer servidor com Node (ver README, seção "Salas da Poli").
+name: Salas da Poli
+
+on:
+  schedule:
+    # Horários em UTC: 5h30, 11h30 e 17h30 em São Paulo.
+    - cron: "30 8 * * *"
+    - cron: "30 14 * * *"
+    - cron: "30 20 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dados-do-site
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node ferramentas/salas.mjs
+      - name: Publicar se mudou
+        run: |
+          if git diff --quiet -- assets/dados/salas.json; then
+            echo "Sem mudanças nas salas."
+            exit 0
+          fi
+          git config user.name "salas-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/dados/salas.json
+          git commit -m "Atualiza salas da Poli (USPolis)"
+          git pull --rebase origin main
+          git push

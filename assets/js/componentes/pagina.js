@@ -7,7 +7,7 @@
 // Com duas ou mais seções que têm itens, a página ganha atalhos "Nesta página" no topo. Para escrever uma página à mão, troque este
 // componente pelo conteúdo em HTML e mantenha a trilha com data-componente="trilha".
 
-import { trilha } from "./trilha.js?v=202610071136";
+import { trilha } from "./trilha.js?v=202610071213";
 
 // Pílula de estado de um nó (campo `estado` no registro).
 export function pilulaEstado({ site }, no) {
@@ -34,6 +34,7 @@ export function cartoes(contexto, no, ancestrais, estilo = "") {
     .map((f) => `<li><a class="recurso${f.estado ? ` recurso--${f.estado}` : ""}" href="${url(destino(f, [...ancestrais, no]))}">
         ${pilulaEstado(contexto, f)}
         <h3>${f.titulo}</h3>
+        ${f.destaque ? `<span class="indice__destaque">${f.destaque}</span>` : ""}
         ${f.resumo ? `<p>${f.resumo}</p>` : ""}
         <span class="recurso__ir">${f.chamada || `Abrir ${f.titulo.toLowerCase()}`}</span>
       </a></li>`)

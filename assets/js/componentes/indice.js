@@ -25,7 +25,8 @@ function ramo(contexto, nos, ancestrais = [], sempreAbrir = false) {
       const temFilhos = no.filhos && no.filhos.length;
       const abrir = temFilhos && (sempreAbrir || contemAtual(no));
       const atual = ehAtual(no) ? ' aria-current="page"' : "";
-      return `<li><a href="${url(destino(no, ancestrais))}"${atual}>${no.titulo}</a>${
+      const destaque = no.destaque ? `<span class="indice__destaque">${no.destaque}</span>` : "";
+      return `<li><a href="${url(destino(no, ancestrais))}"${atual}>${no.titulo}${destaque}</a>${
         abrir ? ramo(contexto, no.filhos, [...ancestrais, no]) : ""
       }</li>`;
     })

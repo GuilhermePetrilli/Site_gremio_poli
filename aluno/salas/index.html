@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Salas | Grêmio Politécnico da USP</title>
+  <meta name="description" content="Salas livres agora em cada prédio da Poli, onde é a sua aula e a sua grade com as salas, com os dados do USPolis.">
+  <meta name="theme-color" content="#fbfbfe">
+  <link rel="icon" href="../../assets/img/marca/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
+  <link rel="stylesheet" href="../../assets/css/tokens.css?v=202610071213">
+  <link rel="stylesheet" href="../../assets/css/base.css?v=202610071213">
+  <link rel="stylesheet" href="../../assets/css/componentes.css?v=202610071213">
+  <link rel="stylesheet" href="../../assets/css/portal.css?v=202610071213">
+  <link rel="stylesheet" href="../../assets/css/salas.css?v=202610071213">
+  <script type="module" src="../../assets/js/site.js?v=202610071213"></script>
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+  <div data-componente="cabecalho"></div>
+
+  <div class="container leiaute leiaute--pagina leiaute--largo">
+    <div data-componente="indice" data-modo="lateral" data-raiz="aluno"></div>
+    <main id="conteudo" class="leiaute__principal portal salas">
+      <div data-componente="trilha" data-id="salas"></div>
+
+      <!-- Abertura: o pulso do campus agora -->
+      <section class="abertura abertura--noite salas-abertura" aria-labelledby="salas-titulo">
+        <div class="salas-abertura__texto">
+          <h1 id="salas-titulo">Salas</h1>
+          <p class="abertura__lead">Quais salas da Poli estão livres agora, onde é a sua aula e a sua grade com as salas certas.</p>
+          <p class="salas-gex"><span class="selo-gex">GEX, deem uma olhada</span> Precisa de um lugar para reunião, estudo ou processo seletivo? Filtre pelo tamanho do grupo e veja o que está livre.</p>
+        </div>
+        <div class="pulso" aria-live="polite">
+          <b class="pulso__numero tab" id="pulsoNum">–</b>
+          <span class="pulso__texto" id="pulsoTxt">salas livres agora, segundo o USPolis</span>
+          <small class="pulso__sub" id="pulsoSub">Carregando os dados do USPolis…</small>
+        </div>
+        <figure class="curva" aria-labelledby="curvaLegenda">
+          <svg id="curva" role="img" aria-label="Quantidade de salas livres ao longo do dia"></svg>
+          <figcaption id="curvaLegenda">Salas livres ao longo do dia. Toque na curva para escolher um horário.</figcaption>
+        </figure>
+      </section>
+
+      <nav class="pagina__atalhos salas-atalhos" aria-label="Nesta página">
+        <a class="chip" href="#livres">Salas livres</a><a class="chip" href="#minha-aula">Onde é a minha aula?</a><a class="chip" href="#grade">Minha grade</a><a class="chip" href="#gex">Para os grupos de extensão</a>
+      </nav>
+
+      <!-- Mapa de salas livres -->
+      <section class="bloco-portal" id="livres" aria-labelledby="livres-titulo">
+        <div class="livres-topo">
+          <h2 id="livres-titulo">Salas livres</h2>
+          <p class="bloco-portal__intro">Escolha o dia e arraste o horário. Cada quadrado é uma sala: verde está sem ocupação registrada no USPolis, amarelo fica livre por pouco tempo e cinza está ocupada.</p>
+        </div>
+
+        <div class="controles" role="group" aria-label="Quando">
+          <div class="controles__linha">
+            <span class="controles__rotulo" id="rotDia">Dia</span>
+            <div class="seg-dias" id="dias" role="group" aria-labelledby="rotDia"></div>
+          </div>
+          <div class="controles__linha controles__linha--hora">
+            <label class="controles__rotulo" for="hora">Horário</label>
+            <input type="range" id="hora" min="420" max="1380" step="10" value="720">
+            <output class="hora-saida tab" id="horaSaida" for="hora">12h</output>
+            <button type="button" class="chip" id="agora">Agora</button>
+          </div>
+          <div class="controles__linha">
+            <span class="controles__rotulo" id="rotPredio">Prédio</span>
+            <div class="chips-filtro" id="predios" role="group" aria-labelledby="rotPredio"></div>
+          </div>
+          <div class="controles__linha">
+            <span class="controles__rotulo" id="rotCap">Pessoas</span>
+            <div class="chips-filtro" id="capacidades" role="group" aria-labelledby="rotCap"></div>
+            <span class="controles__sep" aria-hidden="true"></span>
+            <button type="button" class="chip chip--alterna" id="fAcess" aria-pressed="false">Acessível</button>
+            <button type="button" class="chip chip--alterna" id="fAr" aria-pressed="false">Ar-condicionado</button>
+            <button type="button" class="chip chip--alterna" id="fLivres" aria-pressed="false">Só as livres</button>
+          </div>
+        </div>
+
+        <p class="aviso-dia" id="avisoDia" hidden></p>
+        <div class="legenda-salas" aria-hidden="true">
+          <span><i class="q q--livre"></i>Livre</span><span><i class="q q--curta"></i>Livre por menos de 1h</span><span><i class="q q--ocupada"></i>Ocupada</span>
+        </div>
+        <p class="cobertura" id="cobertura"></p>
+        <div class="mapa-salas" id="mapaSalas" aria-live="polite"></div>
+      </section>
+
+      <!-- Detalhe de uma sala -->
+      <dialog class="sala-detalhe" id="salaDetalhe" aria-labelledby="detTitulo">
+        <div class="sala-detalhe__topo">
+          <div><p class="sala-detalhe__predio" id="detPredio"></p><h2 id="detTitulo"></h2></div>
+          <button type="button" class="gaveta__fechar sala-detalhe__fechar" id="detFechar">Fechar</button>
+        </div>
+        <ul class="etiquetas sala-detalhe__dados" id="detDados"></ul>
+        <p class="sala-detalhe__estado" id="detEstado"></p>
+        <div class="linha-dia" id="detLinha" aria-hidden="true"></div>
+        <ol class="sala-detalhe__lista" id="detLista"></ol>
+        <p class="nota">Livre segundo o USPolis. Antes de usar a sala, siga as regras de reserva do prédio.</p>
+      </dialog>
+
+      <!-- Onde é a minha aula -->
+      <section class="bloco-portal" id="minha-aula" aria-labelledby="aula-titulo">
+        <h2 id="aula-titulo">Onde é a minha aula?</h2>
+        <p class="bloco-portal__intro">Digite o código ou o nome da disciplina. Encontre a sua turma e adicione à sua grade.</p>
+        <div class="busca">
+          <label class="sr" for="busca">Código ou nome da disciplina</label>
+          <input type="search" id="busca" placeholder="Ex.: MAC0122 ou Cálculo" autocomplete="off" spellcheck="false">
+        </div>
+        <p class="busca__estado" id="buscaEstado" aria-live="polite"></p>
+        <div class="resultados" id="resultados"></div>
+      </section>
+
+      <!-- Minha grade -->
+      <section class="bloco-portal" id="grade" aria-labelledby="grade-titulo">
+        <div class="grade-topo">
+          <div>
+            <h2 id="grade-titulo">Minha grade</h2>
+            <p class="bloco-portal__intro">As turmas que você adicionar aparecem aqui, com a sala de cada aula. A grade fica salva só neste navegador.</p>
+          </div>
+          <button type="button" class="botao botao--linha botao--pequeno" id="gradeLimpar" hidden>Limpar a grade</button>
+        </div>
+        <div class="grade" id="gradeQuadro"></div>
+      </section>
+
+      <!-- Para os grupos de extensão -->
+      <section class="bloco-portal chamado chamado--gex" id="gex" aria-labelledby="gex-titulo">
+        <div>
+          <span class="selo-gex">GEX, deem uma olhada</span>
+          <h2 id="gex-titulo" style="margin-top:10px">Uma sala para o seu grupo, em segundos</h2>
+          <p>Escolha o dia e o horário da reunião, filtre pelo número de pessoas e abra a sala para ver até quando ela fica livre. As salas marcadas como reserváveis no USPolis aparecem assim no detalhe.</p>
+        </div>
+        <a class="botao" href="#livres" id="gexIr">Procurar uma sala</a>
+      </section>
+
+      <p class="fonte-dados" id="fonteDados">Dados do <a href="https://www.uspolis.com.br/public/allocations" target="_blank" rel="noopener">USPolis</a>, o sistema de alocação de salas da Poli. "Livre" quer dizer sem aula, prova, reunião ou evento registrado no USPolis.</p>
+
+      <div data-componente="guia-salas"></div>
+    </main>
+  </div>
+
+  <div data-componente="rodape"></div>
+</body>
+</html>

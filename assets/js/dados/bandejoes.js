@@ -40,22 +40,9 @@ export const bandejoes = [
   },
 ];
 
-export const hora = (m) => {
-  const h = Math.floor(m / 60), mm = m % 60;
-  return h + "h" + (mm ? String(mm).padStart(2, "0") : "");
-};
-
-// Dia da semana (0 = domingo) e minuto atual no fuso de São Paulo.
-export function agoraSP() {
-  const p = Object.fromEntries(
-    new Intl.DateTimeFormat("en-US", { timeZone: "America/Sao_Paulo", weekday: "short", hour: "numeric", minute: "numeric", hourCycle: "h23" })
-      .formatToParts(new Date()).map((x) => [x.type, x.value])
-  );
-  return { dia: { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 }[p.weekday], minuto: (+p.hour % 24) * 60 + +p.minute };
-}
-
-// Data de hoje em São Paulo, no formato AAAA-MM-DD (chave do cardápio).
-export const hojeSP = () => new Intl.DateTimeFormat("en-CA", { timeZone: "America/Sao_Paulo" }).format(new Date());
+// Hora e data em São Paulo vêm de tempo.js (também usado pelas salas).
+import { hora, agoraSP, hojeSP } from "./tempo.js?v=202610071213";
+export { hora, agoraSP, hojeSP };
 
 export function situacao(b, { dia, minuto } = agoraSP()) {
   const lista = dia >= 1 && dia <= 5 ? b.semana : dia === 6 ? b.sabado : [];
