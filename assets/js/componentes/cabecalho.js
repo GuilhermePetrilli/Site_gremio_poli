@@ -1,8 +1,9 @@
 // Cabeçalho: faixa de aviso, marca, menu e gaveta lateral com o índice do site.
-// No computador, o botão "Índice" abre a gaveta; no celular, o botão "Menu" abre a
-// mesma gaveta, que também traz os links do menu.
+// O botão "Índice do site" (escuro, em destaque) abre a gaveta. No celular ele vira
+// "Índice" e a gaveta também traz os links do menu.
+// Qualquer elemento com data-abrir-gaveta, em qualquer lugar da página, abre a mesma gaveta.
 
-import { arvore } from "./indice.js?v=202610062310";
+import { arvore } from "./indice.js?v=202610062336";
 
 export default function cabecalho(alvo, contexto) {
   const { site, url } = contexto;
@@ -24,7 +25,7 @@ export default function cabecalho(alvo, contexto) {
     .map((a, i) => `<a class="botao ${i ? "botao--linha" : "botao--acesso"}" href="${url(a.href)}">${i ? "" : iconeAcesso}<span>${a.rotulo}</span></a>`)
     .join("");
 
-  const iconeIndice = `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h13"/></svg>`;
+  const iconeIndice = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h13"/></svg>`;
 
   alvo.innerHTML = `${aviso}
     <header class="cabecalho">
@@ -33,15 +34,15 @@ export default function cabecalho(alvo, contexto) {
           <img src="${url("assets/img/marca/gremio-azul.png")}" alt="" width="40" height="40">
           <span>${site.nome}</span>
         </a>
-        <button class="cabecalho__indice" type="button" data-abrir-gaveta aria-haspopup="dialog">${iconeIndice}Índice</button>
+        <button class="botao--indice cabecalho__indice" type="button" data-abrir-gaveta aria-haspopup="dialog">${iconeIndice}Índice do site</button>
         <nav class="cabecalho__menu" aria-label="Principal">${itens}</nav>
         ${chamada}
-        <button class="cabecalho__menu-botao" type="button" data-abrir-gaveta aria-haspopup="dialog">Menu</button>
+        <button class="botao--indice cabecalho__menu-botao" type="button" data-abrir-gaveta aria-haspopup="dialog" aria-label="Índice do site">${iconeIndice}<span>Índice</span></button>
       </div>
     </header>
     <dialog class="gaveta" aria-label="Índice do site">
       <div class="gaveta__topo">
-        <span class="gaveta__titulo">Índice</span>
+        <span class="gaveta__titulo">Índice do site</span>
         <button class="gaveta__fechar" type="button" data-fechar-gaveta>Fechar</button>
       </div>
       <div class="gaveta__acessos">${acessos}</div>
@@ -50,7 +51,9 @@ export default function cabecalho(alvo, contexto) {
     </dialog>`;
 
   const gaveta = alvo.querySelector(".gaveta");
-  alvo.querySelectorAll("[data-abrir-gaveta]").forEach((b) => b.addEventListener("click", () => gaveta.showModal()));
+  document.addEventListener("click", (e) => {
+    if (e.target.closest("[data-abrir-gaveta]")) gaveta.showModal();
+  });
   alvo.querySelector("[data-fechar-gaveta]").addEventListener("click", () => gaveta.close());
   // Fecha ao clicar fora do painel ou ao seguir um link.
   gaveta.addEventListener("click", (e) => {

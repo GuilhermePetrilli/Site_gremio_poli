@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bandejões | Grêmio Politécnico da USP</title>
+  <meta name="description" content="Cardápio de hoje, horários, preço e o caminho a pé até cada um dos quatro bandejões da Cidade Universitária.">
+  <meta name="theme-color" content="#fbfbfe">
+  <link rel="icon" href="../../assets/img/marca/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
+  <link rel="stylesheet" href="../../assets/css/tokens.css?v=202610062336">
+  <link rel="stylesheet" href="../../assets/css/base.css?v=202610062336">
+  <link rel="stylesheet" href="../../assets/css/componentes.css?v=202610062336">
+  <link rel="stylesheet" href="../../assets/css/bandejoes.css?v=202610062336">
+  <script type="module" src="../../assets/js/site.js?v=202610062336"></script>
+</head>
+<body>
+  <a class="pular" href="#mapa">Ir para o mapa</a>
+  <div data-componente="cabecalho"></div>
+
+  <div class="container leiaute leiaute--pagina leiaute--largo">
+    <div data-componente="indice" data-modo="lateral" data-raiz="aluno"></div>
+    <main id="conteudo" class="leiaute__principal guia">
+      <div data-componente="trilha" data-id="bandejoes"></div>
+
+      <!-- Abertura -->
+      <section class="hero" id="inicio">
+        <div class="hero__texto">
+          <span class="eyebrow">Guia para quem estuda na Poli</span>
+          <h1>Bandejão a quantos passos do Biênio?</h1>
+          <p class="lead">Os quatro restaurantes universitários da Cidade Universitária, com o caminho a pé a partir do seu prédio e o que está aberto agora.</p>
+          <div class="cta"><a class="botao" href="#mapa">Ver o mapa</a><a class="botao botao--linha" href="#bandejoes">Horários e preços</a></div>
+          <div class="facts">
+            <div class="fact"><b>4</b> bandejões no campus</div>
+            <div class="fact"><b>R$&nbsp;2</b> a refeição para alunos</div>
+            <div class="fact"><b class="tab" id="factMin">8 min</b> do Biênio ao mais perto</div>
+          </div>
+        </div>
+        <div class="horizonte" aria-hidden="true"><div class="horizonte__sol"></div><div class="horizonte__faixa2"></div><div class="horizonte__faixa1"></div></div>
+      </section>
+
+      <nav class="guia__nav" aria-label="Nesta página">
+        <a class="chip" href="#hoje">Cardápio</a><a class="chip" href="#mapa">Qual o mais perto?</a><a class="chip" href="#bandejoes">Bandejões</a><a class="chip" href="#pagar">Como pagar</a><a class="chip" href="#faq">Perguntas</a>
+      </nav>
+
+      <!-- O que tem hoje: cardápio do Cardápio+ (assets/dados/cardapio.json) -->
+      <section class="secao" id="hoje">
+        <div class="hoje-head">
+          <h2>O que tem hoje</h2>
+          <p class="hoje-src" id="hojeSrc">Cardápio do app Cardápio+ da USP</p>
+        </div>
+        <div class="hoje-bar">
+          <div class="seg" role="group" aria-label="Bandejão" id="hojeRu"></div>
+          <div class="seg" role="group" aria-label="Refeição" id="hojeMeal"></div>
+        </div>
+        <div class="hoje-body" id="hojeBody" aria-live="polite"></div>
+      </section>
+
+      <!-- Mapa e caminho a pé -->
+      <section class="secao" id="mapa">
+        <div class="mhead">
+          <h2>Qual bandejão fica mais perto de você?</h2>
+          <p>Escolha de onde você sai ou toque em qualquer ponto do mapa. O caminho segue as vias internas do campus.</p>
+        </div>
+        <div class="mgrid">
+          <div class="panel p-orig">
+            <p class="plabel" id="olabel">Você está em</p>
+            <div class="origins" role="group" aria-labelledby="olabel" id="origins"></div>
+            <p class="osub" id="osub"></p>
+          </div>
+          <div class="panel p-res">
+            <ol class="res" id="res" aria-live="polite"></ol>
+            <a class="gmaps" id="gmaps" href="#" target="_blank" rel="noopener">Abrir este caminho no Google Maps</a>
+            <p class="pnote">Tempo estimado a 4,5 km/h. Horários de dias letivos; em feriados e férias o funcionamento muda.</p>
+          </div>
+          <div class="mapcol">
+            <div class="mapbox" id="mapbox">
+              <svg id="map" role="img" aria-label="Mapa da Cidade Universitária com a Poli em destaque, os quatro bandejões e o caminho a pé até eles"></svg>
+              <div class="zoom">
+                <button type="button" id="zin" aria-label="Aproximar">+</button>
+                <button type="button" id="zout" aria-label="Afastar">−</button>
+                <button type="button" id="zfit" class="txt" aria-label="Enquadrar a rota">ROTA</button>
+                <button type="button" id="zall" class="txt" aria-label="Ver o campus inteiro">TUDO</button>
+              </div>
+              <div class="hintbar"><span id="hint">Arraste para mover · toque para marcar onde você está</span></div>
+              <div class="toast" id="toast" hidden></div>
+            </div>
+            <div class="layers" role="group" aria-label="Camadas do mapa">
+              <button type="button" class="toggle" id="tFood" aria-pressed="false"><i></i>Outras opções de comida</button>
+              <button type="button" class="toggle" id="tPD" aria-pressed="false"><i></i>Oferta de comida por área</button>
+            </div>
+            <div class="leg" id="leg">
+              <span><svg width="22" height="22" viewBox="-11 -11 22 22"><circle r="9" fill="var(--sol)" stroke="var(--tinta)" stroke-width="2"/></svg>Bandejão</span>
+              <span><svg width="20" height="14" viewBox="0 0 20 14"><rect x="1" y="1" width="18" height="12" rx="3" fill="var(--m-poli)" stroke="var(--azul)" stroke-width="2"/></svg>Área da Poli</span>
+              <span><svg width="26" height="10" viewBox="0 0 26 10"><path d="M2 5H24" stroke="var(--azul)" stroke-width="5" stroke-linecap="round"/></svg>Caminho escolhido</span>
+              <span><svg width="26" height="10" viewBox="0 0 26 10"><path d="M2 5H24" stroke="var(--tinta-suave)" stroke-width="2" stroke-dasharray="2 5" stroke-linecap="round"/></svg>Outros caminhos</span>
+            </div>
+            <div class="leg" id="legFood" hidden>
+              <span><svg width="12" height="12"><circle cx="6" cy="6" r="5" class="f-rest"/></svg>Restaurante particular</span>
+              <span><svg width="12" height="12"><circle cx="6" cy="6" r="5" class="f-lanch"/></svg>Lanchonete</span>
+              <span><svg width="12" height="12"><circle cx="6" cy="6" r="5" class="f-rua"/></svg>Comida de rua</span>
+              <span><svg width="12" height="12"><circle cx="6" cy="6" r="5" class="f-outros"/></svg>Ambulantes, bancas e máquinas</span>
+            </div>
+            <p class="pdnote" id="legPD" hidden>Áreas azuis: poucas opções de alimentação. Áreas verdes: mais bem servidas. Classificação do Plano Diretor Participativo do campus.</p>
+          </div>
+          <div class="p-extra">
+            <details class="how" id="how" open><summary id="howTitle">Como chegar a pé</summary><ol class="steps" id="steps"></ol></details>
+            <div class="menu-box" id="menuToday"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Os quatro bandejões -->
+      <section class="secao" id="bandejoes">
+        <h2>Os quatro bandejões</h2>
+        <p class="secao__intro">Todos servem o mesmo esquema de bandeja: arroz, feijão, prato principal, opção vegetariana, salada e sobremesa. Mudam o horário, a distância e alguns detalhes.</p>
+        <div class="bgrid" id="bgrid"></div>
+        <p class="src">Horários de dias letivos segundo a página de alunos do Instituto de Física da USP. Cardápio do dia vindo do app Cardápio+ da USP; avisos de feriado ficam no site da PRIP.</p>
+      </section>
+
+      <!-- Como pagar -->
+      <section class="secao" id="pagar">
+        <h2>Como pagar</h2>
+        <p class="secao__intro">O bandejão funciona com créditos pré-pagos ligados ao seu número USP. Compre antes de entrar na fila.</p>
+        <div class="sq">
+          <div class="n"><b>R$&nbsp;2</b><span>por almoço ou jantar para alunos de graduação e pós</span></div>
+          <div class="s"><b>R$&nbsp;15</b><span>para docentes, servidores, pós-docs e visitantes autorizados</span></div>
+          <div class="a"><b>App</b><span>Compre créditos no app Cardápio+, com PIX ou transferência</span></div>
+          <div><b>Caixa</b><span>Ou no Caixa Central, ao lado do Restaurante Central, das 7h às 19h30, de segunda a sexta</span></div>
+        </div>
+      </section>
+
+      <!-- Perguntas frequentes -->
+      <section class="secao perguntas" id="faq">
+        <h2>Perguntas frequentes</h2>
+        <details><summary>Qual bandejão abre no sábado e no café da manhã?</summary><p>Só o Central. Ele serve café da manhã de segunda a sábado e é o único que abre para almoço aos sábados. Domingo nenhum dos quatro funciona.</p></details>
+        <details><summary>Dá para jantar na Prefeitura?</summary><p>Não. O bandejão da Prefeitura serve só almoço. Para jantar, vá ao Central, à Física ou à Química, das 17h30 às 19h45.</p></details>
+        <details><summary>Os tempos de caminhada são exatos?</summary><p>São estimativas. O caminho é calculado sobre as vias internas do mapa do Plano Diretor, a 4,5 km/h, e as posições dos prédios da Poli são aproximadas. Atalhos por dentro de prédios e estacionamentos podem encurtar o trajeto.</p></details>
+        <details><summary>De onde vem o cardápio?</summary><p>Do mesmo serviço que alimenta o app Cardápio+ da USP. O site busca o cardápio da semana de cada bandejão várias vezes por dia e mostra o do dia ao lado do caminho. A PRIP, Pró-Reitoria de Inclusão e Pertencimento, publica no site dela os avisos de feriado e de férias.</p></details>
+        <details><summary>Tem opção vegetariana?</summary><p>Sim, há opção vegetariana. A Física é conhecida também pelo suco à vontade no almoço e no jantar.</p></details>
+      </section>
+
+      <!-- Fontes -->
+      <section class="fontes" aria-labelledby="fontes-titulo">
+        <h2 id="fontes-titulo">Fontes</h2>
+        <ul>
+          <li>Mapa-base, bandejões e outras opções de comida: mapa “Alimentação no Campus”, Plano Diretor Participativo do Campus USP Capital-Butantã (PUSP-CB e Equipe Técnica do Plano Diretor).</li>
+          <li>Horários, locais e preço para alunos: <a href="https://portal.if.usp.br/salunos/pt-br/bandej%C3%A3o" target="_blank" rel="noopener">Instituto de Física da USP, página “Bandejão”</a>.</li>
+          <li>Preço para servidores e visitantes: <a href="https://jornal.usp.br/artigos/em-defesa-dos-bandejoes-da-usp/" target="_blank" rel="noopener">Jornal da USP, “Em defesa dos bandejões da USP” (maio de 2026)</a>.</li>
+          <li>Endereços e coordenada do prédio da Administração: <a href="https://www.poli.usp.br/a-poli-2/como-chegar/" target="_blank" rel="noopener">Poli-USP, “Como chegar”</a>.</li>
+          <li>Cardápio: serviço do app Cardápio+ da USP, atualizado automaticamente.</li>
+          <li>Avisos de funcionamento: <a href="https://prip.usp.br/restaurantes/" target="_blank" rel="noopener">PRIP-USP, Restaurantes</a>.</li>
+        </ul>
+        <p>Guia criado pela chapa Alvorada. Dados conferidos em outubro de 2026.</p>
+      </section>
+
+      <div data-componente="guia-bandejoes"></div>
+    </main>
+  </div>
+
+  <div data-componente="rodape"></div>
+</body>
+</html>

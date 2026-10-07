@@ -18,22 +18,44 @@ Depois acesse http://localhost:8000.
 ```
 index.html                 página inicial
 apoio/, cultura/, …       uma pasta por ramificação, gerada por ferramentas/paginas.mjs
+aluno/                     Área do aluno (página de entrada escrita à mão)
+  bandejoes/               guia dos bandejões: cardápio do dia, mapa e caminho a pé
+.github/workflows/         agendador do cardápio (opcional; ver "Cardápio dos bandejões")
 .nojekyll                  faz o GitHub Pages servir os arquivos como estão
 assets/
   css/
     tokens.css             cores, fontes e medidas (identidade visual)
     base.css               reset, tipografia e utilitários
-    componentes.css        botões, cabeçalho, seções, cartões, rodapé
+    componentes.css        botões, chips, cabeçalho, índice, seções, cartões, rodapé
+    bandejoes.css          estilos só do guia dos bandejões
+  dados/
+    cardapio.json          cardápio da semana, gerado por ferramentas/cardapio.mjs
   js/
     config.js              menu, contato, redes e autoria
     ramificacoes.js        registro das ramificações em árvore (fonte única de índice, páginas, menu e mapa)
     site.js                monta os componentes de cada página
-    componentes/           um arquivo por componente (cabecalho, rodape, indice, trilha, pagina, ramificacoes, agora)
-    dados/                 dados reutilizáveis (ex.: horários dos bandejões)
+    componentes/           um arquivo por componente (cabecalho, rodape, indice, trilha, pagina, recursos, ramificacoes, agora, guia-bandejoes)
+    dados/                 dados reutilizáveis (bandejões e horários, mapa do campus)
   img/
     marca/                 logo oficial do Grêmio (não alterar)
     servicos/, historia/   imagens de conteúdo
 ```
+
+## Identidade visual
+
+Títulos e números em Bricolage Grotesque, texto em Nunito. Bordas de 2px na cor tinta, cantos de 10px, botões e chips em pílula, números em "fichas" com borda. O azul da logo marca ações e links; o amarelo (`--sol`) é o sol do horizonte e o destaque. Esses elementos vieram do protótipo do guia dos bandejões e valem para o site inteiro.
+
+## Cardápio dos bandejões
+
+O guia em `aluno/bandejoes/` mostra o cardápio do dia lido de `assets/dados/cardapio.json`. Esse arquivo é gerado por:
+
+```sh
+node ferramentas/cardapio.mjs
+```
+
+O script consulta o serviço que alimenta o app Cardápio+ da USP. O serviço não aceita chamadas direto do navegador (não envia cabeçalhos CORS), por isso o cardápio passa pelo arquivo. Hoje o agendamento em `.github/workflows/cardapio.yml` roda o script quatro vezes por dia e publica o arquivo quando o cardápio muda. Em outra hospedagem, basta um cron rodando o mesmo comando e publicando o arquivo.
+
+Como esse agendador faz commits no `main`, rode `git pull --rebase` antes de enviar as suas mudanças.
 
 ## Versão dos arquivos (cache)
 
@@ -66,6 +88,10 @@ Para criar uma subdivisão nova (ex.: uma página dentro da Área do aluno):
 2. rode `node ferramentas/paginas.mjs`, que cria a pasta e o `index.html` de toda página nova do registro, sem tocar nas que já existem;
 3. publique. O índice, a trilha e os links se atualizam sozinhos.
 
+**Áreas com índice próprio (Área do aluno, dos administradores):** as páginas dessas áreas usam `<div data-componente="indice" data-modo="lateral" data-raiz="aluno">`, que mostra só a área, com a página de entrada no topo e as subpáginas abaixo. O `paginas.mjs` já gera as subpáginas assim. Para listar as subpáginas como cartões numa página escrita à mão, use `<div data-componente="recursos" data-id="aluno"></div>`.
+
 Para escrever o conteúdo de uma página à mão, edite o `index.html` dela e troque o `<div data-componente="pagina">` pelo HTML desejado, mantendo `<div data-componente="trilha" data-id="...">`.
 
-**Novo componente:** crie `assets/js/componentes/nome.js` exportando `function (alvo, { site, url })`, registre o componente em `site.js` e use `<div data-componente="nome"></div>` na página.
+**Novo componente:** crie `assets/js/componentes/nome.js` exportando `function (alvo, { site, url })`, registre o componente em `site.js` e use `<div data-componente="nome"></div>` na página. Componentes pesados, usados numa página só (como o guia dos bandejões), entram em `sobDemanda` no `site.js` e só são baixados nessa página.
+
+**Abrir o índice de qualquer lugar:** qualquer botão com `data-abrir-gaveta` abre a gaveta do índice do site.

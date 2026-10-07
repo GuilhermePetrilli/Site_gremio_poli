@@ -4,28 +4,38 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Área do aluno | Grêmio Politécnico da USP</title>
-  <meta name="description" content="O espaço de quem estuda na Poli: informações e serviços do Grêmio reunidos num só lugar.">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="O lugar para tirar suas dúvidas sobre a vida na Poli, cheio de recursos para ajudar você no dia a dia.">
+  <meta name="theme-color" content="#fbfbfe">
   <link rel="icon" href="../assets/img/marca/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap">
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610062310">
-  <link rel="stylesheet" href="../assets/css/base.css?v=202610062310">
-  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610062310">
-  <script type="module" src="../assets/js/site.js?v=202610062310"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610062336">
+  <link rel="stylesheet" href="../assets/css/base.css?v=202610062336">
+  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610062336">
+  <script type="module" src="../assets/js/site.js?v=202610062336"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
   <div data-componente="cabecalho"></div>
 
   <div class="container leiaute leiaute--pagina">
-    <div data-componente="indice" data-modo="lateral"></div>
+    <!-- Índice só da Área do aluno: as subpáginas vêm de `filhos` do nó "aluno" em assets/js/ramificacoes.js. -->
+    <div data-componente="indice" data-modo="lateral" data-raiz="aluno"></div>
     <main id="conteudo" class="leiaute__principal">
-      <!-- Conteúdo montado a partir do registro (assets/js/ramificacoes.js, id "aluno").
-           Para escrever esta página à mão, troque o div abaixo pelo HTML da página e use
-           <div data-componente="trilha" data-id="aluno"></div> para manter a trilha. -->
-      <div data-componente="pagina" data-id="aluno"></div>
+      <div data-componente="trilha" data-id="aluno"></div>
+
+      <header class="pagina__topo aluno__topo">
+        <h1>Área do aluno</h1>
+        <p class="pagina__resumo">Este é o lugar para tirar suas dúvidas sobre a vida na Poli. Aqui o Grêmio reúne recursos práticos para ajudar você no dia a dia da graduação, do almoço de hoje ao que você precisa resolver no campus.</p>
+      </header>
+
+      <section class="aluno__recursos" aria-labelledby="recursos-titulo">
+        <h2 id="recursos-titulo">Recursos</h2>
+        <div data-componente="recursos" data-id="aluno"></div>
+        <p class="aluno__nota">Novos recursos entram aqui conforme ficam prontos. Não achou o que procurava?
+          <a href="#contato">Fale com o Grêmio</a> e a gente ajuda.</p>
+      </section>
     </main>
   </div>
 

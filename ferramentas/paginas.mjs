@@ -12,7 +12,11 @@ import { percorrer } from "../assets/js/ramificacoes.js";
 const raiz = fileURLToPath(new URL("..", import.meta.url));
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 
-function modelo(no) {
+// Páginas dentro de uma área de acesso (Área do aluno, dos administradores) usam o índice
+// lateral só daquela área; as demais usam o índice do site.
+function modelo(no, ancestrais) {
+  const topo = ancestrais[0] || no;
+  const area = topo.grupo === "acessos" ? ` data-raiz="${topo.id}"` : "";
   const nivel = no.caminho.split("/").filter(Boolean).length;
   const p = "../".repeat(nivel);
   return `<!doctype html>
@@ -22,11 +26,11 @@ function modelo(no) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(no.titulo)} | Grêmio Politécnico da USP</title>
   <meta name="description" content="${esc(no.resumo)}">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#fbfbfe">
   <link rel="icon" href="${p}assets/img/marca/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
   <link rel="stylesheet" href="${p}assets/css/tokens.css">
   <link rel="stylesheet" href="${p}assets/css/base.css">
   <link rel="stylesheet" href="${p}assets/css/componentes.css">
@@ -37,7 +41,7 @@ function modelo(no) {
   <div data-componente="cabecalho"></div>
 
   <div class="container leiaute leiaute--pagina">
-    <div data-componente="indice" data-modo="lateral"></div>
+    <div data-componente="indice" data-modo="lateral"${area}></div>
     <main id="conteudo" class="leiaute__principal">
       <!-- Conteúdo montado a partir do registro (assets/js/ramificacoes.js, id "${no.id}").
            Para escrever esta página à mão, troque o div abaixo pelo HTML da página e use
@@ -53,13 +57,13 @@ function modelo(no) {
 }
 
 let criadas = 0;
-for (const { no } of percorrer()) {
+for (const { no, ancestrais } of percorrer()) {
   if (!no.caminho) continue;
   const pasta = join(raiz, no.caminho);
   const arquivo = join(pasta, "index.html");
   if (existsSync(arquivo)) continue;
   mkdirSync(pasta, { recursive: true });
-  writeFileSync(arquivo, modelo(no));
+  writeFileSync(arquivo, modelo(no, ancestrais));
   console.log(`Criada: ${no.caminho}index.html`);
   criadas++;
 }

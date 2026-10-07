@@ -13,6 +13,7 @@
 //   acoes     [{ rotulo, href, externo }]
 //   filhos    nós filhos, com o mesmo formato (qualquer profundidade)
 //   construcao  true enquanto a página não tiver o conteúdo completo
+//   chamada   texto do link no cartão da página (opcional; padrão "Abrir <título>")
 //
 // Para criar páginas novas: adicione o nó com `caminho` e rode `node ferramentas/paginas.mjs`.
 // Conteúdo das frentes: página "Projetos e impacto" do site atual, conferida em outubro de 2026.
@@ -127,9 +128,16 @@ export const ramificacoes = [
     grupo: "acessos",
     titulo: "Área do aluno",
     caminho: "aluno/",
-    construcao: true,
-    resumo: "O espaço de quem estuda na Poli: informações e serviços do Grêmio reunidos num só lugar.",
-    filhos: [],
+    resumo: "O lugar para tirar suas dúvidas sobre a vida na Poli, cheio de recursos para ajudar você no dia a dia.",
+    filhos: [
+      {
+        id: "bandejoes",
+        titulo: "Bandejões",
+        caminho: "aluno/bandejoes/",
+        resumo: "Cardápio de hoje, horários, preço e o caminho a pé até cada um dos quatro bandejões do campus.",
+        chamada: "Ver cardápio e caminho",
+      },
+    ],
   },
   {
     id: "admin",

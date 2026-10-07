@@ -1,33 +1,39 @@
 /* Tokens de design: cores, tipografia e medidas usadas em todo o site.
-   O azul é o da logo histórica do Grêmio (#222E84). */
+   O azul é o da logo histórica do Grêmio (#222E84); o amarelo é o sol do horizonte
+   e o destaque de foco e seleção. */
 :root {
-  --tinta: #121735;        /* texto principal */
+  --tinta: #121735;        /* texto principal e bordas fortes */
   --tinta-suave: #4a5070;  /* texto secundário */
   --azul: #222e84;         /* azul da logo: marca, links, ações */
   --azul-forte: #1a2366;   /* hover das ações */
   --azul-tinta: #e4e8fa;   /* realces suaves */
+  --sol: #ffd84d;          /* sol do horizonte, marcadores e destaques */
+  --sol-claro: #fff3c2;
   --papel: #ffffff;
+  --fundo: #fbfbfe;        /* fundo da página */
   --painel: #f1f3f8;       /* painéis e faixas alternadas */
-  --linha: #d5d9e6;        /* bordas e divisões */
-  --aberto: #1d8a5b;       /* estado "aberto agora" */
-  --aberto-fundo: #e2f3ea;
-  --marca-texto: #ffd84d;  /* foco e seleção */
+  --linha: #d5d9e6;        /* bordas e divisões leves */
+  --aberto: #1d7a52;       /* estado "aberto agora" */
+  --aberto-fundo: #ddf2e7;
+  --marca-texto: var(--sol);
 
-  /* Uma família só: Archivo. Títulos na largura expandida, texto na normal. */
-  --fonte: "Archivo", system-ui, sans-serif;
-  --largo: 118%;
+  /* Duas famílias: Bricolage Grotesque nos títulos e números, Nunito no texto. */
+  --fonte: "Nunito", system-ui, sans-serif;
+  --fonte-titulo: "Bricolage Grotesque", "Nunito", system-ui, sans-serif;
 
-  /* Escala tipográfica (px): 14, 17, 21, 28, 40, 64 */
+  /* Escala tipográfica (px): 14, 17, 21, 28, 40, 70 */
   --t-pequeno: 0.875rem;
   --t-texto: 1.0625rem;
-  --t-media: 1.3125rem;
+  --t-media: 1.25rem;
   --t-titulo: 1.75rem;
-  --t-grande: clamp(1.9rem, 4vw, 2.5rem);
-  --t-gigante: clamp(2.6rem, 7vw, 4.4rem);
+  --t-grande: clamp(1.7rem, 4.2vw, 2.5rem);
+  --t-gigante: clamp(2.4rem, 6.5vw, 4.4rem);
 
   --largura: 1200px;
   --gutter: 20px;
-  --bloco: clamp(64px, 9vw, 112px);
+  --bloco: clamp(56px, 8vw, 96px);
   --altura-cabecalho: 68px;
-  --raio: 6px;
+  --raio: 10px;
+  --raio-pequeno: 8px;
+  --borda: 2px solid var(--tinta);
 }

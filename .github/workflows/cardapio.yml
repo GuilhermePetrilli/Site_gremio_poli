@@ -1,0 +1,42 @@
+# Atualiza assets/dados/cardapio.json com o cardápio do Cardápio+ USP.
+# É só um agendador: todo o trabalho está em ferramentas/cardapio.mjs, que roda igual
+# em qualquer servidor com Node (ver README, seção "Cardápio dos bandejões").
+name: Cardápio dos bandejões
+
+on:
+  schedule:
+    # Horários em UTC: 5h, 9h30, 13h e 19h em São Paulo.
+    - cron: "0 8 * * *"
+    - cron: "30 12 * * *"
+    - cron: "0 16 * * *"
+    - cron: "0 22 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cardapio
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node ferramentas/cardapio.mjs
+      - name: Publicar se mudou
+        run: |
+          if git diff --quiet -- assets/dados/cardapio.json; then
+            echo "Sem mudanças no cardápio."
+            exit 0
+          fi
+          git config user.name "cardapio-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/dados/cardapio.json
+          git commit -m "Atualiza cardápio dos bandejões"
+          git pull --rebase origin main
+          git push

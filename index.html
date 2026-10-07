@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Grêmio Politécnico da USP</title>
   <meta name="description" content="Grêmio Politécnico da USP: representação discente, apoio ao aluno, projetos culturais e sociais, eventos e serviços para os alunos da Escola Politécnica desde 1903.">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#fbfbfe">
   <link rel="icon" href="assets/img/marca/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap">
-  <link rel="stylesheet" href="assets/css/tokens.css?v=202610062310">
-  <link rel="stylesheet" href="assets/css/base.css?v=202610062310">
-  <link rel="stylesheet" href="assets/css/componentes.css?v=202610062310">
-  <script type="module" src="assets/js/site.js?v=202610062310"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
+  <link rel="stylesheet" href="assets/css/tokens.css?v=202610062336">
+  <link rel="stylesheet" href="assets/css/base.css?v=202610062336">
+  <link rel="stylesheet" href="assets/css/componentes.css?v=202610062336">
+  <script type="module" src="assets/js/site.js?v=202610062336"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -26,6 +26,10 @@
       <div class="container">
         <h1>Do que você precisa hoje?</h1>
         <p class="inicio__intro">O Grêmio Politécnico é a entidade dos alunos da Poli desde 1903. Representação, apoio, cultura, projetos sociais e serviços, tudo começa por aqui.</p>
+        <div class="inicio__navegar">
+          <button class="botao--indice" type="button" data-abrir-gaveta aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h13"/></svg>Abrir o índice do site</button>
+          <p>Todas as páginas do Grêmio, da Área do aluno a cada projeto, num só lugar.</p>
+        </div>
 
         <div class="inicio__grade">
           <nav class="balcao" aria-label="Atalhos">
@@ -64,6 +68,8 @@
           <div data-componente="agora"></div>
         </div>
       </div>
+      <!-- Horizonte: o sol nasce sobre a faixa azul, que continua na faixa de acesso abaixo. -->
+      <div class="horizonte" aria-hidden="true"><div class="horizonte__sol"></div><div class="horizonte__faixa2"></div><div class="horizonte__faixa1"></div></div>
     </section>
 
     <!-- Acessos: área do aluno em destaque e área da gestão -->
@@ -80,7 +86,10 @@
     <!-- Frentes: índice lateral e blocos gerados de assets/js/ramificacoes.js -->
     <section class="bloco bloco--painel" id="frentes">
       <div class="container leiaute">
-        <div data-componente="indice" data-modo="lateral"></div>
+        <div class="indice--lateral-home">
+          <div class="indice-chamada"><button class="botao--indice" type="button" data-abrir-gaveta aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h13"/></svg>Índice do site</button></div>
+          <div data-componente="indice" data-modo="lateral"></div>
+        </div>
         <div class="leiaute__principal">
           <div class="bloco__topo">
             <h2>O que o Grêmio faz</h2>

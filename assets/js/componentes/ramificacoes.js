@@ -23,7 +23,7 @@ export default function ramificacoes(alvo, { url, registro, destino }) {
 
   const numeros = (r) =>
     r.numeros && r.numeros.length
-      ? `<dl class="frente__numeros">${r.numeros.map((n) => `<div><dt>${n.valor}</dt><dd>${n.rotulo}</dd></div>`).join("")}</dl>`
+      ? `<dl class="fichas frente__numeros">${r.numeros.map((n) => `<div class="ficha"><dt>${n.valor}</dt><dd>${n.rotulo}</dd></div>`).join("")}</dl>`
       : "";
 
   const filhos = (r) =>
