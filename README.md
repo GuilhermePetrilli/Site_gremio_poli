@@ -18,8 +18,16 @@ Depois acesse http://localhost:8000.
 ```
 index.html                 página inicial
 projetos/, eventos/, …     uma pasta por ramificação, gerada por ferramentas/paginas.mjs
-aluno/                     Área do aluno (página de entrada escrita à mão)
+aluno/                     Área do aluno: o portal aberto do Novo Grêmio (páginas escritas à mão)
+  fuja-do-nabo/            hub de estudos
+  extensoes/               hub dos grupos de extensão
+  meu-amor/                eventos, esportes e cultura
+  jornal/                  Jornal O Politécnico (estética de papel-jornal, assets/css/jornal.css)
+  minerva/                 grandes anúncios e Aulas Magnas
   bandejoes/               guia dos bandejões: cardápio do dia, mapa e caminho a pé
+  demandas/                demandas para a diretoria (monta um e-mail) e transparência
+admin/                     Área dos administradores: o portal interno
+loja/                      Loja do Grêmio (em breve)
 .github/workflows/         agendador do cardápio (opcional; ver "Cardápio dos bandejões")
 .nojekyll                  faz o GitHub Pages servir os arquivos como estão
 assets/
@@ -28,6 +36,8 @@ assets/
     base.css               reset, tipografia e utilitários
     componentes.css        botões, chips, cabeçalho, índice, seções, cartões, rodapé
     bandejoes.css          estilos só do guia dos bandejões
+    portal.css             peças das páginas do portal (abertura, módulos, chamado, calendário, formulário)
+    jornal.css             estilos só do Jornal O Politécnico
   dados/
     cardapio.json          cardápio da semana, gerado por ferramentas/cardapio.mjs
   js/
@@ -40,6 +50,12 @@ assets/
     marca/                 logo oficial do Grêmio (não alterar)
     servicos/, historia/   imagens de conteúdo
 ```
+
+## O portal do Novo Grêmio
+
+O site segue o documento "A Nova Era do Grêmio Politécnico": um portal aberto (Área do aluno) e um portal interno (Área dos administradores), com meta de lançamento na Semana de Recepção de 2027 (`site.portal` em `config.js`). Cada seção do portal é um filho do nó `aluno` no registro, com `estado: "no-ar"` ou `"em-construcao"`, que vira pílula nos cartões. Itens antigos que ganharam seção no portal apontam para ela com `veja` (ex.: Aulas de reforço → Fuja do Nabo).
+
+Regras de conteúdo: o que é plano aparece como plano, com estado visível; nada de funcionalidade de mentira; onde dá para agir hoje, a página oferece uma ação real (e-mail com assunto pronto, YouTube, Bandejões).
 
 ## Identidade visual
 

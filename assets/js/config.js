@@ -3,7 +3,7 @@
 // Os caminhos (href) são relativos à raiz do site, sem barra no início,
 // para funcionar igual em subpasta (github.io/Site_gremio_poli/) ou num domínio próprio.
 
-import { encontrar, destino } from "./ramificacoes.js?v=202610071030";
+import { encontrar, destino } from "./ramificacoes.js?v=202610071046";
 
 const doRegistro = (id, rotulo) => {
   const { no } = encontrar(id);
@@ -29,6 +29,13 @@ export const site = {
     { rotulo: "O Grêmio", href: "#gremio" },
     { rotulo: "Contato", href: "#contato", local: true },
   ],
+  // Portal aberto do Novo Grêmio (Área do aluno). O nome ainda vai ser decidido.
+  portal: {
+    nome: "Portal Politécnico",
+    lancamento: "Semana de Recepção de 2027",
+    lancamentoCurto: "Recepção 2027",
+  },
+
   chamada: doRegistro("aluno"),
   // Acessos mostrados no topo da gaveta do índice.
   acessos: [doRegistro("aluno"), doRegistro("admin")],

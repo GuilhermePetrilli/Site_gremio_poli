@@ -14,6 +14,8 @@
 //   filhos    nós filhos, com o mesmo formato (qualquer profundidade)
 //   construcao  true enquanto a página não tiver o conteúdo completo
 //   chamada   texto do link no cartão da página (opcional; padrão "Abrir <título>")
+//   estado    "no-ar" (já funciona) ou "em-construcao"; aparece como pílula nos cartões
+//   veja      id de outro nó relacionado (ex.: um projeto que ganhou seção no portal); vira link "Ver também"
 //
 // Para criar páginas novas: adicione o nó com `caminho` e rode `node ferramentas/paginas.mjs`.
 // Conteúdo das frentes: página "Projetos e impacto" do site atual, conferida em outubro de 2026.
@@ -49,7 +51,7 @@ export const ramificacoes = [
           { valor: "900+", rotulo: "bolsas integrais de idiomas concedidas" },
         ],
         filhos: [
-          { id: "reforco", titulo: "Aulas de reforço (Fuja do Nabo)", texto: "Aulas na reta final antes das provas, gravadas e publicadas no YouTube do Grêmio." },
+          { id: "reforco", titulo: "Aulas de reforço (Fuja do Nabo)", texto: "Aulas na reta final antes das provas, gravadas e publicadas no YouTube do Grêmio.", veja: "fuja-do-nabo" },
           { id: "apoio-academico", titulo: "Apoio acadêmico", texto: "Dúvidas sobre matrícula, requerimentos e calendário, divulgação de bolsas e pedidos de reoferecimento de disciplinas." },
           { id: "emprestimo", titulo: "Empréstimo de material", texto: "Calculadoras científicas, jalecos e equipamentos de som e foto para eventos e apresentações." },
           { id: "bolsas", titulo: "Bolsas de idiomas", texto: "Bolsas integrais no Poliglota Idiomas, independentemente da condição socioeconômica." },
@@ -64,7 +66,7 @@ export const ramificacoes = [
           { valor: "1989", rotulo: "ano da primeira SAPO" },
         ],
         filhos: [
-          { id: "o-politecnico", titulo: "Jornal O Politécnico", texto: "Há mais de 80 anos tratando os temas da Poli com verdade, humor e curiosidade." },
+          { id: "o-politecnico", titulo: "Jornal O Politécnico", texto: "Desde 1944 tratando os temas da Poli com verdade, humor e curiosidade.", veja: "jornal" },
           { id: "sapo", titulo: "Semana de Arte da Poli (SAPO)", texto: "Desde 1989, oficinas de pintura, recitais de piano e apresentações de teatro e dança." },
           { id: "gtp", titulo: "Grupo de Teatro da Poli (GTP)", texto: "Mais de 80 anos de história e aulas gratuitas, abertas à universidade e ao público." },
         ],
@@ -98,8 +100,8 @@ export const ramificacoes = [
     ],
     filhos: [
       { id: "recepcao", titulo: "Semana de Recepção", texto: "Integração dos calouros à vida universitária e à comunidade politécnica." },
-      { id: "festas", titulo: "Festas e confraternizações", texto: "Encontros que aproximam turmas e cursos." },
-      { id: "feira-de-extensoes", titulo: "Feira de Extensões", texto: "Todo primeiro trimestre, os grupos de extensão e coletivos da Poli reunidos num só lugar." },
+      { id: "festas", titulo: "Festas e confraternizações", texto: "Encontros que aproximam turmas e cursos.", veja: "meu-amor" },
+      { id: "feira-de-extensoes", titulo: "Feira de Extensões", texto: "Duas vezes por ano, os grupos de extensão e coletivos da Poli reunidos num só lugar.", veja: "extensoes" },
     ],
   },
   {
@@ -127,7 +129,7 @@ export const ramificacoes = [
     construcao: true,
     resumo: "Alunos com voz e voto nas decisões da graduação e da pós-graduação. Nessas instâncias, o voto discente tem o mesmo peso do voto docente.",
     acoes: [
-      { rotulo: "Enviar uma demanda por e-mail", href: "mailto:administrativo@gremiopolitecnico.com.br?subject=Demanda%20para%20a%20representa%C3%A7%C3%A3o" },
+      { rotulo: "Enviar uma demanda", href: "aluno/demandas/" },
       { rotulo: "Falar pelo Instagram", href: "https://instagram.com/gremiopolitecnico", externo: true },
     ],
     filhos: [],
@@ -137,14 +139,69 @@ export const ramificacoes = [
     grupo: "acessos",
     titulo: "Área do aluno",
     caminho: "aluno/",
-    resumo: "O lugar para tirar suas dúvidas sobre a vida na Poli, cheio de recursos para ajudar você no dia a dia.",
+    resumo: "O portal aberto do Novo Grêmio: o lugar para tirar suas dúvidas e encontrar tudo o que ajuda a viver a Poli, dos estudos ao amor pela Escola.",
+    // Seções do portal aberto, na ordem do documento "A Nova Era do Grêmio Politécnico".
     filhos: [
+      {
+        id: "fuja-do-nabo",
+        titulo: "Fuja do Nabo",
+        caminho: "aluno/fuja-do-nabo/",
+        estado: "em-construcao",
+        resumo: "O hub de estudos da Poli: videoaulas, provas antigas resolvidas, exercícios para cada prova, os livros dos professores e um assistente com IA.",
+        chamada: "Conhecer o hub de estudos",
+      },
+      {
+        id: "extensoes",
+        titulo: "Extensões",
+        caminho: "aluno/extensoes/",
+        estado: "em-construcao",
+        resumo: "Todos os grupos de extensão da Poli num só lugar, com a Feira de Extensão aberta o ano inteiro.",
+        chamada: "Conhecer o hub dos grupos",
+      },
+      {
+        id: "meu-amor",
+        titulo: "Meu Amor",
+        caminho: "aluno/meu-amor/",
+        estado: "em-construcao",
+        resumo: "Festas, viagens, esportes e cultura: tudo o que faz um politécnico se apaixonar pela Escola.",
+        chamada: "Ver eventos, esportes e cultura",
+        filhos: [
+          { id: "festas-e-viagens", titulo: "Eventos", texto: "Próximas festas e viagens, contato para compra, aviso de novos lotes e as novidades de cada evento." },
+          { id: "esportes", titulo: "Esportes", texto: "O espaço da AAAP: jogos da rodada, resultados do fim de semana e links para assistir." },
+          { id: "exposicao-cultural", titulo: "Cultura", texto: "Exposição livre de arte: grupos de teatro, dança e música, e a arte de cada aluno." },
+        ],
+      },
+      {
+        id: "jornal",
+        titulo: "Jornal O Politécnico",
+        caminho: "aluno/jornal/",
+        estado: "em-construcao",
+        resumo: "O jornal dos politécnicos desde 1944 renasce no portal, com a estética de papel-jornal e espaço para quem quer escrever.",
+        chamada: "Ler a primeira página",
+      },
+      {
+        id: "minerva",
+        titulo: "Minerva",
+        caminho: "aluno/minerva/",
+        estado: "em-construcao",
+        resumo: "Os grandes anúncios do Grêmio: Aulas Magnas com grandes nomes do país, palestras com os grupos de extensão e inscrições.",
+        chamada: "Ver as Aulas Magnas",
+      },
       {
         id: "bandejoes",
         titulo: "Bandejões",
         caminho: "aluno/bandejoes/",
+        estado: "no-ar",
         resumo: "Cardápio de hoje, horários, preço e o caminho a pé até cada um dos quatro bandejões do campus.",
         chamada: "Ver cardápio e caminho",
+      },
+      {
+        id: "demandas",
+        titulo: "Demandas e transparência",
+        caminho: "aluno/demandas/",
+        estado: "no-ar",
+        resumo: "Leve uma proposta, demanda ou denúncia ao Grêmio e acompanhe como o dinheiro do Grêmio é gasto.",
+        chamada: "Enviar uma demanda",
       },
     ],
   },
@@ -154,7 +211,7 @@ export const ramificacoes = [
     titulo: "Área dos administradores",
     caminho: "admin/",
     construcao: true,
-    resumo: "Espaço da gestão do Grêmio.",
+    resumo: "O portal interno do Grêmio: as tarefas e os e-mails de cada diretoria numa só tela.",
     filhos: [],
   },
   {

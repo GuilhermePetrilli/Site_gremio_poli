@@ -1,0 +1,54 @@
+/* Jornal O Politécnico (aluno/jornal/): a seção mantém a estética de papel-jornal,
+   com cor e diagramação próprias, em respeito ao jornal criado pelos politécnicos em 1944.
+   Papel cinza claro (como a antiga tiragem em A3), serifada Newsreader, colunas e fios. */
+
+.jornal {
+  --papel-jornal: #e8e7e2;
+  --tinta-jornal: #1a1a1a;
+  --fio-jornal: #1a1a1a;
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  color: var(--tinta-jornal);
+  background: var(--papel-jornal);
+  padding: clamp(18px, 3.5vw, 40px);
+  border-radius: 4px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .08), 0 14px 30px -18px rgba(18, 23, 53, .45);
+}
+.jornal h1, .jornal h2, .jornal h3 { font-family: "Newsreader", Georgia, serif; letter-spacing: 0; color: var(--tinta-jornal); }
+
+/* cabeçalho */
+.jornal__cabeca { text-align: center; border-bottom: 4px double var(--fio-jornal); padding-bottom: 14px; }
+.jornal__linha { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 6px 0; border-top: 1px solid var(--fio-jornal); border-bottom: 1px solid var(--fio-jornal); font-size: .82rem; font-variant: small-caps; letter-spacing: .06em; }
+.jornal__titulo { margin-top: 14px; font-size: clamp(2.6rem, 11cqi, 6.4rem); font-weight: 800; line-height: .95; font-variation-settings: "opsz" 72; }
+.jornal__subtitulo { margin-top: 8px; font-style: italic; font-size: 1.05rem; }
+.jornal__estado { margin: 14px 0 0; text-align: center; font-size: .95rem; }
+.jornal__estado .pill { font-family: var(--fonte); margin-right: 6px; }
+
+/* manchete */
+.jornal__manchete { padding: 22px 0 20px; border-bottom: 1px solid var(--fio-jornal); }
+.jornal__manchete h2 { font-size: clamp(2rem, 6.2cqi, 3.6rem); font-weight: 800; line-height: 1.02; text-align: center; font-variation-settings: "opsz" 60; }
+.jornal__linha-fina { margin: 12px auto 0; max-width: 60ch; text-align: center; font-style: italic; font-size: 1.15rem; line-height: 1.45; }
+.jornal__colunas { margin-top: 20px; columns: 3 14rem; column-gap: 28px; column-rule: 1px solid var(--fio-jornal); font-size: 1.05rem; line-height: 1.55; text-align: left; }
+.jornal__colunas p + p { margin-top: .7em; }
+.jornal__colunas p:first-child::first-letter { float: left; font-size: 3.4em; line-height: .82; font-weight: 800; margin: 4px 8px 0 0; }
+
+/* grade de matérias */
+.jornal__grade { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.1fr); border-bottom: 4px double var(--fio-jornal); }
+.jornal__grade > * { padding: 18px 20px; }
+.jornal__grade > * + * { border-left: 1px solid var(--fio-jornal); }
+.jornal__grade > :first-child { padding-left: 0; }
+.jornal__grade > :last-child { padding-right: 0; }
+@container (max-width: 760px) {
+  .jornal__grade { grid-template-columns: 1fr; }
+  .jornal__grade > * { padding-inline: 0; }
+  .jornal__grade > * + * { border-left: 0; border-top: 1px solid var(--fio-jornal); }
+}
+.jornal__materia h2 { font-size: 1.55rem; font-weight: 700; line-height: 1.1; }
+.jornal__materia p { margin-top: 10px; font-size: 1.05rem; line-height: 1.55; }
+
+.jornal__classificados h2 { font-size: 1rem; font-variant: small-caps; letter-spacing: .12em; text-align: center; border-bottom: 1px solid var(--fio-jornal); padding-bottom: 6px; }
+.anuncio { margin-top: 12px; padding: 12px 14px; border: 1px solid var(--fio-jornal); }
+.anuncio h3 { font-size: 1.15rem; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; }
+.anuncio p { margin-top: 6px; font-size: .98rem; line-height: 1.45; }
+.anuncio a { display: inline-block; margin-top: 8px; color: var(--tinta-jornal); font-weight: 700; font-style: italic; }
+
+.jornal__rodape { padding-top: 10px; text-align: center; font-size: .82rem; font-variant: small-caps; letter-spacing: .08em; }

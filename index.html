@@ -10,10 +10,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
-  <link rel="stylesheet" href="assets/css/tokens.css?v=202610071030">
-  <link rel="stylesheet" href="assets/css/base.css?v=202610071030">
-  <link rel="stylesheet" href="assets/css/componentes.css?v=202610071030">
-  <script type="module" src="assets/js/site.js?v=202610071030"></script>
+  <link rel="stylesheet" href="assets/css/tokens.css?v=202610071046">
+  <link rel="stylesheet" href="assets/css/base.css?v=202610071046">
+  <link rel="stylesheet" href="assets/css/componentes.css?v=202610071046">
+  <script type="module" src="assets/js/site.js?v=202610071046"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -33,9 +33,9 @@
 
         <div class="inicio__grade">
           <nav class="balcao" aria-label="Atalhos">
-            <a class="balcao__item" href="projetos/#reforco">
+            <a class="balcao__item" href="aluno/fuja-do-nabo/">
               <span class="balcao__acao">Revisar a matéria antes da prova</span>
-              <span class="balcao__onde">Aulas de reforço</span>
+              <span class="balcao__onde">Fuja do Nabo</span>
               <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
             <a class="balcao__item" href="projetos/#emprestimo">
@@ -83,6 +83,19 @@
       </div>
     </section>
 
+    <!-- A nova era: o portal aberto do Novo Grêmio (seções vindas do nó "aluno" do registro) -->
+    <section class="bloco bloco--papel nova-era" id="nova-era" aria-labelledby="nova-era-titulo">
+      <div class="container nova-era__grade">
+        <div class="nova-era__texto">
+          <h2 id="nova-era-titulo">A nova era do Grêmio</h2>
+          <p>O Novo Grêmio começa pela digitalização: um portal aberto, para ajudar, integrar e ampliar os horizontes de quem estuda na Poli, e um portal interno, para que as diretorias trabalhem melhor.</p>
+          <p class="nova-era__meta"><span class="pill pill--breve">Semana de Recepção de 2027</span> O portal recebe os calouros e cresce a cada semestre.</p>
+          <a class="botao" href="aluno/">Conhecer o portal</a>
+        </div>
+        <div class="nova-era__secoes" data-componente="recursos" data-id="aluno" data-estilo="portal"></div>
+      </div>
+    </section>
+
     <!-- Frentes: índice lateral e blocos gerados de assets/js/ramificacoes.js -->
     <section class="bloco bloco--painel" id="frentes">
       <div class="container leiaute">
@@ -102,7 +115,7 @@
     </section>
 
     <!-- O Grêmio -->
-    <section class="bloco bloco--painel" id="gremio">
+    <section class="bloco bloco--papel" id="gremio">
       <div class="container colunas">
         <figure class="gremio__figura">
           <img class="gremio__imagem" src="assets/img/historia/gremio-antigo.jpg" alt="Ilustração antiga do prédio do Grêmio Politécnico" width="900" height="900" loading="lazy">
@@ -113,6 +126,15 @@
           <p class="texto">Fundado em 1º de setembro de 1903 por estudantes da Escola Politécnica, o Grêmio é a segunda entidade estudantil mais antiga do Brasil.</p>
           <p class="texto">Hoje é uma associação de representação estudantil e de serviços, formada por alunos e colaboradores, com impacto direto na vida de milhares de estudantes dentro e fora da Poli.</p>
         </div>
+      </div>
+      <div class="container">
+        <ol class="linha-tempo" aria-label="Linha do tempo do Grêmio">
+          <li><b>1903</b><span>Estudantes da Escola Politécnica fundam o Grêmio, em 1º de setembro.</span></li>
+          <li><b>1944</b><span>Politécnicos criam o jornal O Politécnico.</span></li>
+          <li><b>1989</b><span>Acontece a primeira Semana de Arte da Poli, a SAPO.</span></li>
+          <li class="linha-tempo__futuro"><b>2027</b><span>O portal do Novo Grêmio recebe os calouros na Semana de Recepção.</span></li>
+        </ol>
+        <p class="gremio__frase">Viver de presente, consolidando o futuro.</p>
       </div>
     </section>
 

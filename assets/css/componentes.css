@@ -327,3 +327,43 @@
 .loja__categorias .pill { align-self: flex-start; }
 .loja__nota { margin-top: 18px; color: var(--tinta-suave); }
 .loja__nota a { font-weight: 700; }
+
+/* ---------- portal: estado, seções numeradas e "ver também" (usados também fora do portal) ---------- */
+.pill--breve { background: var(--sol-claro); color: var(--tinta); border-color: transparent; }
+.veja { display: inline-block; margin-top: 8px; font-weight: 800; font-size: .95rem; }
+/* área do aluno: seções numeradas do portal */
+.recursos--portal { counter-reset: secao; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.recursos--portal li { counter-increment: secao; }
+.recursos--portal .recurso { position: relative; padding-top: 22px; }
+.recursos--portal .recurso::before { content: counter(secao); position: absolute; top: 16px; right: 18px; font: 800 2.4rem/1 var(--fonte-titulo); color: var(--azul-tinta); -webkit-text-stroke: 2px var(--azul); }
+.recursos--portal .recurso .pill { align-self: flex-start; }
+.recursos--portal .recurso--no-ar { box-shadow: 0 4px 0 var(--aberto); }
+.recursos .pill { align-self: flex-start; }
+
+
+/* ---------- página inicial: a nova era e a linha do tempo ---------- */
+.nova-era__grade { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 32px clamp(32px, 5vw, 64px); align-items: start; }
+@media (max-width: 960px) { .nova-era__grade { grid-template-columns: 1fr; } }
+.nova-era__texto { position: sticky; top: calc(var(--altura-cabecalho) + 28px); }
+@media (max-width: 960px) { .nova-era__texto { position: static; } }
+.nova-era__texto p { margin-top: 14px; font-size: var(--t-media); line-height: 1.5; color: var(--tinta-suave); }
+.nova-era__texto .nova-era__meta { font-size: 1rem; color: var(--tinta); display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.nova-era__texto .botao { margin-top: 22px; }
+.nova-era__secoes .recursos { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.nova-era__secoes .recurso p { display: none; }
+
+.linha-tempo { list-style: none; margin: clamp(40px, 6vw, 64px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 20px; border-top: var(--borda); }
+.linha-tempo li { position: relative; padding-top: 22px; }
+.linha-tempo li::before { content: ""; position: absolute; top: -9px; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--papel); border: var(--borda); }
+.linha-tempo b { display: block; font: 800 clamp(1.8rem, 3.6vw, 2.6rem)/1 var(--fonte-titulo); }
+.linha-tempo span { display: block; margin-top: 8px; color: var(--tinta-suave); max-width: 26ch; }
+.linha-tempo__futuro::before { background: var(--sol); width: 22px; height: 22px; top: -12px; }
+.linha-tempo__futuro b { color: var(--azul); }
+@media (max-width: 760px) {
+  .linha-tempo { grid-template-columns: 1fr; border-top: 0; border-left: var(--borda); gap: 22px; margin-left: 9px; }
+  .linha-tempo li { padding: 0 0 0 22px; }
+  .linha-tempo li::before { top: 6px; left: -9px; }
+  .linha-tempo__futuro::before { left: -12px; top: 4px; }
+}
+.gremio__frase { margin-top: clamp(32px, 5vw, 48px); font: 700 clamp(1.5rem, 3.6vw, 2.4rem)/1.2 var(--fonte-titulo); max-width: 24ch; }
+.loja__intro { margin: -6px 0 16px; color: var(--tinta-suave); max-width: 60ch; }

@@ -4,37 +4,57 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Área do aluno | Grêmio Politécnico da USP</title>
-  <meta name="description" content="O lugar para tirar suas dúvidas sobre a vida na Poli, cheio de recursos para ajudar você no dia a dia.">
+  <meta name="description" content="O portal aberto do Novo Grêmio: o lugar para tirar suas dúvidas e encontrar tudo o que ajuda a viver a Poli.">
   <meta name="theme-color" content="#fbfbfe">
   <link rel="icon" href="../assets/img/marca/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610071030">
-  <link rel="stylesheet" href="../assets/css/base.css?v=202610071030">
-  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610071030">
-  <script type="module" src="../assets/js/site.js?v=202610071030"></script>
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610071046">
+  <link rel="stylesheet" href="../assets/css/base.css?v=202610071046">
+  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610071046">
+  <link rel="stylesheet" href="../assets/css/portal.css?v=202610071046">
+  <script type="module" src="../assets/js/site.js?v=202610071046"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
   <div data-componente="cabecalho"></div>
 
   <div class="container leiaute leiaute--pagina">
-    <!-- Índice só da Área do aluno: as subpáginas vêm de `filhos` do nó "aluno" em assets/js/ramificacoes.js. -->
     <div data-componente="indice" data-modo="lateral" data-raiz="aluno"></div>
-    <main id="conteudo" class="leiaute__principal">
+    <main id="conteudo" class="leiaute__principal portal">
       <div data-componente="trilha" data-id="aluno"></div>
 
-      <header class="pagina__topo aluno__topo">
-        <h1>Área do aluno</h1>
-        <p class="pagina__resumo">Este é o lugar para tirar suas dúvidas sobre a vida na Poli. Aqui o Grêmio reúne recursos práticos para ajudar você no dia a dia da graduação, do almoço de hoje ao que você precisa resolver no campus.</p>
-      </header>
+      <section class="abertura abertura--com-horizonte" aria-labelledby="aluno-titulo">
+        <h1 id="aluno-titulo">Área do aluno</h1>
+        <p class="abertura__lead">O lugar para tirar suas dúvidas e encontrar tudo o que ajuda a viver a Poli, dos estudos ao amor pela Escola.</p>
+        <p class="abertura__texto">Este é o Portal Politécnico, o portal aberto do Novo Grêmio, feito para integrar, ajudar e ampliar os horizontes de quem estuda aqui. Ele chega por inteiro na Semana de Recepção de 2027 e cresce a cada semestre.</p>
+        <div class="horizonte" aria-hidden="true"><div class="horizonte__sol"></div><div class="horizonte__faixa2"></div><div class="horizonte__faixa1"></div></div>
+      </section>
 
-      <section class="aluno__recursos" aria-labelledby="recursos-titulo">
-        <h2 id="recursos-titulo">Recursos</h2>
-        <div data-componente="recursos" data-id="aluno"></div>
-        <p class="aluno__nota">Novos recursos entram aqui conforme ficam prontos. Não achou o que procurava?
-          <a href="#contato">Fale com o Grêmio</a> e a gente ajuda.</p>
+      <section class="bloco-portal" aria-labelledby="secoes-titulo">
+        <h2 id="secoes-titulo">As seções do portal</h2>
+        <p class="bloco-portal__intro">Cada seção nasce de um compromisso do Novo Grêmio. As marcadas com "Já funciona" você já pode usar hoje.</p>
+        <div data-componente="recursos" data-id="aluno" data-estilo="portal"></div>
+      </section>
+
+      <section class="bloco-portal duas" aria-label="Mais do portal">
+        <a class="cartao cartao--forte cartao--link" href="../loja/">
+          <span class="pill pill--breve">Mais adiante</span>
+          <h3>Loja do Grêmio</h3>
+          <p>Do vestuário ao almoço no Triedro, tudo pela palma da mão.</p>
+          <span class="recurso__ir">Ver a loja</span>
+        </a>
+        <a class="cartao cartao--link" href="#contato">
+          <h3>Não achou o que procurava?</h3>
+          <p>Escreva para o Grêmio pelo canal que preferir. A gente responde e o portal melhora com a sua dúvida.</p>
+          <span class="recurso__ir">Fale com o Grêmio</span>
+        </a>
+      </section>
+
+      <section class="manifesto" aria-label="Por que este portal existe">
+        <blockquote>Uma ferramenta para as próximas gerações de politécnicos.</blockquote>
+        <p>Esta inovação talvez nem seja para a nossa geração. Ela é a base das próximas, a começar pelos bixos de 2027. Não basta lembrar o que o Grêmio já foi: queremos entrar para a história vivendo o presente e consolidando o futuro.</p>
       </section>
     </main>
   </div>

@@ -1,0 +1,149 @@
+/* Portal aberto do Novo Grêmio (Área do aluno e suas seções) e portal interno (admin).
+   Peças comuns: abertura com estado, módulos do que vem por aí, "já existe hoje",
+   chamado para ação, manifesto, calendário e formulário. Cada seção ganha um traço
+   próprio por modificadores (--sol, --noite) e, no Jornal, por jornal.css. */
+
+.portal { --fio: rgba(18, 23, 53, .14); }
+.portal h2 { font-size: clamp(1.6rem, 3.6vw, 2.3rem); }
+
+/* abertura */
+.abertura { position: relative; overflow: hidden; border-radius: var(--raio); background: var(--painel); padding: clamp(26px, 4vw, 48px) clamp(20px, 3.5vw, 44px) clamp(26px, 4vw, 44px); }
+.abertura h1 { font-size: clamp(2.4rem, 7cqi, 4.4rem); max-width: 14ch; }
+.abertura__lead { margin-top: 16px; max-width: 46ch; font-size: clamp(1.15rem, 2.2cqi, 1.35rem); line-height: 1.5; color: var(--tinta-suave); }
+.abertura__texto { margin-top: 12px; max-width: 58ch; color: var(--tinta-suave); }
+.abertura__estado { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 22px; font-size: var(--t-pequeno); color: var(--tinta-suave); }
+.abertura .acoes { margin-top: 24px; }
+.abertura--com-horizonte { padding-bottom: 0; }
+.abertura--com-horizonte .horizonte { margin: 28px calc(-1 * clamp(20px, 3.5vw, 44px)) 0; height: 150px; }
+.abertura--com-horizonte .horizonte__sol { width: min(300px, 55%); }
+.abertura > :not(.horizonte) { position: relative; z-index: 1; }
+.abertura--sol { background: var(--sol); }
+.abertura--sol .abertura__lead, .abertura--sol .abertura__texto, .abertura--sol .abertura__estado { color: var(--tinta); }
+.abertura--noite { background: var(--tinta); color: #fff; }
+.abertura--noite .abertura__lead, .abertura--noite .abertura__texto, .abertura--noite .abertura__estado { color: rgba(255, 255, 255, .82); }
+.abertura--noite .pill { background: rgba(255, 255, 255, .12); color: #fff; border-color: transparent; }
+.abertura--noite .botao--linha { color: #fff; box-shadow: inset 0 0 0 2px #fff; }
+.abertura--noite .botao--linha:hover { background: rgba(255, 255, 255, .12); }
+
+/* blocos */
+.bloco-portal { margin-top: clamp(36px, 5vw, 56px); scroll-margin-top: calc(var(--altura-cabecalho) + 16px); }
+.bloco-portal > h2 { margin-bottom: 10px; }
+.bloco-portal__intro { max-width: 62ch; color: var(--tinta-suave); font-size: 1.08rem; }
+.bloco-portal__intro + * { margin-top: 20px; }
+
+/* módulos do que vem por aí */
+.modulos { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+.modulo { padding: 20px; background: var(--papel); border: var(--borda); border-radius: var(--raio); display: flex; flex-direction: column; gap: 8px; }
+.modulo h3 { font-size: 1.15rem; }
+.modulo p { color: var(--tinta-suave); }
+.modulo__marca { width: 34px; height: 34px; border-radius: 50%; background: var(--sol); border: var(--borda); display: grid; place-items: center; font: 800 .95rem var(--fonte-titulo); }
+
+/* o que já existe hoje */
+.hoje-existe { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px 28px; align-items: center; padding: 22px 24px; background: var(--aberto-fundo); border-radius: var(--raio); }
+.hoje-existe h2 { font-size: 1.35rem; }
+.hoje-existe p { margin-top: 6px; color: var(--tinta); max-width: 60ch; }
+.hoje-existe .fichas { margin-top: 14px; }
+@container (max-width: 620px) { .hoje-existe { grid-template-columns: 1fr; } }
+
+/* chamado para ação */
+.chamado { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px 32px; align-items: center; padding: clamp(22px, 3vw, 32px); background: var(--tinta); color: #fff; border-radius: var(--raio); box-shadow: 0 6px 0 var(--sol); }
+.chamado h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
+.chamado p { margin-top: 8px; color: rgba(255, 255, 255, .82); max-width: 56ch; }
+.chamado .botao { background: var(--sol); color: var(--tinta); }
+.chamado .botao:hover { background: #fff; }
+@container (max-width: 620px) { .chamado { grid-template-columns: 1fr; } }
+
+/* manifesto */
+.manifesto { margin-top: clamp(40px, 6vw, 64px); padding: clamp(24px, 4vw, 44px); border: var(--borda); border-radius: var(--raio); background: var(--papel); }
+.manifesto blockquote { margin: 0; font: 700 clamp(1.4rem, 3.4cqi, 2.1rem)/1.25 var(--fonte-titulo); letter-spacing: -.01em; max-width: 30ch; text-wrap: balance; }
+.manifesto p { margin-top: 16px; max-width: 60ch; color: var(--tinta-suave); }
+
+/* chips sem ação (prévia de filtros e temas) */
+.etiquetas { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
+.etiquetas li { border: 2px solid var(--tinta); border-radius: 999px; padding: 5px 14px; font: 700 .92rem var(--fonte); }
+
+/* duas colunas de texto */
+.duas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+@container (max-width: 680px) { .duas { grid-template-columns: 1fr; } }
+.cartao { padding: 22px; border-radius: var(--raio); background: var(--papel); border: 2px solid var(--linha); }
+.cartao h3 { font-size: 1.25rem; }
+.cartao p, .cartao li { color: var(--tinta-suave); }
+.cartao p { margin-top: 8px; }
+.cartao ul { margin: 10px 0 0; padding-left: 18px; }
+.cartao li + li { margin-top: 4px; }
+.cartao--forte { border: var(--borda); }
+
+/* Meu Amor: subseções em amarelo e azul */
+.amor { display: grid; gap: 16px; margin-top: 20px; }
+.amor__secao { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 16px 32px; padding: clamp(20px, 3vw, 30px); border-radius: var(--raio); border: var(--borda); background: var(--papel); scroll-margin-top: calc(var(--altura-cabecalho) + 16px); }
+.amor__secao:nth-child(2) { background: var(--azul); color: #fff; border-color: var(--azul); }
+.amor__secao:nth-child(2) p, .amor__secao:nth-child(2) li { color: rgba(255, 255, 255, .85); }
+.amor__secao:nth-child(3) { background: var(--sol); }
+.amor__secao h2 { font-size: clamp(1.6rem, 3.4cqi, 2.2rem); }
+.amor__secao p { color: var(--tinta-suave); }
+.amor__secao:nth-child(3) p, .amor__secao:nth-child(3) li { color: var(--tinta); }
+.amor__secao ul { margin: 0; padding-left: 18px; }
+.amor__secao li + li { margin-top: 6px; }
+.amor__secao .acoes { margin-top: 16px; }
+@container (max-width: 680px) { .amor__secao { grid-template-columns: 1fr; } }
+
+/* Minerva: calendário das Aulas Magnas */
+.calendario { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+@container (max-width: 640px) { .calendario { grid-template-columns: 1fr; } }
+.semestre { padding: 18px; border: var(--borda); border-radius: var(--raio); background: var(--papel); }
+.semestre h3 { font-size: 1.05rem; color: var(--tinta-suave); font-family: var(--fonte); font-weight: 700; }
+.semestre ol { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.semestre li { padding: 14px 12px; border-radius: var(--raio-pequeno); background: var(--painel); text-align: center; }
+.semestre li { min-width: 0; }
+.semestre li b { display: block; font: 800 clamp(1rem, 2.4cqi, 1.2rem) var(--fonte-titulo); overflow-wrap: anywhere; }
+.semestre li span { font-size: .82rem; color: var(--tinta-suave); }
+.semestre li small { display: block; margin-top: 6px; font-size: .78rem; font-weight: 700; color: var(--azul); }
+.nota { margin-top: 12px; font-size: var(--t-pequeno); color: var(--tinta-suave); }
+
+/* formulário de demandas */
+.formulario { display: grid; gap: 18px; padding: clamp(20px, 3vw, 30px); border: var(--borda); border-radius: var(--raio); background: var(--papel); }
+.campo { display: grid; gap: 8px; }
+.campo > label, .campo > legend { font-weight: 800; padding: 0; }
+.campo fieldset, fieldset.campo { border: 0; margin: 0; padding: 0; min-width: 0; }
+.campo .ajuda { font-size: var(--t-pequeno); color: var(--tinta-suave); }
+.campo input[type="text"], .campo input[type="email"], .campo select, .campo textarea {
+  width: 100%; padding: 11px 13px; border: 2px solid var(--linha); border-radius: var(--raio-pequeno);
+  font: 400 1rem var(--fonte); color: var(--tinta); background: var(--fundo);
+}
+.campo input:focus, .campo select:focus, .campo textarea:focus { border-color: var(--tinta); outline: none; }
+.campo textarea { min-height: 150px; resize: vertical; }
+.opcoes { display: flex; flex-wrap: wrap; gap: 8px; }
+.opcoes label { position: relative; }
+.opcoes input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.opcoes span { display: inline-flex; border: 2px solid var(--tinta); border-radius: 999px; padding: 6px 14px; font: 700 .92rem var(--fonte); cursor: pointer; }
+.opcoes input:checked + span { background: var(--tinta); color: #fff; }
+.opcoes input:focus-visible + span { outline: 3px solid var(--azul); outline-offset: 2px; }
+.dupla { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+@container (max-width: 560px) { .dupla { grid-template-columns: 1fr; } }
+.aviso-envio { padding: 12px 14px; border-radius: var(--raio-pequeno); background: var(--sol-claro); font-size: .95rem; }
+.formulario__erro { color: #a3122a; font-weight: 700; font-size: .95rem; }
+.formulario__fim { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.formulario__fim p { font-size: var(--t-pequeno); color: var(--tinta-suave); }
+
+/* portal interno */
+.interno__tela { margin-top: 20px; border: var(--borda); border-radius: var(--raio); overflow: hidden; background: var(--papel); }
+.interno__barra { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--tinta); color: #fff; font-weight: 700; font-size: .9rem; }
+.interno__barra i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, .35); }
+.interno__corpo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; }
+.interno__corpo > div { padding: 18px 20px; }
+.interno__corpo > div + div { border-left: 1px solid var(--linha); }
+.interno__corpo h3 { font-size: 1rem; }
+.interno__corpo p { margin-top: 6px; color: var(--tinta-suave); font-size: .95rem; }
+@container (max-width: 560px) { .interno__corpo { grid-template-columns: 1fr; } .interno__corpo > div + div { border-left: 0; border-top: 1px solid var(--linha); } }
+
+
+/* cartões que são links inteiros */
+.cartao--link { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: var(--tinta); }
+.cartao--link p { margin-top: 0; }
+.cartao--link:hover { box-shadow: 0 4px 0 var(--tinta); }
+.cartao--link .pill { align-self: flex-start; }
+@container (max-width: 520px) {
+  .semestre ol { grid-template-columns: 1fr; gap: 6px; }
+  .semestre li { display: flex; align-items: baseline; gap: 10px; text-align: left; padding: 10px 12px; }
+  .semestre li small { margin: 0 0 0 auto; }
+}

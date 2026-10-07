@@ -4,16 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Área dos administradores | Grêmio Politécnico da USP</title>
-  <meta name="description" content="Espaço da gestão do Grêmio.">
+  <meta name="description" content="O portal interno do Grêmio: as tarefas e os e-mails de cada diretoria numa só tela.">
   <meta name="theme-color" content="#fbfbfe">
   <link rel="icon" href="../assets/img/marca/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610071030">
-  <link rel="stylesheet" href="../assets/css/base.css?v=202610071030">
-  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610071030">
-  <script type="module" src="../assets/js/site.js?v=202610071030"></script>
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610071046">
+  <link rel="stylesheet" href="../assets/css/base.css?v=202610071046">
+  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610071046">
+  <link rel="stylesheet" href="../assets/css/portal.css?v=202610071046">
+  <script type="module" src="../assets/js/site.js?v=202610071046"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -21,11 +22,37 @@
 
   <div class="container leiaute leiaute--pagina">
     <div data-componente="indice" data-modo="lateral" data-raiz="admin"></div>
-    <main id="conteudo" class="leiaute__principal">
-      <!-- Conteúdo montado a partir do registro (assets/js/ramificacoes.js, id "admin").
-           Para escrever esta página à mão, troque o div abaixo pelo HTML da página e use
-           <div data-componente="trilha" data-id="admin"></div> para manter a trilha. -->
-      <div data-componente="pagina" data-id="admin"></div>
+    <main id="conteudo" class="leiaute__principal portal">
+      <div data-componente="trilha" data-id="admin"></div>
+
+      <section class="abertura abertura--noite" aria-labelledby="admin-titulo">
+        <h1 id="admin-titulo">Área dos administradores</h1>
+        <p class="abertura__lead">O portal interno do Grêmio, onde diretores e trainees fazem o trabalho acontecer.</p>
+        <div class="abertura__estado"><span class="pill pill--breve">Em construção</span><span>Acesso restrito à gestão do Grêmio. Entra no ar junto com o portal aberto.</span></div>
+      </section>
+
+      <section class="bloco-portal" aria-labelledby="admin-tela">
+        <h2 id="admin-tela">Uma tela para o trabalho de cada diretor</h2>
+        <p class="bloco-portal__intro">Cada diretor vai encontrar as suas tarefas e os seus e-mails na tela principal, e concluir o que é dele.</p>
+        <div class="interno__tela" role="img" aria-label="Esboço da tela principal do portal interno, com tarefas e e-mails">
+          <div class="interno__barra"><i></i><i></i><i></i><span>Portal interno, tela do diretor</span></div>
+          <div class="interno__corpo">
+            <div><h3>Tarefas</h3><p>O que a sua diretoria precisa entregar, com prazo e responsável.</p></div>
+            <div><h3>E-mails</h3><p>As mensagens que chegam para a sua diretoria, inclusive as demandas enviadas pelos alunos.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bloco-portal duas" aria-label="Princípios do portal interno">
+        <div class="cartao cartao--forte">
+          <h3>Menos horas, mais vida</h3>
+          <p>Quanto mais organizado o fluxo de trabalho, menos horas cada diretor dedica ao Grêmio, e mais tempo sobra para grupos, modalidades, estágio e, claro, a graduação.</p>
+        </div>
+        <div class="cartao">
+          <h3>Leve para todo mundo</h3>
+          <p>Quem se compromete com o Grêmio fica com a parte boa do trabalho: inovar e descobrir os próprios gostos e os caminhos profissionais que as habilidades desenvolvidas aqui abrem.</p>
+        </div>
+      </section>
     </main>
   </div>
 

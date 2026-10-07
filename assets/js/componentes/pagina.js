@@ -7,20 +7,37 @@
 // Com duas ou mais seções que têm itens, a página ganha atalhos "Nesta página" no topo. Para escrever uma página à mão, troque este
 // componente pelo conteúdo em HTML e mantenha a trilha com data-componente="trilha".
 
-import { trilha } from "./trilha.js?v=202610071030";
+import { trilha } from "./trilha.js?v=202610071046";
+
+// Pílula de estado de um nó (campo `estado` no registro).
+export function pilulaEstado({ site }, no) {
+  if (no.estado === "no-ar") return `<span class="pill pill--aberto">Já funciona</span>`;
+  if (no.estado === "em-construcao") return `<span class="pill pill--breve">${site.portal?.lancamentoCurto ? `Chega na ${site.portal.lancamentoCurto}` : "Em construção"}</span>`;
+  return "";
+}
+
+// Link "Ver também" para o nó indicado em `veja`.
+export function linkVeja({ url, destino, encontrar }, no) {
+  const alvo = no.veja && encontrar(no.veja);
+  return alvo ? `<a class="veja" href="${url(destino(alvo.no, alvo.ancestrais))}">Ver também: ${alvo.no.titulo}</a>` : "";
+}
 
 // Cartões das subpáginas de um nó. Também usado em páginas escritas à mão
 // (<div data-componente="recursos" data-id="aluno"></div>).
-export function cartoes({ url, destino }, no, ancestrais) {
+// estilo "portal": lista numerada, na ordem do registro, com a pílula de estado.
+export function cartoes(contexto, no, ancestrais, estilo = "") {
+  const { url, destino } = contexto;
   const comPagina = (no.filhos || []).filter((f) => f.caminho);
   if (!comPagina.length) return "";
-  return `<ul class="recursos">${comPagina
-    .map((f) => `<li><a class="recurso" href="${url(destino(f, [...ancestrais, no]))}">
+  const tag = estilo === "portal" ? "ol" : "ul";
+  return `<${tag} class="recursos${estilo ? ` recursos--${estilo}` : ""}">${comPagina
+    .map((f) => `<li><a class="recurso${f.estado ? ` recurso--${f.estado}` : ""}" href="${url(destino(f, [...ancestrais, no]))}">
+        ${pilulaEstado(contexto, f)}
         <h3>${f.titulo}</h3>
         ${f.resumo ? `<p>${f.resumo}</p>` : ""}
         <span class="recurso__ir">${f.chamada || `Abrir ${f.titulo.toLowerCase()}`}</span>
       </a></li>`)
-    .join("")}</ul>`;
+    .join("")}</${tag}>`;
 }
 
 export default function pagina(alvo, contexto) {
@@ -41,7 +58,7 @@ export default function pagina(alvo, contexto) {
 
   const acoes = no.acoes && no.acoes.length
     ? `<div class="acoes pagina__acoes">${no.acoes
-        .map((a, i) => `<a class="botao${i ? " botao--linha" : ""}" href="${a.href}"${a.externo ? ' target="_blank" rel="noopener"' : ""}>${a.rotulo}</a>`)
+        .map((a, i) => `<a class="botao${i ? " botao--linha" : ""}" href="${url(a.href)}"${a.externo ? ' target="_blank" rel="noopener"' : ""}>${a.rotulo}</a>`)
         .join("")}</div>`
     : "";
 
@@ -51,6 +68,7 @@ export default function pagina(alvo, contexto) {
         .map((g) => `<li id="${g.id}">
             <h3>${g.caminho ? `<a href="${url(destino(g, [...ancestrais, no, f]))}">${g.titulo}</a>` : g.titulo}</h3>
             ${g.texto || g.resumo ? `<p>${g.texto || g.resumo}</p>` : ""}
+            ${linkVeja(contexto, g)}
           </li>`)
         .join("")}</ul>`
     : "";
@@ -58,6 +76,7 @@ export default function pagina(alvo, contexto) {
     .map((f) => `<section class="pagina__secao" id="${f.id}">
         <h2>${f.titulo}</h2>
         ${f.texto || f.resumo ? `<p>${f.texto || f.resumo}</p>` : ""}
+        ${linkVeja(contexto, f)}
         ${fichas(f.numeros, "pagina__secao-numeros")}
         ${itens(f)}
       </section>`)
