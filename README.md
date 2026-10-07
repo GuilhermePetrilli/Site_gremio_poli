@@ -33,6 +33,17 @@ assets/
     servicos/, historia/   imagens de conteúdo
 ```
 
+## Versão dos arquivos (cache)
+
+As referências a `.css` e `.js` levam `?v=AAAAMMDDHHMM`. Isso impede que o navegador misture arquivos novos com versões antigas em cache depois de uma publicação. O script `ferramentas/versionar.mjs` atualiza todas as versões de uma vez e roda sozinho antes de cada commit, se o gancho estiver instalado:
+
+```sh
+printf '#!/bin/sh\nnode ferramentas/versionar.mjs && git add -u\n' > .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit
+```
+
+Ao criar arquivos novos, escreva as referências normalmente (`"./componentes/novo.js"`); o script acrescenta a versão.
+
 ## Regras para manter o site portável
 
 - Use sempre caminhos relativos, nunca começando com `/`. O site precisa funcionar em subpasta (`usuario.github.io/Site_gremio_poli/`) e na raiz de um domínio próprio.
