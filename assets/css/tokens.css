@@ -1,0 +1,29 @@
+/* Tokens de design: cores, tipografia e medidas usadas em todo o site.
+   Cores baseadas na identidade histórica do Grêmio (azul da logo, #222E84). */
+:root {
+  --azul: #222e84;
+  --azul-escuro: #15153c;
+  --azul-medio: #292b77;
+  --azul-claro: #8a8bcc;
+  --azul-tinta: #eceef9;
+
+  --destaque: #fdbe34;
+  --destaque-texto: #15153c;
+
+  --texto: #181818;
+  --texto-suave: #4b4f6b;
+  --fundo: #ffffff;
+  --fundo-alt: #f5f6fb;
+  --linha: rgba(34, 46, 132, 0.14);
+
+  --fonte-titulo: "Poppins", system-ui, sans-serif;
+  --fonte-texto: "Poppins", system-ui, sans-serif;
+
+  --raio: 14px;
+  --raio-pequeno: 8px;
+  --largura: 1180px;
+  --gutter: 20px;
+  --secao: clamp(56px, 8vw, 96px);
+  --altura-cabecalho: 72px;
+  --sombra: 0 10px 30px rgba(21, 21, 60, 0.08);
+}
