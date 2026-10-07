@@ -8,12 +8,14 @@ export default function ramificacoes(alvo, { url, registro, destino }) {
 
   const abrir = (r) => `<a class="botao botao--linha botao--pequeno" href="${url(destino(r, []))}">Abrir ${r.titulo.toLowerCase()}</a>`;
 
+  // Acessos: faixa de destaque. A primeira área (aluno) é a principal.
   if (grupo === "acessos") {
+    const rotulos = { aluno: "Entrar na Área do aluno", admin: "Entrar na área da gestão" };
     alvo.innerHTML = `<div class="acessos">${lista
-      .map((r) => `<article class="acesso">
+      .map((r, i) => `<article class="acesso${i ? "" : " acesso--principal"}">
           <h3><a href="${url(destino(r, []))}">${r.titulo}</a></h3>
           <p>${r.resumo}</p>
-          ${abrir(r)}
+          <a class="botao ${i ? "botao--claro" : "botao--grande"}" href="${url(destino(r, []))}">${rotulos[r.id] || `Entrar: ${r.titulo}`}</a>
         </article>`)
       .join("")}</div>`;
     return;

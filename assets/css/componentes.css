@@ -12,6 +12,11 @@
 .botao--linha { background: transparent; color: var(--azul); }
 .botao--linha:hover { background: var(--azul-tinta); color: var(--azul); }
 .botao--pequeno { min-height: 40px; padding: 0 16px; font-size: .95rem; }
+.botao--grande { min-height: 54px; padding: 0 26px; font-size: 1.08rem; }
+.botao--claro { background: transparent; border-color: #fff; color: #fff; }
+.botao--claro:hover { background: #fff; border-color: #fff; color: var(--azul); }
+.botao--acesso { min-height: 44px; padding: 0 18px; gap: 10px; font-size: 1rem; box-shadow: 0 0 0 3px var(--azul-tinta); }
+.botao--acesso svg { flex: none; }
 .acoes { display: flex; flex-wrap: wrap; gap: 12px; }
 
 /* ---------- aviso ---------- */
@@ -33,11 +38,17 @@
 .cabecalho__menu { margin-left: auto; display: flex; align-items: center; gap: 2px; }
 .cabecalho__menu a:not(.botao) { color: var(--tinta); text-decoration: none; font-weight: 500; padding: 8px 12px; border-radius: var(--raio); }
 .cabecalho__menu a:not(.botao):hover { background: var(--painel); }
-.cabecalho__menu .botao { margin-left: 10px; }
+.cabecalho .botao--acesso { margin-left: 8px; }
 .cabecalho__menu-botao { display: none; margin-left: auto; border: 2px solid var(--tinta); }
 @media (max-width: 900px) {
   .cabecalho__indice, .cabecalho__menu { display: none; }
-  .cabecalho__menu-botao { display: inline-flex; }
+  .cabecalho__menu-botao { display: inline-flex; margin-left: 0; }
+  .cabecalho .botao--acesso { margin-left: auto; }
+}
+@media (max-width: 520px) {
+  .marca span { display: none; }
+  .cabecalho__barra { gap: 10px; }
+  .cabecalho .botao--acesso { padding: 0 14px; font-size: .95rem; }
 }
 
 /* ---------- gaveta lateral (índice do site) ---------- */
@@ -53,9 +64,10 @@
 .gaveta__titulo { font-weight: 700; font-stretch: var(--largo); font-size: var(--t-media); }
 .gaveta__fechar { min-height: 38px; padding: 0 12px; background: none; border: 1px solid var(--linha); border-radius: var(--raio); font: 600 .9rem var(--fonte); color: var(--tinta); cursor: pointer; }
 .gaveta .indice { padding: 20px; }
+.gaveta__acessos { display: flex; flex-direction: column; gap: 10px; padding: 20px 20px 4px; }
+.gaveta__acessos .botao { justify-content: flex-start; }
 .gaveta__menu { display: none; flex-direction: column; gap: 2px; padding: 0 20px 28px; }
 .gaveta__menu a:not(.botao) { padding: 12px 0; border-top: 1px solid var(--linha); color: var(--tinta); text-decoration: none; font-weight: 500; }
-.gaveta__menu .botao { margin-top: 12px; }
 @media (max-width: 900px) { .gaveta__menu { display: flex; } }
 
 /* ---------- índice em árvore ---------- */
@@ -139,7 +151,6 @@
 .bloco { padding-block: var(--bloco); }
 .bloco--painel { background: var(--painel); }
 .bloco__topo { max-width: 640px; margin-bottom: 44px; }
-.bloco__topo--seguinte { margin-top: var(--bloco); }
 .bloco__topo p { margin-top: 14px; font-size: var(--t-media); line-height: 1.5; color: var(--tinta-suave); }
 .texto { color: var(--tinta-suave); max-width: 60ch; }
 .texto + .texto { margin-top: 1em; }
@@ -175,15 +186,23 @@
 }
 .estado::before { content: ""; width: 10px; height: 10px; border: 2px dashed var(--tinta-suave); border-radius: 50%; }
 
-/* ---------- ramificações: acessos ---------- */
-.acessos { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 20px; }
-.acesso { background: var(--papel); }
-.acesso { padding: 28px; border: 1px solid var(--linha); border-radius: var(--raio); display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
-.acesso:first-child { border: 2px solid var(--azul); }
-.acesso:first-child h3 { font-size: var(--t-titulo); color: var(--azul); }
-.acesso p { color: var(--tinta-suave); max-width: 52ch; }
-.acesso .botao { margin-top: auto; }
+/* ---------- ramificações: acessos (faixa de destaque) ---------- */
+.faixa-acesso { background: var(--azul); color: #fff; padding-block: clamp(56px, 8vw, 96px); }
+.faixa-acesso__grade { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 32px clamp(32px, 5vw, 72px); align-items: center; }
+.faixa-acesso__texto h2 { font-size: var(--t-grande); }
+.faixa-acesso__texto p { margin-top: 14px; font-size: var(--t-media); line-height: 1.5; color: rgba(255, 255, 255, .8); max-width: 34ch; }
+@media (max-width: 960px) { .faixa-acesso__grade { grid-template-columns: 1fr; } }
+
+.acessos { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 16px; align-items: stretch; }
 @media (max-width: 760px) { .acessos { grid-template-columns: 1fr; } }
+.acesso { padding: 28px; border-radius: var(--raio); display: flex; flex-direction: column; align-items: flex-start; gap: 12px; border: 1px solid rgba(255, 255, 255, .45); color: #fff; }
+.acesso h3 a { color: inherit; text-decoration: none; }
+.acesso h3 a:hover { text-decoration: underline; }
+.acesso p { color: rgba(255, 255, 255, .8); max-width: 44ch; }
+.acesso .botao { margin-top: auto; }
+.acesso--principal { background: var(--papel); color: var(--tinta); border-color: var(--papel); padding: 32px; }
+.acesso--principal h3 { font-size: var(--t-grande); color: var(--azul); }
+.acesso--principal p { color: var(--tinta-suave); font-size: var(--t-media); line-height: 1.5; }
 
 /* ---------- o Grêmio ---------- */
 .gremio__figura { margin: 0; }

@@ -4,7 +4,7 @@
 // as seções filhas e as ações. Para escrever uma página à mão, troque este
 // componente pelo conteúdo em HTML e mantenha a trilha com data-componente="trilha".
 
-import { trilha } from "./trilha.js?v=202610062246";
+import { trilha } from "./trilha.js?v=202610062310";
 
 export default function pagina(alvo, contexto) {
   const { url, encontrar, destino } = contexto;

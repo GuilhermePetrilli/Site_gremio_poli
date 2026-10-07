@@ -3,7 +3,7 @@
 // Os caminhos (href) são relativos à raiz do site, sem barra no início,
 // para funcionar igual em subpasta (github.io/Site_gremio_poli/) ou num domínio próprio.
 
-import { encontrar, destino } from "./ramificacoes.js?v=202610062246";
+import { encontrar, destino } from "./ramificacoes.js?v=202610062310";
 
 const doRegistro = (id, rotulo) => {
   const { no } = encontrar(id);
@@ -29,6 +29,8 @@ export const site = {
     { rotulo: "Contato", href: "#contato", local: true },
   ],
   chamada: doRegistro("aluno"),
+  // Acessos mostrados no topo da gaveta do índice.
+  acessos: [doRegistro("aluno"), doRegistro("admin")],
 
   contato: {
     endereco: "Av. Prof. Almeida Prado, 128, Travessa 2, Cidade Universitária, São Paulo, SP",

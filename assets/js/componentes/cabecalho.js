@@ -2,7 +2,7 @@
 // No computador, o botão "Índice" abre a gaveta; no celular, o botão "Menu" abre a
 // mesma gaveta, que também traz os links do menu.
 
-import { arvore } from "./indice.js?v=202610062246";
+import { arvore } from "./indice.js?v=202610062310";
 
 export default function cabecalho(alvo, contexto) {
   const { site, url } = contexto;
@@ -15,9 +15,14 @@ export default function cabecalho(alvo, contexto) {
     : "";
 
   const itens = site.menu.map((i) => `<a href="${link(i)}">${i.rotulo}</a>`).join("");
+  const iconeAcesso = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>`;
+  // Botão de acesso: fica visível em todas as larguras, inclusive no celular.
   const chamada = site.chamada
-    ? `<a class="botao botao--pequeno" href="${url(site.chamada.href)}">${site.chamada.rotulo}</a>`
+    ? `<a class="botao botao--acesso" href="${url(site.chamada.href)}">${iconeAcesso}<span>${site.chamada.rotulo}</span></a>`
     : "";
+  const acessos = (site.acessos || [])
+    .map((a, i) => `<a class="botao ${i ? "botao--linha" : "botao--acesso"}" href="${url(a.href)}">${i ? "" : iconeAcesso}<span>${a.rotulo}</span></a>`)
+    .join("");
 
   const iconeIndice = `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h13"/></svg>`;
 
@@ -29,7 +34,8 @@ export default function cabecalho(alvo, contexto) {
           <span>${site.nome}</span>
         </a>
         <button class="cabecalho__indice" type="button" data-abrir-gaveta aria-haspopup="dialog">${iconeIndice}Índice</button>
-        <nav class="cabecalho__menu" aria-label="Principal">${itens}${chamada}</nav>
+        <nav class="cabecalho__menu" aria-label="Principal">${itens}</nav>
+        ${chamada}
         <button class="cabecalho__menu-botao" type="button" data-abrir-gaveta aria-haspopup="dialog">Menu</button>
       </div>
     </header>
@@ -38,8 +44,9 @@ export default function cabecalho(alvo, contexto) {
         <span class="gaveta__titulo">Índice</span>
         <button class="gaveta__fechar" type="button" data-fechar-gaveta>Fechar</button>
       </div>
+      <div class="gaveta__acessos">${acessos}</div>
       <nav class="indice indice--gaveta" aria-label="Índice do site">${arvore(contexto, "gaveta")}</nav>
-      <div class="gaveta__menu">${itens}${chamada}</div>
+      <div class="gaveta__menu">${itens}</div>
     </dialog>`;
 
   const gaveta = alvo.querySelector(".gaveta");
