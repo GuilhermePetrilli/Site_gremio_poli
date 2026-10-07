@@ -5,7 +5,7 @@ export default function rodape(alvo, { site, url, registro, destino }) {
   const { contato } = site;
   const tel = contato.telefone.replace(/\D/g, "");
   // Mapa do site: todas as ramificações do registro, na ordem em que foram cadastradas.
-  const menu = registro.map((r) => `<li><a href="${url(destino(r))}">${r.titulo}</a></li>`).join("");
+  const menu = registro.map((r) => `<li><a href="${url(destino(r, []))}">${r.titulo}</a></li>`).join("");
 
   alvo.innerHTML = `
     <footer class="rodape" id="contato">

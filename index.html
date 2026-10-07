@@ -10,10 +10,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap">
-  <link rel="stylesheet" href="assets/css/tokens.css?v=202610062205">
-  <link rel="stylesheet" href="assets/css/base.css?v=202610062205">
-  <link rel="stylesheet" href="assets/css/componentes.css?v=202610062205">
-  <script type="module" src="assets/js/site.js?v=202610062205"></script>
+  <link rel="stylesheet" href="assets/css/tokens.css?v=202610062246">
+  <link rel="stylesheet" href="assets/css/base.css?v=202610062246">
+  <link rel="stylesheet" href="assets/css/componentes.css?v=202610062246">
+  <script type="module" src="assets/js/site.js?v=202610062246"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -29,27 +29,27 @@
 
         <div class="inicio__grade">
           <nav class="balcao" aria-label="Atalhos">
-            <a class="balcao__item" href="#apoio">
+            <a class="balcao__item" href="apoio/#reforco">
               <span class="balcao__acao">Revisar a matéria antes da prova</span>
               <span class="balcao__onde">Aulas de reforço</span>
               <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a class="balcao__item" href="#apoio">
+            <a class="balcao__item" href="apoio/#emprestimo">
               <span class="balcao__acao">Pegar uma calculadora ou jaleco</span>
               <span class="balcao__onde">Empréstimo de material</span>
               <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a class="balcao__item" href="#servicos">
+            <a class="balcao__item" href="servicos/#copiadora">
               <span class="balcao__acao">Imprimir ou tirar cópias</span>
               <span class="balcao__onde">Copiadora Politécnica</span>
               <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a class="balcao__item" href="#apoio">
+            <a class="balcao__item" href="apoio/#bolsas">
               <span class="balcao__acao">Estudar um idioma com bolsa</span>
               <span class="balcao__onde">Poliglota Idiomas</span>
               <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a class="balcao__item" href="#representacao">
+            <a class="balcao__item" href="representacao/">
               <span class="balcao__acao">Levar uma demanda à Poli</span>
               <span class="balcao__onde">Representação discente</span>
               <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -66,24 +66,23 @@
       </div>
     </section>
 
-    <!-- Frentes: geradas a partir de assets/js/ramificacoes.js -->
+    <!-- Frentes e acessos: índice lateral e blocos gerados de assets/js/ramificacoes.js -->
     <section class="bloco bloco--painel" id="frentes">
-      <div class="container">
-        <div class="bloco__topo">
-          <h2>O que o Grêmio faz</h2>
-          <p>Seis frentes de trabalho, com projetos que já fazem parte da vida na Poli. Cada uma vai ganhar uma página própria.</p>
-        </div>
-        <div data-componente="ramificacoes" data-grupo="frentes"></div>
-      </div>
-    </section>
+      <div class="container leiaute">
+        <div data-componente="indice" data-modo="lateral"></div>
+        <div class="leiaute__principal">
+          <div class="bloco__topo">
+            <h2>O que o Grêmio faz</h2>
+            <p>Seis frentes de trabalho, com projetos que já fazem parte da vida na Poli. Cada uma tem sua página.</p>
+          </div>
+          <div data-componente="ramificacoes" data-grupo="frentes"></div>
 
-    <!-- Acessos: área do aluno e da gestão -->
-    <section class="bloco" id="acessos">
-      <div class="container">
-        <div class="bloco__topo">
-          <h2>Acessos</h2>
+          <div class="bloco__topo bloco__topo--seguinte" id="acessos">
+            <h2>Acessos</h2>
+            <p>Áreas com informações e ferramentas para cada público.</p>
+          </div>
+          <div data-componente="ramificacoes" data-grupo="acessos"></div>
         </div>
-        <div data-componente="ramificacoes" data-grupo="acessos"></div>
       </div>
     </section>
 

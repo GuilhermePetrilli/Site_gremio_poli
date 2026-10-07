@@ -3,11 +3,11 @@
 // Os caminhos (href) são relativos à raiz do site, sem barra no início,
 // para funcionar igual em subpasta (github.io/Site_gremio_poli/) ou num domínio próprio.
 
-import { ramificacao, destino } from "./ramificacoes.js?v=202610062205";
+import { encontrar, destino } from "./ramificacoes.js?v=202610062246";
 
 const doRegistro = (id, rotulo) => {
-  const r = ramificacao(id);
-  return { rotulo: rotulo || r.titulo, href: destino(r) };
+  const { no } = encontrar(id);
+  return { rotulo: rotulo || no.titulo, href: destino(no) };
 };
 
 export const site = {
@@ -21,11 +21,12 @@ export const site = {
     link: { rotulo: "gremiopolitecnico.com.br", href: "https://www.gremiopolitecnico.com.br/" },
   },
 
+  // O índice completo das ramificações abre pelo botão "Índice" do cabeçalho.
+  // `local: true` mantém o link na própria página (o rodapé com #contato existe em todas).
   menu: [
-    { rotulo: "O que fazemos", href: "#frentes" },
     doRegistro("representacao", "Representação"),
     { rotulo: "O Grêmio", href: "#gremio" },
-    { rotulo: "Contato", href: "#contato" },
+    { rotulo: "Contato", href: "#contato", local: true },
   ],
   chamada: doRegistro("aluno"),
 

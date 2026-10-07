@@ -17,6 +17,7 @@ Depois acesse http://localhost:8000.
 
 ```
 index.html                 página inicial
+apoio/, cultura/, …       uma pasta por ramificação, gerada por ferramentas/paginas.mjs
 .nojekyll                  faz o GitHub Pages servir os arquivos como estão
 assets/
   css/
@@ -25,9 +26,9 @@ assets/
     componentes.css        botões, cabeçalho, seções, cartões, rodapé
   js/
     config.js              menu, contato, redes e autoria
-    ramificacoes.js        registro das ramificações (fonte única de menu, blocos e mapa do site)
+    ramificacoes.js        registro das ramificações em árvore (fonte única de índice, páginas, menu e mapa)
     site.js                monta os componentes de cada página
-    componentes/           um arquivo por componente (cabecalho, rodape, agora, ramificacoes)
+    componentes/           um arquivo por componente (cabecalho, rodape, indice, trilha, pagina, ramificacoes, agora)
     dados/                 dados reutilizáveis (ex.: horários dos bandejões)
   img/
     marca/                 logo oficial do Grêmio (não alterar)
@@ -55,16 +56,16 @@ Ao criar arquivos novos, escreva as referências normalmente (`"./componentes/no
 
 **Nova seção na página inicial:** copie um bloco `<section class="bloco">` do `index.html` e troque o conteúdo. Para fundo alternado, adicione a classe `bloco--painel`. Se a seção precisar aparecer no menu, inclua o item em `assets/js/config.js`.
 
-**Ramificações (seções principais):** todas ficam cadastradas em `assets/js/ramificacoes.js`, com título, caminho, resumo, itens e números. Desse registro saem os blocos da página inicial, o mapa do rodapé e os links do menu. Enquanto `pronta: false`, os links levam ao bloco da ramificação na página inicial e ele mostra "Página em construção". Para criar a página de uma ramificação:
+**Ramificações e subdivisões:** o site é uma árvore cadastrada em `assets/js/ramificacoes.js`. Cada nó tem `id`, `titulo`, `resumo` e, opcionalmente, `caminho` (pasta da página), `numeros`, `acoes` e `filhos`, que seguem o mesmo formato e podem ter qualquer profundidade. Nó sem `caminho` vira uma seção dentro da página do pai, com link `pai/#id`.
 
-1. crie a pasta do `caminho` (ex.: `apoio/index.html`) usando o mesmo `<head>` da página inicial, com `../` nos caminhos, e os pontos de montagem:
-   ```html
-   <div data-componente="cabecalho"></div>
-   <main id="conteudo"> ... </main>
-   <div data-componente="rodape"></div>
-   ```
-2. troque `pronta` para `true` no registro. Todos os links do site passam a apontar para a página nova.
+Do registro saem o índice lateral (fixo nas páginas internas e na gaveta do botão "Índice"), a trilha de navegação, os blocos da página inicial, o mapa do rodapé e o conteúdo das páginas.
 
-Para criar uma ramificação nova, basta adicionar uma entrada ao registro.
+Para criar uma subdivisão nova (ex.: uma página dentro da Área do aluno):
+
+1. adicione o nó em `filhos` do nó pai, com `caminho: "aluno/nome/"`;
+2. rode `node ferramentas/paginas.mjs`, que cria a pasta e o `index.html` de toda página nova do registro, sem tocar nas que já existem;
+3. publique. O índice, a trilha e os links se atualizam sozinhos.
+
+Para escrever o conteúdo de uma página à mão, edite o `index.html` dela e troque o `<div data-componente="pagina">` pelo HTML desejado, mantendo `<div data-componente="trilha" data-id="...">`.
 
 **Novo componente:** crie `assets/js/componentes/nome.js` exportando `function (alvo, { site, url })`, registre o componente em `site.js` e use `<div data-componente="nome"></div>` na página.
