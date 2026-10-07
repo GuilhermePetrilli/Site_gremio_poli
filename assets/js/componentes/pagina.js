@@ -1,11 +1,13 @@
 // Página de uma ramificação, montada a partir do registro (ramificacoes.js).
-// Uso: <div data-componente="pagina" data-id="apoio"></div>
+// Uso: <div data-componente="pagina" data-id="projetos"></div>
 // Mostra a trilha (Início › … › página), o título, o resumo, os números,
 // as seções filhas e as ações. Filhos com página própria aparecem como cartões de recurso;
-// filhos sem página viram seções com âncora. Para escrever uma página à mão, troque este
+// filhos sem página viram seções com âncora, com seus próprios números e, se tiverem filhos,
+// uma lista de itens, cada um com âncora (ex.: projetos/#apoio e projetos/#reforco).
+// Com duas ou mais seções que têm itens, a página ganha atalhos "Nesta página" no topo. Para escrever uma página à mão, troque este
 // componente pelo conteúdo em HTML e mantenha a trilha com data-componente="trilha".
 
-import { trilha } from "./trilha.js?v=202610071019";
+import { trilha } from "./trilha.js?v=202610071025";
 
 // Cartões das subpáginas de um nó. Também usado em páginas escritas à mão
 // (<div data-componente="recursos" data-id="aluno"></div>).
@@ -22,7 +24,7 @@ export function cartoes({ url, destino }, no, ancestrais) {
 }
 
 export default function pagina(alvo, contexto) {
-  const { encontrar } = contexto;
+  const { encontrar, url, destino } = contexto;
   const achado = encontrar(alvo.dataset.id);
   if (!achado) {
     alvo.innerHTML = `<p>Esta página não está no registro de ramificações.</p>`;
@@ -32,9 +34,10 @@ export default function pagina(alvo, contexto) {
   const filhos = no.filhos || [];
   const secoesSemPagina = filhos.filter((f) => !f.caminho);
 
-  const numeros = no.numeros && no.numeros.length
-    ? `<dl class="fichas pagina__numeros">${no.numeros.map((n) => `<div class="ficha"><dt>${n.valor}</dt><dd>${n.rotulo}</dd></div>`).join("")}</dl>`
+  const fichas = (lista, classe) => lista && lista.length
+    ? `<dl class="fichas ${classe}">${lista.map((n) => `<div class="ficha"><dt>${n.valor}</dt><dd>${n.rotulo}</dd></div>`).join("")}</dl>`
     : "";
+  const numeros = fichas(no.numeros, "pagina__numeros");
 
   const acoes = no.acoes && no.acoes.length
     ? `<div class="acoes pagina__acoes">${no.acoes
@@ -43,12 +46,26 @@ export default function pagina(alvo, contexto) {
     : "";
 
   const recursos = cartoes(contexto, no, ancestrais);
+  const itens = (f) => f.filhos && f.filhos.length
+    ? `<ul class="pagina__itens">${f.filhos
+        .map((g) => `<li id="${g.id}">
+            <h3>${g.caminho ? `<a href="${url(destino(g, [...ancestrais, no, f]))}">${g.titulo}</a>` : g.titulo}</h3>
+            ${g.texto || g.resumo ? `<p>${g.texto || g.resumo}</p>` : ""}
+          </li>`)
+        .join("")}</ul>`
+    : "";
   const secoes = secoesSemPagina
     .map((f) => `<section class="pagina__secao" id="${f.id}">
         <h2>${f.titulo}</h2>
         ${f.texto || f.resumo ? `<p>${f.texto || f.resumo}</p>` : ""}
+        ${fichas(f.numeros, "pagina__secao-numeros")}
+        ${itens(f)}
       </section>`)
     .join("");
+  const comItens = secoesSemPagina.filter((f) => f.filhos && f.filhos.length);
+  const atalhos = comItens.length >= 2
+    ? `<nav class="pagina__atalhos" aria-label="Nesta página">${comItens.map((f) => `<a class="chip" href="#${f.id}">${f.titulo}</a>`).join("")}</nav>`
+    : "";
 
   alvo.innerHTML = `
     ${trilha(contexto, ancestrais, no)}
@@ -58,6 +75,7 @@ export default function pagina(alvo, contexto) {
       ${numeros}
       ${acoes}
       ${no.construcao ? `<p class="estado">Página em construção: o conteúdo completo entra em breve.</p>` : ""}
+      ${atalhos}
     </header>
     ${recursos ? `<div class="pagina__recursos">${recursos}</div>` : ""}
     <div class="pagina__secoes">${secoes || (recursos ? "" : `<p class="pagina__vazio">As seções desta área vão aparecer aqui conforme forem criadas.</p>`)}</div>`;

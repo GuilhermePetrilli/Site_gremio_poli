@@ -17,7 +17,7 @@ Depois acesse http://localhost:8000.
 
 ```
 index.html                 página inicial
-apoio/, cultura/, …       uma pasta por ramificação, gerada por ferramentas/paginas.mjs
+projetos/, eventos/, …     uma pasta por ramificação, gerada por ferramentas/paginas.mjs
 aluno/                     Área do aluno (página de entrada escrita à mão)
   bandejoes/               guia dos bandejões: cardápio do dia, mapa e caminho a pé
 .github/workflows/         agendador do cardápio (opcional; ver "Cardápio dos bandejões")

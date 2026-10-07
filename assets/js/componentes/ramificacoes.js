@@ -29,7 +29,7 @@ export default function ramificacoes(alvo, { url, registro, destino }) {
   const filhos = (r) =>
     r.filhos && r.filhos.length
       ? `<ul class="frente__itens">${r.filhos
-          .map((f) => `<li><h4><a href="${url(destino(f, [r]))}">${f.titulo}</a></h4>${f.texto ? `<p>${f.texto}</p>` : ""}</li>`)
+          .map((f) => `<li><h4><a href="${url(destino(f, [r]))}">${f.titulo}</a></h4>${f.texto || f.resumo ? `<p>${f.texto || f.resumo}</p>` : ""}</li>`)
           .join("")}</ul>`
       : "";
 

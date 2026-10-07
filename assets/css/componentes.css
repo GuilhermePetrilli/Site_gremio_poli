@@ -143,11 +143,19 @@
 .pagina__numeros { margin-top: 24px; }
 .pagina__acoes { margin-top: 24px; }
 .pagina__topo .estado { margin-top: 24px; }
-.pagina__secao { padding-block: 26px; border-bottom: 1px solid var(--linha); scroll-margin-top: calc(var(--altura-cabecalho) + 16px); }
+.pagina__secao { padding-block: 32px; border-bottom: 1px solid var(--linha); scroll-margin-top: calc(var(--altura-cabecalho) + 16px); }
 .pagina__secao h2 { font-size: var(--t-titulo); }
 .pagina__secao h2 a { color: inherit; }
 .pagina__secao p { margin-top: 8px; max-width: 62ch; color: var(--tinta-suave); }
 .pagina__vazio { padding-block: 28px; color: var(--tinta-suave); }
+.pagina__atalhos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.pagina__secao-numeros { margin-top: 18px; }
+.pagina__itens { list-style: none; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.pagina__itens li { padding: 16px 18px; background: var(--papel); border: 2px solid var(--linha); border-radius: var(--raio); scroll-margin-top: calc(var(--altura-cabecalho) + 16px); }
+.pagina__itens li:target { border-color: var(--tinta); box-shadow: 0 4px 0 var(--tinta); }
+.pagina__itens h3 { font-size: 1.08rem; }
+.pagina__itens h3 a { color: inherit; }
+.pagina__itens p { margin-top: 6px; color: var(--tinta-suave); max-width: none; }
 
 /* cartões de recursos (seções que têm página própria) */
 .recursos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }

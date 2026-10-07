@@ -17,6 +17,8 @@
 //
 // Para criar páginas novas: adicione o nó com `caminho` e rode `node ferramentas/paginas.mjs`.
 // Conteúdo das frentes: página "Projetos e impacto" do site atual, conferida em outubro de 2026.
+// Apoio ao aluno, projetos culturais e projetos sociais dividem a página "Projetos e apoio"
+// (projetos/): cada um é uma seção, e os projetos de cada um ficam dentro dela.
 
 export const grupos = [
   { id: "frentes", titulo: "Frentes do Grêmio" },
@@ -26,55 +28,61 @@ export const grupos = [
 
 export const ramificacoes = [
   {
-    id: "apoio",
+    id: "projetos",
     grupo: "frentes",
-    titulo: "Apoio ao aluno",
-    caminho: "apoio/",
+    titulo: "Projetos e apoio",
+    caminho: "projetos/",
     construcao: true,
-    resumo: "Do reforço antes da prova ao empréstimo de calculadora: ajuda prática para atravessar a graduação.",
+    resumo: "Apoio ao aluno, projetos culturais e projetos sociais: o que o Grêmio faz pela vida acadêmica, pela cultura e pela comunidade, dentro e fora da Poli.",
     numeros: [
       { valor: "700+", rotulo: "alunos por ano nas aulas de reforço" },
-      { valor: "900+", rotulo: "bolsas integrais de idiomas concedidas" },
-    ],
-    filhos: [
-      { id: "reforco", titulo: "Aulas de reforço (Fuja do Nabo)", texto: "Aulas na reta final antes das provas, gravadas e publicadas no YouTube do Grêmio." },
-      { id: "apoio-academico", titulo: "Apoio acadêmico", texto: "Dúvidas sobre matrícula, requerimentos e calendário, divulgação de bolsas e pedidos de reoferecimento de disciplinas." },
-      { id: "emprestimo", titulo: "Empréstimo de material", texto: "Calculadoras científicas, jalecos e equipamentos de som e foto para eventos e apresentações." },
-      { id: "bolsas", titulo: "Bolsas de idiomas", texto: "Bolsas integrais no Poliglota Idiomas, independentemente da condição socioeconômica." },
-    ],
-  },
-  {
-    id: "cultura",
-    grupo: "frentes",
-    titulo: "Projetos culturais",
-    caminho: "cultura/",
-    construcao: true,
-    resumo: "Jornalismo, arte e teatro com décadas de história dentro da Poli.",
-    numeros: [
       { valor: "80+", rotulo: "anos de O Politécnico e do GTP" },
-      { valor: "1989", rotulo: "ano da primeira SAPO" },
-    ],
-    filhos: [
-      { id: "o-politecnico", titulo: "Jornal O Politécnico", texto: "Há mais de 80 anos tratando os temas da Poli com verdade, humor e curiosidade." },
-      { id: "sapo", titulo: "Semana de Arte da Poli (SAPO)", texto: "Desde 1989, oficinas de pintura, recitais de piano e apresentações de teatro e dança." },
-      { id: "gtp", titulo: "Grupo de Teatro da Poli (GTP)", texto: "Mais de 80 anos de história e aulas gratuitas, abertas à universidade e ao público." },
-    ],
-  },
-  {
-    id: "social",
-    grupo: "frentes",
-    titulo: "Projetos sociais",
-    caminho: "social/",
-    construcao: true,
-    resumo: "A Poli indo até as escolas públicas e abrindo as portas para quem ainda vai chegar.",
-    numeros: [
       { valor: "1000+", rotulo: "estudantes alcançados pelo Poli Vai à Escola" },
-      { valor: "75", rotulo: "alunas visitantes no Meninas na Poli em 2025" },
     ],
     filhos: [
-      { id: "poli-vai-a-escola", titulo: "Poli Vai à Escola", texto: "Politécnicos levam a universidade até escolas, desde 2023." },
-      { id: "meninas-na-poli", titulo: "Meninas na Poli", texto: "Alunas do ensino médio de escolas públicas conhecem laboratórios, atividades estudantis e a rotina da Poli." },
-      { id: "semana-da-mulher", titulo: "Semana da Mulher Politécnica", texto: "Programação dedicada às mulheres da Poli." },
+      {
+        id: "apoio",
+        titulo: "Apoio ao aluno",
+        resumo: "Do reforço antes da prova ao empréstimo de calculadora: ajuda prática para atravessar a graduação.",
+        numeros: [
+          { valor: "700+", rotulo: "alunos por ano nas aulas de reforço" },
+          { valor: "900+", rotulo: "bolsas integrais de idiomas concedidas" },
+        ],
+        filhos: [
+          { id: "reforco", titulo: "Aulas de reforço (Fuja do Nabo)", texto: "Aulas na reta final antes das provas, gravadas e publicadas no YouTube do Grêmio." },
+          { id: "apoio-academico", titulo: "Apoio acadêmico", texto: "Dúvidas sobre matrícula, requerimentos e calendário, divulgação de bolsas e pedidos de reoferecimento de disciplinas." },
+          { id: "emprestimo", titulo: "Empréstimo de material", texto: "Calculadoras científicas, jalecos e equipamentos de som e foto para eventos e apresentações." },
+          { id: "bolsas", titulo: "Bolsas de idiomas", texto: "Bolsas integrais no Poliglota Idiomas, independentemente da condição socioeconômica." },
+        ],
+      },
+      {
+        id: "cultura",
+        titulo: "Projetos culturais",
+        resumo: "Jornalismo, arte e teatro com décadas de história dentro da Poli.",
+        numeros: [
+          { valor: "80+", rotulo: "anos de O Politécnico e do GTP" },
+          { valor: "1989", rotulo: "ano da primeira SAPO" },
+        ],
+        filhos: [
+          { id: "o-politecnico", titulo: "Jornal O Politécnico", texto: "Há mais de 80 anos tratando os temas da Poli com verdade, humor e curiosidade." },
+          { id: "sapo", titulo: "Semana de Arte da Poli (SAPO)", texto: "Desde 1989, oficinas de pintura, recitais de piano e apresentações de teatro e dança." },
+          { id: "gtp", titulo: "Grupo de Teatro da Poli (GTP)", texto: "Mais de 80 anos de história e aulas gratuitas, abertas à universidade e ao público." },
+        ],
+      },
+      {
+        id: "social",
+        titulo: "Projetos sociais",
+        resumo: "A Poli indo até as escolas públicas e abrindo as portas para quem ainda vai chegar.",
+        numeros: [
+          { valor: "1000+", rotulo: "estudantes alcançados pelo Poli Vai à Escola" },
+          { valor: "75", rotulo: "alunas visitantes no Meninas na Poli em 2025" },
+        ],
+        filhos: [
+          { id: "poli-vai-a-escola", titulo: "Poli Vai à Escola", texto: "Politécnicos levam a universidade até escolas, desde 2023." },
+          { id: "meninas-na-poli", titulo: "Meninas na Poli", texto: "Alunas do ensino médio de escolas públicas conhecem laboratórios, atividades estudantis e a rotina da Poli." },
+          { id: "semana-da-mulher", titulo: "Semana da Mulher Politécnica", texto: "Programação dedicada às mulheres da Poli." },
+        ],
+      },
     ],
   },
   {
