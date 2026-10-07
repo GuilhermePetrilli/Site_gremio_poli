@@ -19,6 +19,7 @@
 .botao--claro:hover { background: #fff; color: var(--azul); }
 .botao--acesso { min-height: 44px; padding: 0 18px; gap: 10px; box-shadow: 0 0 0 3px var(--azul-tinta); }
 .botao--acesso svg, .botao--indice svg { flex: none; }
+.botao--acesso, .botao--indice, .marca span { white-space: nowrap; }
 .acoes { display: flex; flex-wrap: wrap; gap: 12px; }
 
 /* Botão do índice: claro, com borda e sombra em tinta (como um cartão selecionado),
@@ -60,7 +61,7 @@
 .cabecalho__menu a:not(.botao):hover { background: var(--azul-tinta); }
 .cabecalho .botao--acesso { margin-left: 8px; }
 .cabecalho__menu-botao { display: none; }
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .cabecalho__indice, .cabecalho__menu { display: none; }
   .cabecalho__menu-botao { display: inline-flex; margin-left: auto; }
   .cabecalho .botao--acesso { margin-left: 0; }
@@ -90,7 +91,7 @@
 .gaveta__acessos .botao { justify-content: flex-start; }
 .gaveta__menu { display: none; flex-direction: column; padding: 0 20px 28px; }
 .gaveta__menu a:not(.botao) { padding: 12px 4px; border-top: 1px solid var(--linha); color: var(--tinta); text-decoration: none; font-weight: 700; }
-@media (max-width: 900px) { .gaveta__menu { display: flex; } }
+@media (max-width: 1000px) { .gaveta__menu { display: flex; } }
 
 /* ---------- índice em árvore ---------- */
 .indice { font-size: .95rem; }
@@ -306,3 +307,15 @@
 .aluno__recursos h2 { font-size: var(--t-titulo); margin-bottom: 16px; }
 .aluno__nota { margin-top: 18px; color: var(--tinta-suave); max-width: 60ch; }
 .aluno__nota a { font-weight: 700; }
+
+/* ---------- loja ---------- */
+.loja__breve { position: relative; margin-top: 32px; padding: clamp(22px, 3vw, 32px); background: var(--painel); border: var(--borda); border-radius: var(--raio); box-shadow: 0 6px 0 var(--sol); overflow: hidden; }
+.loja__breve h2 { font-size: var(--t-grande); }
+.loja__breve p { margin-top: 10px; max-width: 54ch; font-size: var(--t-media); line-height: 1.5; color: var(--tinta-suave); }
+.loja__breve .acoes { margin-top: 20px; }
+.loja__categorias { padding-top: 36px; }
+.loja__categorias h2 { font-size: var(--t-titulo); margin-bottom: 16px; }
+.loja__categorias .recurso--breve { color: var(--tinta); }
+.loja__categorias .pill { align-self: flex-start; }
+.loja__nota { margin-top: 18px; color: var(--tinta-suave); }
+.loja__nota a { font-weight: 700; }

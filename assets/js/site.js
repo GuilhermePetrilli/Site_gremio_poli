@@ -4,16 +4,16 @@
 // Componentes pesados, usados numa página só, entram em `sobDemanda`: o arquivo
 // só é baixado quando a página tem aquele componente.
 
-import { site } from "./config.js?v=202610071003";
-import { ramificacoes as registro, grupos, encontrar, destino } from "./ramificacoes.js?v=202610071003";
-import cabecalho from "./componentes/cabecalho.js?v=202610071003";
-import rodape from "./componentes/rodape.js?v=202610071003";
-import agora from "./componentes/agora.js?v=202610071003";
-import ramificacoes from "./componentes/ramificacoes.js?v=202610071003";
-import indice from "./componentes/indice.js?v=202610071003";
-import pagina from "./componentes/pagina.js?v=202610071003";
-import trilha from "./componentes/trilha.js?v=202610071003";
-import recursos from "./componentes/recursos.js?v=202610071003";
+import { site } from "./config.js?v=202610071016";
+import { ramificacoes as registro, grupos, encontrar, destino } from "./ramificacoes.js?v=202610071016";
+import cabecalho from "./componentes/cabecalho.js?v=202610071016";
+import rodape from "./componentes/rodape.js?v=202610071016";
+import agora from "./componentes/agora.js?v=202610071016";
+import ramificacoes from "./componentes/ramificacoes.js?v=202610071016";
+import indice from "./componentes/indice.js?v=202610071016";
+import pagina from "./componentes/pagina.js?v=202610071016";
+import trilha from "./componentes/trilha.js?v=202610071016";
+import recursos from "./componentes/recursos.js?v=202610071016";
 
 // Raiz do site calculada a partir deste arquivo (assets/js/site.js),
 // então funciona em qualquer domínio, subpasta ou hospedagem.
@@ -22,7 +22,7 @@ export const url = (caminho) => (/^[a-z]+:/i.test(caminho) ? caminho : new URL(c
 
 const componentes = { cabecalho, rodape, agora, ramificacoes, indice, pagina, trilha, recursos };
 const sobDemanda = {
-  "guia-bandejoes": () => import("./componentes/guia-bandejoes.js?v=202610071003"),
+  "guia-bandejoes": () => import("./componentes/guia-bandejoes.js?v=202610071016"),
 };
 const contexto = { site, url, raiz: RAIZ, registro, grupos, encontrar, destino };
 

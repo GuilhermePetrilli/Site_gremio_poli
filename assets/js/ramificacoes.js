@@ -21,6 +21,7 @@
 export const grupos = [
   { id: "frentes", titulo: "Frentes do Grêmio" },
   { id: "acessos", titulo: "Acessos" },
+  { id: "mais", titulo: "Mais do Grêmio" },
 ];
 
 export const ramificacoes = [
@@ -146,6 +147,14 @@ export const ramificacoes = [
     caminho: "admin/",
     construcao: true,
     resumo: "Espaço da gestão do Grêmio.",
+    filhos: [],
+  },
+  {
+    id: "loja",
+    grupo: "mais",
+    titulo: "Loja do Grêmio",
+    caminho: "loja/",
+    resumo: "Vista a camisa politécnica e faça a diferença. Os lucros da loja apoiam os projetos sociais do Grêmio.",
     filhos: [],
   },
 ];
