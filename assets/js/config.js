@@ -1,6 +1,14 @@
-// Configuração global do site: um único lugar para menu, contato e redes.
+// Configuração global do site: menu, contato, redes e autoria.
+// As ramificações (grandes seções) ficam em ramificacoes.js.
 // Os caminhos (href) são relativos à raiz do site, sem barra no início,
 // para funcionar igual em subpasta (github.io/Site_gremio_poli/) ou num domínio próprio.
+
+import { ramificacao, destino } from "./ramificacoes.js?v=202610062204";
+
+const doRegistro = (id, rotulo) => {
+  const r = ramificacao(id);
+  return { rotulo: rotulo || r.titulo, href: destino(r) };
+};
 
 export const site = {
   nome: "Grêmio Politécnico",
@@ -14,12 +22,12 @@ export const site = {
   },
 
   menu: [
-    { rotulo: "Serviços", href: "#servicos" },
-    { rotulo: "Representação", href: "#representacao" },
+    { rotulo: "O que fazemos", href: "#frentes" },
+    doRegistro("representacao", "Representação"),
     { rotulo: "O Grêmio", href: "#gremio" },
     { rotulo: "Contato", href: "#contato" },
   ],
-  chamada: { rotulo: "Fale com o Grêmio", href: "#contato" },
+  chamada: doRegistro("aluno"),
 
   contato: {
     endereco: "Av. Prof. Almeida Prado, 128, Travessa 2, Cidade Universitária, São Paulo, SP",
@@ -32,4 +40,6 @@ export const site = {
     { nome: "Instagram", usuario: "@gremiopolitecnico", href: "https://instagram.com/gremiopolitecnico" },
     { nome: "YouTube", usuario: "@gremiopolitecnico", href: "https://www.youtube.com/@gremiopolitecnico" },
   ],
+
+  autoria: "Site desenvolvido pela chapa Alvorada.",
 };

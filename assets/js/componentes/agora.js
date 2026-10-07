@@ -1,6 +1,6 @@
 // Painel "Agora no campus": quais bandejões estão abertos neste momento.
 
-import { bandejoes, situacao } from "../dados/bandejoes.js?v=202610062144";
+import { bandejoes, situacao } from "../dados/bandejoes.js?v=202610062204";
 
 export default function agora(alvo) {
   const desenhar = () => {

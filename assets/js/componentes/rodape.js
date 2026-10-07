@@ -1,10 +1,11 @@
 // Rodapé no formato de carimbo (legenda) de folha de desenho técnico:
 // cada campo traz um dado da entidade.
 
-export default function rodape(alvo, { site, url }) {
+export default function rodape(alvo, { site, url, registro, destino }) {
   const { contato } = site;
   const tel = contato.telefone.replace(/\D/g, "");
-  const menu = site.menu.map((i) => `<li><a href="${url(i.href)}">${i.rotulo}</a></li>`).join("");
+  // Mapa do site: todas as ramificações do registro, na ordem em que foram cadastradas.
+  const menu = registro.map((r) => `<li><a href="${url(destino(r))}">${r.titulo}</a></li>`).join("");
 
   alvo.innerHTML = `
     <footer class="rodape" id="contato">
@@ -29,7 +30,8 @@ export default function rodape(alvo, { site, url }) {
           <div class="carimbo__campo"><span>Ano</span><span data-ano></span></div>
         </div>
 
-        <nav class="rodape__menu" aria-label="Rodapé"><ul>${menu}</ul></nav>
+        <nav class="rodape__menu" aria-label="Mapa do site"><ul>${menu}</ul></nav>
+        <p class="rodape__autoria">${site.autoria}</p>
       </div>
     </footer>`;
 }

@@ -87,25 +87,39 @@
 .colunas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
 @media (max-width: 860px) { .colunas { grid-template-columns: 1fr; } }
 
-/* ---------- serviços ---------- */
-.servicos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 2px solid var(--tinta); }
-.servico { padding: 28px 28px 8px 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-.servico + .servico { border-left: 1px solid var(--linha); padding-left: 28px; }
-.servico img { width: 64px; height: 64px; object-fit: contain; margin-bottom: 8px; }
-.servico p { color: var(--tinta-suave); }
-.servico__onde { font-size: var(--t-pequeno); color: var(--tinta); font-weight: 500; }
-@media (max-width: 860px) {
-  .servicos { grid-template-columns: 1fr; }
-  .servico, .servico + .servico { padding: 24px 0; border-left: 0; }
-  .servico + .servico { border-top: 1px solid var(--linha); }
+/* ---------- ramificações: frentes ---------- */
+.frente {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 20px clamp(32px, 5vw, 72px);
+  padding-block: 36px 40px; border-top: 2px solid var(--tinta);
 }
+.frente__cabeca h3 { font-size: var(--t-titulo); }
+.frente__cabeca > p { margin-top: 12px; color: var(--tinta-suave); max-width: 46ch; }
+.frente__numeros { display: flex; flex-wrap: wrap; gap: 16px 32px; margin: 24px 0 0; }
+.frente__numeros dt { font-size: var(--t-titulo); font-weight: 700; font-stretch: var(--largo); line-height: 1; color: var(--azul); }
+.frente__numeros dd { margin: 6px 0 0; font-size: var(--t-pequeno); color: var(--tinta-suave); max-width: 22ch; }
+.frente__cabeca .estado, .frente__cabeca .botao { margin-top: 24px; }
+.frente__itens { list-style: none; margin: 0; padding: 0; }
+.frente__itens li { padding: 14px 0; border-bottom: 1px solid var(--linha); }
+.frente__itens li:first-child { padding-top: 4px; }
+.frente__itens h4 { margin: 0; font-size: var(--t-texto); font-weight: 600; }
+.frente__itens p { margin-top: 4px; color: var(--tinta-suave); }
+.frente__acoes { margin-top: 4px; }
+@media (max-width: 860px) { .frente { grid-template-columns: 1fr; } }
 
-/* ---------- representação ---------- */
-.frentes { margin: 0; border-top: 2px solid var(--tinta); }
-.frentes div { padding: 18px 0; border-bottom: 1px solid var(--linha); }
-.frentes dt { font-weight: 600; font-size: var(--t-media); font-stretch: 108%; }
-.frentes dd { margin: 4px 0 0; color: var(--tinta-suave); }
-.representacao__acoes { margin-top: 28px; }
+.estado {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: var(--t-pequeno); font-weight: 500; color: var(--tinta-suave);
+}
+.estado::before { content: ""; width: 10px; height: 10px; border: 2px dashed var(--tinta-suave); border-radius: 50%; }
+
+/* ---------- ramificações: acessos ---------- */
+.acessos { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 20px; }
+.acesso { padding: 28px; border: 1px solid var(--linha); border-radius: var(--raio); display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.acesso:first-child { border: 2px solid var(--azul); }
+.acesso:first-child h3 { font-size: var(--t-titulo); color: var(--azul); }
+.acesso p { color: var(--tinta-suave); max-width: 52ch; }
+.acesso .estado { margin-top: auto; padding-top: 8px; }
+@media (max-width: 760px) { .acessos { grid-template-columns: 1fr; } }
 
 /* ---------- o Grêmio ---------- */
 .gremio__figura { margin: 0; }
@@ -144,3 +158,4 @@
 
 .rodape__menu ul { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 20px; }
 .rodape__menu a { color: var(--tinta-suave); font-size: var(--t-pequeno); }
+.rodape__autoria { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--linha); font-size: var(--t-pequeno); color: var(--tinta-suave); }

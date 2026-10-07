@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Grêmio Politécnico da USP</title>
-  <meta name="description" content="Grêmio Politécnico da USP: representação estudantil, serviços e apoio aos alunos da Escola Politécnica desde 1903.">
+  <meta name="description" content="Grêmio Politécnico da USP: representação discente, apoio ao aluno, projetos culturais e sociais, eventos e serviços para os alunos da Escola Politécnica desde 1903.">
   <meta name="theme-color" content="#ffffff">
   <link rel="icon" href="assets/img/marca/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap">
-  <link rel="stylesheet" href="assets/css/tokens.css?v=202610062144">
-  <link rel="stylesheet" href="assets/css/base.css?v=202610062144">
-  <link rel="stylesheet" href="assets/css/componentes.css?v=202610062144">
-  <script type="module" src="assets/js/site.js?v=202610062144"></script>
+  <link rel="stylesheet" href="assets/css/tokens.css?v=202610062204">
+  <link rel="stylesheet" href="assets/css/base.css?v=202610062204">
+  <link rel="stylesheet" href="assets/css/componentes.css?v=202610062204">
+  <script type="module" src="assets/js/site.js?v=202610062204"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -25,28 +25,33 @@
     <section class="inicio">
       <div class="container">
         <h1>Do que você precisa hoje?</h1>
-        <p class="inicio__intro">O Grêmio Politécnico é a entidade dos alunos da Poli desde 1903. Representação estudantil, serviços e apoio, tudo começa por aqui.</p>
+        <p class="inicio__intro">O Grêmio Politécnico é a entidade dos alunos da Poli desde 1903. Representação, apoio, cultura, projetos sociais e serviços, tudo começa por aqui.</p>
 
         <div class="inicio__grade">
           <nav class="balcao" aria-label="Atalhos">
-            <a class="balcao__item" href="#copiadora">
+            <a class="balcao__item" href="#apoio">
+              <span class="balcao__acao">Revisar a matéria antes da prova</span>
+              <span class="balcao__onde">Aulas de reforço</span>
+              <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="balcao__item" href="#apoio">
+              <span class="balcao__acao">Pegar uma calculadora ou jaleco</span>
+              <span class="balcao__onde">Empréstimo de material</span>
+              <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="balcao__item" href="#servicos">
               <span class="balcao__acao">Imprimir ou tirar cópias</span>
               <span class="balcao__onde">Copiadora Politécnica</span>
               <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a class="balcao__item" href="#triedro">
-              <span class="balcao__acao">Comer perto da aula</span>
-              <span class="balcao__onde">O Triedro, no Biênio</span>
-              <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a class="balcao__item" href="#poliglota">
-              <span class="balcao__acao">Estudar um idioma</span>
+            <a class="balcao__item" href="#apoio">
+              <span class="balcao__acao">Estudar um idioma com bolsa</span>
               <span class="balcao__onde">Poliglota Idiomas</span>
               <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
             <a class="balcao__item" href="#representacao">
               <span class="balcao__acao">Levar uma demanda à Poli</span>
-              <span class="balcao__onde">Representação estudantil</span>
+              <span class="balcao__onde">Representação discente</span>
               <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
             <a class="balcao__item" href="#contato">
@@ -61,51 +66,24 @@
       </div>
     </section>
 
-    <!-- Serviços -->
-    <section class="bloco bloco--painel" id="servicos">
+    <!-- Frentes: geradas a partir de assets/js/ramificacoes.js -->
+    <section class="bloco bloco--painel" id="frentes">
       <div class="container">
         <div class="bloco__topo">
-          <h2>Serviços do Grêmio</h2>
-          <p>Mantidos pelo Grêmio para o dia a dia de quem estuda na Poli.</p>
+          <h2>O que o Grêmio faz</h2>
+          <p>Seis frentes de trabalho, com projetos que já fazem parte da vida na Poli. Cada uma vai ganhar uma página própria.</p>
         </div>
-        <div class="servicos">
-          <article class="servico" id="copiadora">
-            <img src="assets/img/marca/gremio-azul.png" alt="" width="64" height="64" loading="lazy">
-            <h3>Copiadora Politécnica</h3>
-            <p>Cópias e impressões, com planos de cotas para alunos.</p>
-          </article>
-          <article class="servico" id="triedro">
-            <img src="assets/img/servicos/triedro.png" alt="" width="64" height="64" loading="lazy">
-            <h3>O Triedro</h3>
-            <p>Lanchonete com refeições a preços acessíveis.</p>
-            <p class="servico__onde">Prédio do Biênio</p>
-          </article>
-          <article class="servico" id="poliglota">
-            <img src="assets/img/servicos/poliglota.png" alt="" width="64" height="64" loading="lazy">
-            <h3>Poliglota Idiomas</h3>
-            <p>Escola de idiomas com mais de 30 anos de experiência: alemão, espanhol, francês, inglês, italiano e português.</p>
-          </article>
-        </div>
+        <div data-componente="ramificacoes" data-grupo="frentes"></div>
       </div>
     </section>
 
-    <!-- Representação -->
-    <section class="bloco" id="representacao">
-      <div class="container colunas">
-        <div>
-          <h2>A voz dos alunos dentro da Poli</h2>
-          <p class="texto texto--abre">O Grêmio leva as demandas dos politécnicos à diretoria da escola e às instâncias da USP. Se algo na Poli precisa mudar, conte para a gente.</p>
-          <div class="acoes representacao__acoes">
-            <a class="botao" href="mailto:administrativo@gremiopolitecnico.com.br?subject=Demanda%20para%20a%20representa%C3%A7%C3%A3o">Enviar uma demanda por e-mail</a>
-            <a class="botao botao--linha" href="https://instagram.com/gremiopolitecnico" target="_blank" rel="noopener">Falar pelo Instagram</a>
-          </div>
+    <!-- Acessos: área do aluno e da gestão -->
+    <section class="bloco" id="acessos">
+      <div class="container">
+        <div class="bloco__topo">
+          <h2>Acessos</h2>
         </div>
-        <dl class="frentes">
-          <div><dt>Representação estudantil</dt><dd>Assentos e diálogo nas instâncias da Poli e da USP.</dd></div>
-          <div><dt>Projetos sociais</dt><dd>Iniciativas de impacto social dentro e fora do campus.</dd></div>
-          <div><dt>Projetos culturais</dt><dd>Eventos e atividades que movimentam a vida na Poli.</dd></div>
-          <div><dt>Apoio aos alunos</dt><dd>Suporte para que cada politécnico aproveite a graduação.</dd></div>
-        </dl>
+        <div data-componente="ramificacoes" data-grupo="acessos"></div>
       </div>
     </section>
 
@@ -119,7 +97,7 @@
         <div class="gremio__texto">
           <h2>Feito por alunos desde 1903</h2>
           <p class="texto">Fundado em 1º de setembro de 1903 por estudantes da Escola Politécnica, o Grêmio é a segunda entidade estudantil mais antiga do Brasil.</p>
-          <p class="texto">Hoje é uma associação de representação estudantil e de serviços, formada por alunos e colaboradores, que trabalha pela formação, pelo apoio social e pela vida acadêmica de quem estuda na Poli.</p>
+          <p class="texto">Hoje é uma associação de representação estudantil e de serviços, formada por alunos e colaboradores, com impacto direto na vida de milhares de estudantes dentro e fora da Poli.</p>
         </div>
       </div>
     </section>
