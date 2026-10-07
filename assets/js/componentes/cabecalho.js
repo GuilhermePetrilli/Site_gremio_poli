@@ -1,9 +1,9 @@
 // Cabeçalho: faixa de aviso, marca, menu e gaveta lateral com o índice do site.
-// O botão "Índice do site" (escuro, em destaque) abre a gaveta. No celular ele vira
+// O botão "Índice do site" (com borda, em destaque) abre a gaveta. No celular ele vira
 // "Índice" e a gaveta também traz os links do menu.
 // Qualquer elemento com data-abrir-gaveta, em qualquer lugar da página, abre a mesma gaveta.
 
-import { arvore } from "./indice.js?v=202610062336";
+import { arvore } from "./indice.js?v=202610071003";
 
 export default function cabecalho(alvo, contexto) {
   const { site, url } = contexto;

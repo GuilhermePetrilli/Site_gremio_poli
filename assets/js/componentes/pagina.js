@@ -5,7 +5,7 @@
 // filhos sem página viram seções com âncora. Para escrever uma página à mão, troque este
 // componente pelo conteúdo em HTML e mantenha a trilha com data-componente="trilha".
 
-import { trilha } from "./trilha.js?v=202610062336";
+import { trilha } from "./trilha.js?v=202610071003";
 
 // Cartões das subpáginas de um nó. Também usado em páginas escritas à mão
 // (<div data-componente="recursos" data-id="aluno"></div>).
