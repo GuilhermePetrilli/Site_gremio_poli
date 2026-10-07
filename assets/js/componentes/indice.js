@@ -32,11 +32,14 @@ function ramo(contexto, nos, ancestrais = [], sempreAbrir = false) {
     .join("")}</ul>`;
 }
 
-export function arvore(contexto) {
+// Na gaveta (modo "gaveta"), as áreas de acesso já aparecem como botões no topo,
+// então o grupo "Acessos" não se repete na árvore.
+export function arvore(contexto, modo = "lateral") {
   const { registro, grupos, url, raiz } = contexto;
   const { aqui } = posicao(contexto);
   const inicio = aqui === new URL("./", raiz).pathname;
   return `<a class="indice__inicio" href="${url("./")}"${inicio ? ' aria-current="page"' : ""}>Início</a>${grupos
+    .filter((g) => !(modo === "gaveta" && g.id === "acessos"))
     .map((g) => {
       const nos = registro.filter((no) => no.grupo === g.id);
       return nos.length ? `<div class="indice__grupo"><p class="indice__titulo">${g.titulo}</p>${ramo(contexto, nos)}</div>` : "";
