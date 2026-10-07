@@ -5,13 +5,14 @@
 import { site } from "./config.js";
 import cabecalho from "./componentes/cabecalho.js";
 import rodape from "./componentes/rodape.js";
+import agora from "./componentes/agora.js";
 
 // Raiz do site calculada a partir deste arquivo (assets/js/site.js),
 // então funciona em qualquer domínio, subpasta ou hospedagem.
 export const RAIZ = new URL("../../", import.meta.url);
 export const url = (caminho) => (/^[a-z]+:/i.test(caminho) ? caminho : new URL(caminho, RAIZ).href);
 
-const componentes = { cabecalho, rodape };
+const componentes = { cabecalho, rodape, agora };
 
 document.querySelectorAll("[data-componente]").forEach((alvo) => {
   const montar = componentes[alvo.dataset.componente];

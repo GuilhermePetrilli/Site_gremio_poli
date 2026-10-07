@@ -1,29 +1,33 @@
 /* Tokens de design: cores, tipografia e medidas usadas em todo o site.
-   Cores baseadas na identidade histórica do Grêmio (azul da logo, #222E84). */
+   O azul é o da logo histórica do Grêmio (#222E84). */
 :root {
-  --azul: #222e84;
-  --azul-escuro: #15153c;
-  --azul-medio: #292b77;
-  --azul-claro: #8a8bcc;
-  --azul-tinta: #eceef9;
+  --tinta: #121735;        /* texto principal */
+  --tinta-suave: #4a5070;  /* texto secundário */
+  --azul: #222e84;         /* azul da logo: marca, links, ações */
+  --azul-forte: #1a2366;   /* hover das ações */
+  --azul-tinta: #e4e8fa;   /* realces suaves */
+  --papel: #ffffff;
+  --painel: #f1f3f8;       /* painéis e faixas alternadas */
+  --linha: #d5d9e6;        /* bordas e divisões */
+  --aberto: #1d8a5b;       /* estado "aberto agora" */
+  --aberto-fundo: #e2f3ea;
+  --marca-texto: #ffd84d;  /* foco e seleção */
 
-  --destaque: #fdbe34;
-  --destaque-texto: #15153c;
+  /* Uma família só: Archivo. Títulos na largura expandida, texto na normal. */
+  --fonte: "Archivo", system-ui, sans-serif;
+  --largo: 118%;
 
-  --texto: #181818;
-  --texto-suave: #4b4f6b;
-  --fundo: #ffffff;
-  --fundo-alt: #f5f6fb;
-  --linha: rgba(34, 46, 132, 0.14);
+  /* Escala tipográfica (px): 14, 17, 21, 28, 40, 64 */
+  --t-pequeno: 0.875rem;
+  --t-texto: 1.0625rem;
+  --t-media: 1.3125rem;
+  --t-titulo: 1.75rem;
+  --t-grande: clamp(1.9rem, 4vw, 2.5rem);
+  --t-gigante: clamp(2.6rem, 7vw, 4.4rem);
 
-  --fonte-titulo: "Poppins", system-ui, sans-serif;
-  --fonte-texto: "Poppins", system-ui, sans-serif;
-
-  --raio: 14px;
-  --raio-pequeno: 8px;
-  --largura: 1180px;
+  --largura: 1200px;
   --gutter: 20px;
-  --secao: clamp(56px, 8vw, 96px);
-  --altura-cabecalho: 72px;
-  --sombra: 0 10px 30px rgba(21, 21, 60, 0.08);
+  --bloco: clamp(64px, 9vw, 112px);
+  --altura-cabecalho: 68px;
+  --raio: 6px;
 }

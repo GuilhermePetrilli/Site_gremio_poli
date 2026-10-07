@@ -14,13 +14,12 @@ export const site = {
   },
 
   menu: [
-    { rotulo: "O Grêmio", href: "#sobre" },
-    { rotulo: "Atuação", href: "#atuacao" },
     { rotulo: "Serviços", href: "#servicos" },
-    { rotulo: "História", href: "#historia" },
+    { rotulo: "Representação", href: "#representacao" },
+    { rotulo: "O Grêmio", href: "#gremio" },
     { rotulo: "Contato", href: "#contato" },
   ],
-  chamada: { rotulo: "Fale com a gente", href: "#contato" },
+  chamada: { rotulo: "Fale com o Grêmio", href: "#contato" },
 
   contato: {
     endereco: "Av. Prof. Almeida Prado, 128, Travessa 2, Cidade Universitária, São Paulo, SP",

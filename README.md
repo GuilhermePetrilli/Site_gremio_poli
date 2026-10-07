@@ -26,7 +26,8 @@ assets/
   js/
     config.js              menu, contato e redes (fonte única)
     site.js                monta os componentes de cada página
-    componentes/           um arquivo por componente (cabecalho.js, rodape.js)
+    componentes/           um arquivo por componente (cabecalho, rodape, agora)
+    dados/                 dados reutilizáveis (ex.: horários dos bandejões)
   img/
     marca/                 logo oficial do Grêmio (não alterar)
     servicos/, historia/   imagens de conteúdo

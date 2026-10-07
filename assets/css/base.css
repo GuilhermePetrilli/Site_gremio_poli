@@ -3,41 +3,41 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--altura-cabecalho) + 12px); }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--altura-cabecalho) + 16px); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  * { animation: none !important; transition: none !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 
 body {
   margin: 0;
-  font: 400 1.0625rem/1.65 var(--fonte-texto);
-  color: var(--texto);
-  background: var(--fundo);
+  font: 400 var(--t-texto)/1.6 var(--fonte);
+  color: var(--tinta);
+  background: var(--papel);
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3 {
-  font-family: var(--fonte-titulo);
+  font-family: var(--fonte);
+  font-stretch: var(--largo);
   font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.015em;
-  margin: 0 0 0.5em;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin: 0;
   text-wrap: balance;
 }
-h1 { font-size: clamp(2.2rem, 5.5vw, 3.8rem); }
-h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); }
-h3 { font-size: 1.2rem; }
-p { margin: 0 0 1em; }
-a { color: var(--azul); }
+h1 { font-size: var(--t-gigante); font-weight: 800; }
+h2 { font-size: var(--t-grande); }
+h3 { font-size: var(--t-media); letter-spacing: -0.01em; }
+p { margin: 0; text-wrap: pretty; }
+a { color: var(--azul); text-underline-offset: 3px; }
 img { max-width: 100%; height: auto; display: block; }
-
-:focus-visible { outline: 3px solid var(--destaque); outline-offset: 3px; border-radius: 4px; }
+::selection { background: var(--marca-texto); color: var(--tinta); }
+:focus-visible { outline: 3px solid var(--marca-texto); outline-offset: 2px; box-shadow: 0 0 0 5px var(--tinta); border-radius: 2px; }
 
 /* Os pontos de montagem não criam caixa própria (mantém o cabeçalho fixo funcionando). */
 [data-componente] { display: contents; }
 
 .container { width: 100%; max-width: var(--largura); margin-inline: auto; padding-inline: var(--gutter); }
-.pular { position: absolute; left: -9999px; top: 8px; z-index: 100; background: var(--azul); color: #fff; padding: 8px 14px; border-radius: var(--raio-pequeno); }
+.pular { position: absolute; left: -9999px; top: 8px; z-index: 100; background: var(--tinta); color: #fff; padding: 8px 14px; }
 .pular:focus { left: 8px; }
-.visualmente-oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
