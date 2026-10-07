@@ -147,3 +147,18 @@
   .semestre li { display: flex; align-items: baseline; gap: 10px; text-align: left; padding: 10px 12px; }
   .semestre li small { margin: 0 0 0 auto; }
 }
+
+/* indicação de site externo (ex.: Poli-Share no Fuja do Nabo) */
+.indicacao { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px 20px; align-items: center; margin-top: 18px; padding: 18px 20px; background: var(--papel); border: var(--borda); border-radius: var(--raio); text-decoration: none; color: var(--tinta); }
+.indicacao:hover { box-shadow: 0 4px 0 var(--tinta); }
+.indicacao__icone { width: 64px; height: 64px; display: grid; place-items: center; border: 2px solid var(--linha); border-radius: var(--raio-pequeno); background: #fff; }
+.indicacao__icone img { width: 40px; height: 40px; image-rendering: pixelated; }
+.indicacao__texto { display: flex; flex-direction: column; gap: 4px; }
+.indicacao__texto strong { font: 700 1.25rem var(--fonte-titulo); }
+.indicacao__texto span { color: var(--tinta-suave); }
+.indicacao__texto small { font-size: .82rem; color: var(--tinta-suave); }
+@container (max-width: 620px) {
+  .indicacao { grid-template-columns: auto minmax(0, 1fr); }
+  .indicacao .botao { grid-column: 1 / -1; }
+  .indicacao__icone { align-self: start; }
+}
