@@ -2,12 +2,12 @@
 // Procura elementos com data-componente="nome" e monta o componente correspondente.
 // Para criar um componente novo: crie o arquivo em componentes/ e registre abaixo.
 
-import { site } from "./config.js?v=202610062204";
-import { ramificacoes as registro, destino } from "./ramificacoes.js?v=202610062204";
-import cabecalho from "./componentes/cabecalho.js?v=202610062204";
-import rodape from "./componentes/rodape.js?v=202610062204";
-import agora from "./componentes/agora.js?v=202610062204";
-import ramificacoes from "./componentes/ramificacoes.js?v=202610062204";
+import { site } from "./config.js?v=202610062205";
+import { ramificacoes as registro, destino } from "./ramificacoes.js?v=202610062205";
+import cabecalho from "./componentes/cabecalho.js?v=202610062205";
+import rodape from "./componentes/rodape.js?v=202610062205";
+import agora from "./componentes/agora.js?v=202610062205";
+import ramificacoes from "./componentes/ramificacoes.js?v=202610062205";
 
 // Raiz do site calculada a partir deste arquivo (assets/js/site.js),
 // então funciona em qualquer domínio, subpasta ou hospedagem.

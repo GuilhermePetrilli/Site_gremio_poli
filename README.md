@@ -53,7 +53,7 @@ Ao criar arquivos novos, escreva as referências normalmente (`"./componentes/no
 
 ## Como expandir
 
-**Nova seção na página inicial:** copie um bloco `<section class="secao">` do `index.html` e troque o conteúdo. Para fundo alternado, adicione a classe `secao--alt`. Se a seção precisar aparecer no menu, inclua o item em `assets/js/config.js`.
+**Nova seção na página inicial:** copie um bloco `<section class="bloco">` do `index.html` e troque o conteúdo. Para fundo alternado, adicione a classe `bloco--painel`. Se a seção precisar aparecer no menu, inclua o item em `assets/js/config.js`.
 
 **Ramificações (seções principais):** todas ficam cadastradas em `assets/js/ramificacoes.js`, com título, caminho, resumo, itens e números. Desse registro saem os blocos da página inicial, o mapa do rodapé e os links do menu. Enquanto `pronta: false`, os links levam ao bloco da ramificação na página inicial e ele mostra "Página em construção". Para criar a página de uma ramificação:
 
