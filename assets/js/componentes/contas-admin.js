@@ -1,23 +1,34 @@
-// Painel "Contas do Grêmio" no portal interno (admin/): entrar, lançar receitas e despesas,
+// Portal interno (admin/): o portão de entrada (e-mail e senha) e, depois dele, o painel
+// "Contas do Grêmio": lançar receitas e despesas,
 // excluir lançamentos e ajustar o valor da dívida e o saldo inicial. Tudo o que é salvo aparece
 // na hora na página Transparência. Exige o banco Supabase configurado em config.js (site.contas);
 // sem ele, mostra o passo a passo. A permissão real está nas regras do banco (contas.sql).
-// Uso: <div class="painel-contas" id="painelContas"></div> e <div data-componente="contas-admin"></div>.
+// A área (#areaAdmin) só aparece para quem está na lista de administradores; esconder é só a
+// interface: quem protege os dados de verdade são as regras do banco.
+// Uso: #painelEntrada, #areaAdmin com #painelContas, e <div data-componente="contas-admin"></div>.
 
-import { supabase, configurado, carregar, extrato, reais, dataBR, CATEGORIAS, INICIO_CONTAS } from "../dados/contas.js?v=202610080831";
-import { hojeSP } from "../dados/tempo.js?v=202610080831";
-import { projetosAdmin, avisoProjetos } from "./projetos-admin.js?v=202610080831";
-import { vendasAdmin, avisoVendas } from "./vendas-admin.js?v=202610080831";
+import { supabase, configurado, carregar, extrato, reais, dataBR, CATEGORIAS, INICIO_CONTAS } from "../dados/contas.js?v=202610080835";
+import { hojeSP } from "../dados/tempo.js?v=202610080835";
+import { projetosAdmin } from "./projetos-admin.js?v=202610080835";
+import { vendasAdmin } from "./vendas-admin.js?v=202610080835";
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 export default async function contasAdmin(_alvo, contexto) {
   const { site, raiz, url } = contexto;
   const painel = document.getElementById("painelContas");
-  if (!painel) return;
+  const entrada = document.getElementById("painelEntrada"), area = document.getElementById("areaAdmin"), portao = document.getElementById("entrada");
+  if (!painel || !entrada) return;
+  // mostra o portão (com o que for preciso dentro) e esconde a área; ou o contrário
+  const noPortao = (html) => { area.hidden = true; portao.hidden = false; entrada.innerHTML = html; return entrada; };
+  const naArea = (email) => {
+    portao.hidden = true; area.hidden = false;
+    document.getElementById("sessaoEmail").textContent = email;
+    document.getElementById("sessaoSair").onclick = async () => { await db.auth.signOut(); tela(); };
+  };
 
   if (!configurado(site)) {
-    painel.innerHTML = `
+    noPortao(`
       <p><b>O banco das contas ainda não está ligado.</b> Assim que ele estiver configurado, quem estiver na lista de administradores entra aqui com e-mail e senha e lança receitas e despesas, que aparecem na hora na <a href="${url("transparencia/")}">Transparência</a>.</p>
       <ol class="passos">
         <li>Crie um projeto gratuito em <a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a> (região São Paulo).</li>
@@ -25,13 +36,13 @@ export default async function contasAdmin(_alvo, contexto) {
         <li>Cadastre os e-mails de quem pode lançar em <code>administradores</code> e crie essas contas em Authentication, com o cadastro aberto desligado.</li>
         <li>Cole a URL do projeto e a chave pública (anon) em <code>assets/js/config.js</code>, em <code>site.contas</code>, e publique.</li>
       </ol>
-      <p class="nota">O passo a passo completo está em <code>ferramentas/supabase/LEIA-ME.md</code>.</p>`;
+      <p class="nota">O passo a passo completo está em <code>ferramentas/supabase/LEIA-ME.md</code>.</p>`);
     return;
   }
 
   let db;
   try { db = await supabase(site); } catch {
-    painel.innerHTML = `<p>Não deu para conectar ao banco das contas agora. Tente de novo em alguns minutos.</p>`;
+    noPortao(`<p>Não deu para conectar ao banco agora. Tente de novo em alguns minutos.</p>`);
     return;
   }
 
@@ -47,26 +58,25 @@ export default async function contasAdmin(_alvo, contexto) {
     if (!session) return telaEntrar();
     const { data: lista } = await db.from("administradores").select("email").eq("email", session.user.email);
     if (!lista || !lista.length) {
-      avisoProjetos("Só administradores lançam projetos."); avisoVendas("Só administradores registram vendas.");
-      painel.innerHTML = `<p>Você entrou como <b>${esc(session.user.email)}</b>, mas esta conta não está na lista de administradores. Peça à diretoria responsável para incluir o seu e-mail.</p><button type="button" class="botao botao--linha botao--pequeno" id="sair">Sair</button>`;
-      painel.querySelector("#sair").onclick = async () => { await db.auth.signOut(); tela(); };
+      const p = noPortao(`<p>Você entrou como <b>${esc(session.user.email)}</b>, mas esta conta não está na lista de administradores. Peça à diretoria responsável para incluir o seu e-mail.</p><button type="button" class="botao botao--linha botao--pequeno" id="sair">Sair</button>`);
+      p.querySelector("#sair").onclick = async () => { await db.auth.signOut(); tela(); };
       return;
     }
+    naArea(session.user.email);
     return telaLancar(session.user.email);
   }
 
   function telaEntrar(msg = "", ok = "") {
-    avisoProjetos("Entre na área de contas acima para lançar projetos."); avisoVendas("Entre na área de contas acima para registrar vendas.");
-    painel.innerHTML = `
+    const painel = noPortao(`
       <form class="formulario" id="fEntrar">
-        <p>Entre com o e-mail e a senha de administrador.</p>
+        <p>Use o e-mail e a senha de administrador do Grêmio.</p>
         <div class="dupla">
           <div class="campo"><label for="ceEmail">E-mail</label><input type="email" id="ceEmail" autocomplete="username" required></div>
           <div class="campo"><label for="ceSenha">Senha</label><input type="password" id="ceSenha" autocomplete="current-password" required></div>
         </div>
         <p class="formulario__erro" id="ceErro" role="alert"${msg ? "" : " hidden"}>${esc(msg)}</p>
         <div class="formulario__fim"><button class="botao" type="submit">Entrar</button><button class="chip" type="button" id="esqueci">Esqueci a senha</button>${ok ? `<p class="ok-msg">${esc(ok)}</p>` : ""}</div>
-      </form>`;
+      </form>`);
     const email = () => painel.querySelector("#ceEmail").value.trim();
     painel.querySelector("#fEntrar").addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -86,14 +96,13 @@ export default async function contasAdmin(_alvo, contexto) {
   }
 
   function telaNovaSenha(msg = "") {
-    avisoProjetos("Crie a senha nova acima para continuar."); avisoVendas("Crie a senha nova acima para continuar.");
-    painel.innerHTML = `
+    const painel = noPortao(`
       <form class="formulario" id="fSenha">
         <p>Crie a sua senha nova de administrador.</p>
         <div class="campo"><label for="cnSenha">Senha nova (mínimo de 8 caracteres)</label><input type="password" id="cnSenha" autocomplete="new-password" minlength="8" required></div>
         <p class="formulario__erro" role="alert"${msg ? "" : " hidden"}>${esc(msg)}</p>
         <div class="formulario__fim"><button class="botao" type="submit">Salvar e entrar</button></div>
-      </form>`;
+      </form>`);
     painel.querySelector("#fSenha").addEventListener("submit", async (e) => {
       e.preventDefault();
       const senha = painel.querySelector("#cnSenha").value;
@@ -115,7 +124,6 @@ export default async function contasAdmin(_alvo, contexto) {
     painel.innerHTML = `
       <div class="painel-contas__topo">
         <span>Saldo publicado: <b>${reais(ex.saldo)}</b> · ${ex.linhas.length} lançamento${ex.linhas.length === 1 ? "" : "s"}</span>
-        <span><small>${esc(email)}</small> <button type="button" class="chip" id="sair">Sair</button></span>
       </div>
       <form class="formulario" id="fLanc" novalidate>
         <fieldset class="campo">
@@ -157,7 +165,6 @@ export default async function contasAdmin(_alvo, contexto) {
         <div class="formulario__fim"><button class="botao botao--linha" type="submit">Salvar valores</button></div>
       </form>`;
 
-    painel.querySelector("#sair").onclick = async () => { await db.auth.signOut(); tela(); };
 
     painel.querySelector("#fLanc").addEventListener("submit", async (e) => {
       e.preventDefault();

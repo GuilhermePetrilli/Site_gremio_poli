@@ -10,13 +10,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610080831">
-  <link rel="stylesheet" href="../assets/css/base.css?v=202610080831">
-  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610080831">
-  <link rel="stylesheet" href="../assets/css/portal.css?v=202610080831">
-  <link rel="stylesheet" href="../assets/css/transparencia.css?v=202610080831">
-  <link rel="stylesheet" href="../assets/css/parcerias.css?v=202610080831">
-  <script type="module" src="../assets/js/site.js?v=202610080831"></script>
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610080835">
+  <link rel="stylesheet" href="../assets/css/base.css?v=202610080835">
+  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610080835">
+  <link rel="stylesheet" href="../assets/css/portal.css?v=202610080835">
+  <link rel="stylesheet" href="../assets/css/transparencia.css?v=202610080835">
+  <link rel="stylesheet" href="../assets/css/parcerias.css?v=202610080835">
+  <script type="module" src="../assets/js/site.js?v=202610080835"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -30,8 +30,19 @@
       <section class="abertura abertura--noite" aria-labelledby="admin-titulo">
         <h1 id="admin-titulo">Área dos administradores</h1>
         <p class="abertura__lead">O portal interno do Grêmio. O que a gestão lança aqui vai a público na hora, nas páginas Transparência e Parcerias.</p>
-        <div class="abertura__estado"><span class="pill pill--aberto">No ar</span><span>Acesso restrito a quem está na lista de administradores. Entre com o seu e-mail e a sua senha.</span></div>
+        <div class="abertura__estado"><span class="pill pill--aberto">No ar</span><span>Acesso restrito a quem está na lista de administradores do Grêmio.</span></div>
       </section>
+
+      <!-- Portão: só o login aparece até uma conta da lista de administradores entrar -->
+      <section class="entrada-admin" id="entrada" aria-labelledby="entrada-titulo">
+        <div class="entrada-admin__cartao">
+          <h2 id="entrada-titulo">Entrar</h2>
+          <div id="painelEntrada"><p class="nota">Carregando…</p></div>
+        </div>
+      </section>
+
+      <div id="areaAdmin" hidden>
+      <div class="sessao-admin" role="status"><span>Você entrou como <b id="sessaoEmail"></b></span><button type="button" class="chip" id="sessaoSair">Sair</button></div>
 
       <section class="bloco-portal" id="contas" aria-labelledby="admin-contas">
         <h2 id="admin-contas">Contas do Grêmio</h2>
@@ -73,6 +84,7 @@
           <p>Quem se compromete com o Grêmio fica com a parte boa do trabalho: inovar e descobrir os próprios gostos e os caminhos profissionais que as habilidades desenvolvidas aqui abrem.</p>
         </div>
       </section>
+      </div>
       <div data-componente="contas-admin"></div>
     </main>
   </div>

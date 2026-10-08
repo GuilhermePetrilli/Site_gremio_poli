@@ -4,16 +4,16 @@
 // Componentes pesados, usados numa página só, entram em `sobDemanda`: o arquivo
 // só é baixado quando a página tem aquele componente.
 
-import { site } from "./config.js?v=202610080831";
-import { ramificacoes as registro, grupos, encontrar, destino } from "./ramificacoes.js?v=202610080831";
-import cabecalho from "./componentes/cabecalho.js?v=202610080831";
-import rodape from "./componentes/rodape.js?v=202610080831";
-import agora from "./componentes/agora.js?v=202610080831";
-import ramificacoes from "./componentes/ramificacoes.js?v=202610080831";
-import indice from "./componentes/indice.js?v=202610080831";
-import pagina from "./componentes/pagina.js?v=202610080831";
-import trilha from "./componentes/trilha.js?v=202610080831";
-import recursos from "./componentes/recursos.js?v=202610080831";
+import { site } from "./config.js?v=202610080835";
+import { ramificacoes as registro, grupos, encontrar, destino } from "./ramificacoes.js?v=202610080835";
+import cabecalho from "./componentes/cabecalho.js?v=202610080835";
+import rodape from "./componentes/rodape.js?v=202610080835";
+import agora from "./componentes/agora.js?v=202610080835";
+import ramificacoes from "./componentes/ramificacoes.js?v=202610080835";
+import indice from "./componentes/indice.js?v=202610080835";
+import pagina from "./componentes/pagina.js?v=202610080835";
+import trilha from "./componentes/trilha.js?v=202610080835";
+import recursos from "./componentes/recursos.js?v=202610080835";
 
 // Raiz do site calculada a partir deste arquivo (assets/js/site.js),
 // então funciona em qualquer domínio, subpasta ou hospedagem.
@@ -22,16 +22,16 @@ export const url = (caminho) => (/^[a-z]+:/i.test(caminho) ? caminho : new URL(c
 
 const componentes = { cabecalho, rodape, agora, ramificacoes, indice, pagina, trilha, recursos };
 const sobDemanda = {
-  "guia-transparencia": () => import("./componentes/guia-transparencia.js?v=202610080831"),
-  "contas-admin": () => import("./componentes/contas-admin.js?v=202610080831"),
-  "guia-parcerias": () => import("./componentes/guia-parcerias.js?v=202610080831"),
-  "foto-mural": () => import("./componentes/foto-mural.js?v=202610080831"),
-  carrossel: () => import("./componentes/carrossel.js?v=202610080831"),
-  jornal: () => import("./componentes/jornal.js?v=202610080831"),
-  "mapa-servicos": () => import("./componentes/mapa-servicos.js?v=202610080831"),
-  "guia-salas": () => import("./componentes/guia-salas.js?v=202610080831"),
-  demanda: () => import("./componentes/demanda.js?v=202610080831"),
-  "guia-bandejoes": () => import("./componentes/guia-bandejoes.js?v=202610080831"),
+  "guia-transparencia": () => import("./componentes/guia-transparencia.js?v=202610080835"),
+  "contas-admin": () => import("./componentes/contas-admin.js?v=202610080835"),
+  "guia-parcerias": () => import("./componentes/guia-parcerias.js?v=202610080835"),
+  "foto-mural": () => import("./componentes/foto-mural.js?v=202610080835"),
+  carrossel: () => import("./componentes/carrossel.js?v=202610080835"),
+  jornal: () => import("./componentes/jornal.js?v=202610080835"),
+  "mapa-servicos": () => import("./componentes/mapa-servicos.js?v=202610080835"),
+  "guia-salas": () => import("./componentes/guia-salas.js?v=202610080835"),
+  demanda: () => import("./componentes/demanda.js?v=202610080835"),
+  "guia-bandejoes": () => import("./componentes/guia-bandejoes.js?v=202610080835"),
 };
 const contexto = { site, url, raiz: RAIZ, registro, grupos, encontrar, destino };
 
