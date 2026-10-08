@@ -11,12 +11,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap">
-  <link rel="stylesheet" href="../../assets/css/tokens.css?v=202610080045">
-  <link rel="stylesheet" href="../../assets/css/base.css?v=202610080045">
-  <link rel="stylesheet" href="../../assets/css/componentes.css?v=202610080045">
-  <link rel="stylesheet" href="../../assets/css/portal.css?v=202610080045">
-  <link rel="stylesheet" href="../../assets/css/memorias.css?v=202610080045">
-  <script type="module" src="../../assets/js/site.js?v=202610080045"></script>
+  <link rel="stylesheet" href="../../assets/css/tokens.css?v=202610080749">
+  <link rel="stylesheet" href="../../assets/css/base.css?v=202610080749">
+  <link rel="stylesheet" href="../../assets/css/componentes.css?v=202610080749">
+  <link rel="stylesheet" href="../../assets/css/portal.css?v=202610080749">
+  <link rel="stylesheet" href="../../assets/css/memorias.css?v=202610080749">
+  <script type="module" src="../../assets/js/site.js?v=202610080749"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -63,7 +63,9 @@
       <section class="bloco-portal" id="mural" aria-labelledby="ev-mural">
         <h2 id="ev-mural">Mural de memórias</h2>
         <p class="bloco-portal__intro">Mais de um século de Poli, um retrato de cada vez. O mural cresce com as fotos que vocês mandarem.</p>
-        <ul class="mural">
+        <div class="carrossel" data-carrossel aria-roledescription="carrossel" aria-label="Fotos do Mural de memórias">
+        <button type="button" class="carrossel__seta carrossel__seta--ant" data-passo="-1" aria-label="Foto anterior"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <ul class="carrossel__trilho" tabindex="0" aria-label="Fotos do mural; use as setas do teclado para passar">
           <li class="polaroide polaroide--foto">
             <img src="../../assets/img/historia/gremio-antigo.jpg" alt="Ilustração antiga do prédio do Grêmio Politécnico" width="900" height="900" loading="lazy">
             <p>a sede do Grêmio, num desenho antigo</p>
@@ -94,6 +96,10 @@
             <p>o próximo capítulo</p>
           </li>
         </ul>
+        <button type="button" class="carrossel__seta carrossel__seta--prox" data-passo="1" aria-label="Próxima foto"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        <div class="carrossel__pontos"></div>
+        </div>
+        <div data-componente="carrossel"></div>
       </section>
 
       <!-- Mandar uma foto: vai por e-mail para o Grêmio (FormSubmit, porque o site é estático) -->

@@ -8,14 +8,32 @@
 .evento h3 { font-size: 1.3rem; }
 .evento p { color: var(--tinta-suave); }
 
-/* mural de polaroides */
-.mural {
-  list-style: none; margin: 24px 0 0; padding: clamp(18px, 3vw, 32px);
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 30px 22px;
-  border-radius: var(--raio);
+/* mural de polaroides, em carrossel: a foto da vez no centro, reta; as vizinhas inclinadas na cortiça */
+.carrossel {
+  --larg: min(290px, 70vw);
+  position: relative; margin-top: 24px; padding: 10px 0 18px; border-radius: var(--raio);
   background: #c99a62 radial-gradient(rgba(255, 255, 255, .08) 1px, transparent 1px) 0 0 / 7px 7px; /* cortiça */
   box-shadow: inset 0 0 0 10px #8a5a2b, inset 0 0 0 12px var(--tinta);
 }
+.carrossel__trilho {
+  position: relative; list-style: none; margin: 0 12px; padding: 34px calc(50% - var(--larg) / 2) 26px;
+  display: flex; gap: 26px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; outline: none;
+}
+.carrossel__trilho::-webkit-scrollbar { display: none; }
+.carrossel__trilho:focus-visible { box-shadow: inset 0 0 0 3px var(--sol); border-radius: 8px; }
+.carrossel__trilho > .polaroide { flex: 0 0 var(--larg); min-height: 340px; scroll-snap-align: center; cursor: pointer; opacity: .78; transform: rotate(var(--giro, -2deg)) scale(.9); transition: transform .35s ease, opacity .35s ease; }
+.carrossel__trilho > .polaroide.ativa { opacity: 1; transform: rotate(0) scale(1); cursor: default; z-index: 1; }
+.carrossel__trilho > .polaroide:hover { transform: rotate(0) scale(.94); }
+.carrossel__trilho > .polaroide.ativa:hover { transform: rotate(0) scale(1); }
+.carrossel__seta { position: absolute; top: calc(50% - 30px); z-index: 2; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: var(--borda); background: var(--papel); color: var(--tinta); cursor: pointer; box-shadow: 0 3px 0 var(--tinta); }
+.carrossel__seta:hover { background: var(--sol); }
+.carrossel__seta:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--tinta); }
+.carrossel__seta--ant { left: 22px; }
+.carrossel__seta--prox { right: 22px; }
+@media (max-width: 560px) { .carrossel__seta { width: 40px; height: 40px; top: auto; bottom: 12px; } .carrossel__seta--ant { left: 20px; } .carrossel__seta--prox { right: 20px; } }
+.carrossel__pontos { display: flex; justify-content: center; gap: 8px; min-height: 30px; align-items: center; }
+.carrossel__pontos button { width: 12px; height: 12px; padding: 0; border-radius: 50%; border: 2px solid var(--tinta); background: #fffdf7; cursor: pointer; transition: width .2s ease; }
+.carrossel__pontos button[aria-current="true"] { width: 30px; border-radius: 999px; background: var(--sol); }
 .polaroide {
   position: relative; display: flex; flex-direction: column; gap: 8px; min-height: 230px;
   padding: 14px 14px 12px; background: #fffdf7; color: var(--tinta);
@@ -41,7 +59,7 @@
 .polaroide--azul p { color: var(--sol); }
 .polaroide--sol { background: var(--sol); }
 .polaroide--sol span { color: var(--tinta); }
-@media (prefers-reduced-motion: reduce) { .polaroide, .polaroide:hover { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .polaroide, .polaroide:hover { transform: none; } .carrossel__trilho > .polaroide { transition: none; } }
 
 /* mandar uma foto: polaroide vazia que mostra a foto escolhida */
 .envio-foto__form { display: grid; grid-template-columns: minmax(200px, 260px) minmax(0, 1fr); gap: 24px 36px; align-items: start; padding: clamp(20px, 3vw, 30px); border: var(--borda); border-radius: var(--raio); background: var(--papel); }
