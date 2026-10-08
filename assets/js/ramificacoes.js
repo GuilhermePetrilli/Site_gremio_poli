@@ -167,6 +167,7 @@ export const ramificacoes = [
           { id: "esportes", titulo: "Esportes", texto: "O espaço da AAAP: jogos da rodada, resultados do fim de semana e links para assistir." },
           { id: "exposicao-cultural", titulo: "Cultura", texto: "Exposição livre de arte: grupos de teatro, dança e música, e a arte de cada aluno." },
           { id: "mural", titulo: "Mural de memórias", texto: "Mais de um século de Poli em fotos, com as que os alunos mandam." },
+          { id: "turmas", titulo: "Turmas de cada ano", texto: "A foto de cada turma de cada curso, guardada ano a ano." },
         ],
       },
       {
@@ -209,6 +210,31 @@ export const ramificacoes = [
         estado: "no-ar",
         resumo: "Leve uma proposta, demanda ou denúncia direto para a diretoria responsável do Grêmio.",
         chamada: "Enviar uma demanda",
+      },
+      // `cartao: false`: entra no índice, mas não nos cartões numerados das seções (tem a sua própria faixa na página).
+      {
+        id: "cursos",
+        titulo: "Guia dos cursos",
+        caminho: "aluno/cursos/",
+        estado: "em-construcao",
+        cartao: false,
+        resumo: "Cada centro acadêmico apresenta o seu curso: as matérias do primeiro semestre, o centrinho e a turma do ano passado.",
+        filhos: [
+          { id: "curso-civil", titulo: "Engenharia Civil", caminho: "aluno/cursos/civil/" },
+          { id: "curso-ambiental", titulo: "Engenharia Ambiental", caminho: "aluno/cursos/ambiental/" },
+          { id: "curso-eletrica", titulo: "Engenharia Elétrica", caminho: "aluno/cursos/eletrica/" },
+          { id: "curso-computacao", titulo: "Engenharia de Computação", caminho: "aluno/cursos/computacao/" },
+          { id: "curso-mecanica", titulo: "Engenharia Mecânica", caminho: "aluno/cursos/mecanica/" },
+          { id: "curso-mecatronica", titulo: "Engenharia Mecatrônica", caminho: "aluno/cursos/mecatronica/" },
+          { id: "curso-naval", titulo: "Engenharia Naval", caminho: "aluno/cursos/naval/" },
+          { id: "curso-producao", titulo: "Engenharia de Produção", caminho: "aluno/cursos/producao/" },
+          { id: "curso-quimica", titulo: "Engenharia Química", caminho: "aluno/cursos/quimica/" },
+          { id: "curso-materiais", titulo: "Engenharia de Materiais", caminho: "aluno/cursos/materiais/" },
+          { id: "curso-metalurgica", titulo: "Engenharia Metalúrgica", caminho: "aluno/cursos/metalurgica/" },
+          { id: "curso-minas", titulo: "Engenharia de Minas", caminho: "aluno/cursos/minas/" },
+          { id: "curso-petroleo", titulo: "Engenharia de Petróleo", caminho: "aluno/cursos/petroleo/" },
+          { id: "curso-nuclear", titulo: "Engenharia Nuclear", caminho: "aluno/cursos/nuclear/" },
+        ],
       },
       // `botao`: fecha o índice da área como botão de cor própria, fora da lista numerada das seções.
       {

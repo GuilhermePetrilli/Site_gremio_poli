@@ -2,11 +2,14 @@
 // Uso: node ferramentas/vetorizar.mjs entrada.png saida.svg [#cor] [--recorte]
 //      node ferramentas/vetorizar.mjs entrada.png saida.svg --camada=#363b71:0-160:0.35 --camada=#403f47:180-242:0.7 --recorte
 //      (cada --camada = cor : faixa de linhas da imagem : suavização; para logos com mais de uma cor)
+//      node ferramentas/vetorizar.mjs entrada.png saida.svg #ffffff --fundo=auto --com-fundo
+//      (logo clara sobre fundo de cor: --fundo=#hex ou auto, a cor mais comum na borda da imagem;
+//       --com-fundo põe esse fundo no SVG, como um quadrado atrás da logo)
 //
 // Como funciona:
 //  1. lê o PNG (8 bits; tons de cinza, RGB, paleta ou com transparência);
 //  2. mede, em cada pixel, o quanto ele pertence à cor da logo (0 = fundo, 1 = logo), usando a
-//     distância de cor até o branco e a transparência;
+//     distância de cor até o fundo (branco, se não for informado) e a transparência;
 //  3. traça os contornos de nível 0,5 com marching squares e interpolação linear (precisão abaixo
 //     do pixel), simplifica com Ramer-Douglas-Peucker e suaviza em curvas de Bézier (Catmull-Rom);
 //  4. grava um único <path> com fill-rule evenodd (os furos ficam vazados).
@@ -62,9 +65,20 @@ function lerPng(buf) {
 
 const { w, h, rgba } = lerPng(readFileSync(entrada));
 
-/* ---------- cor da logo e campo de pertencimento ---------- */
-// Cor da logo: a informada, ou a média dos pixels opacos mais distantes do branco.
-const distBranco = (i) => Math.hypot(255 - rgba[i], 255 - rgba[i + 1], 255 - rgba[i + 2]);
+/* ---------- fundo, cor da logo e campo de pertencimento ---------- */
+const hex = (t) => [1, 3, 5].map((k) => parseInt(t.slice(k, k + 2), 16));
+// Fundo: branco, o informado, ou "auto" = a cor mais comum na borda da imagem (em tons agrupados).
+const fundoArg = (opcoes.find((o) => o.startsWith("--fundo=")) || "").slice(8);
+let fundo = [255, 255, 255];
+if (fundoArg === "auto") {
+  const conta = new Map();
+  for (let x = 0; x < w; x++) for (const y of [0, 1, h - 2, h - 1]) { const i = (y * w + x) * 4, k = [0, 1, 2].map((c) => rgba[i + c] >> 4).join(); conta.set(k, (conta.get(k) || []).concat(i)); }
+  for (let y = 0; y < h; y++) for (const x of [0, 1, w - 2, w - 1]) { const i = (y * w + x) * 4, k = [0, 1, 2].map((c) => rgba[i + c] >> 4).join(); conta.set(k, (conta.get(k) || []).concat(i)); }
+  const mais = [...conta.values()].sort((a, b) => b.length - a.length)[0];
+  fundo = [0, 1, 2].map((c) => Math.round(mais.reduce((s, i) => s + rgba[i + c], 0) / mais.length));
+} else if (fundoArg.startsWith("#")) fundo = hex(fundoArg);
+// Cor da logo: a informada, ou a média dos pixels opacos mais distantes do fundo.
+const distBranco = (i) => Math.hypot(fundo[0] - rgba[i], fundo[1] - rgba[i + 1], fundo[2] - rgba[i + 2]);
 let cor = corArg && corArg.startsWith("#") ? [1, 3, 5].map((k) => parseInt(corArg.slice(k, k + 2), 16)) : null;
 if (!cor) {
   const cand = [];
@@ -76,7 +90,7 @@ if (!cor) {
 const escala = 1000 / Math.max(w, h); // coordenadas finais num quadro de até 1000
 const f = (v) => (Math.round(v * escala * 10) / 10).toString();
 function tracar(cor, y0 = 0, y1 = h, eps = 0.35) {
-const alcance = Math.max(1, Math.hypot(255 - cor[0], 255 - cor[1], 255 - cor[2]));
+const alcance = Math.max(1, Math.hypot(fundo[0] - cor[0], fundo[1] - cor[1], fundo[2] - cor[2]));
 const W = w + 2, H = h + 2, campo = new Float32Array(W * H); // borda de 1 pixel de fundo
 for (let y = Math.max(0, y0); y < Math.min(h, y1); y++) for (let x = 0; x < w; x++) {
   const i = (y * w + x) * 4;
@@ -165,7 +179,8 @@ if (opcoes.includes("--recorte")) {
   const m = Math.max(x1 - x0, y1 - y0) * 0.02;
   vb = [x0 - m, y0 - m, x1 - x0 + 2 * m, y1 - y0 + 2 * m].map(f).join(" ");
 }
-const paths = camadas.map((c) => `<path fill="${hexDe(c.cor)}" fill-rule="evenodd" d="${c.d}"/>`).join("");
+const paths = (opcoes.includes("--com-fundo") ? `<rect x="${vb.split(" ")[0]}" y="${vb.split(" ")[1]}" width="${vb.split(" ")[2]}" height="${vb.split(" ")[3]}" fill="${hexDe(fundo)}"/>` : "")
+  + camadas.map((c) => `<path fill="${hexDe(c.cor)}" fill-rule="evenodd" d="${c.d}"/>`).join("");
 writeFileSync(saida, `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb}">${paths}</svg>
 `);
 console.log(`${saida}: ${contornos.length} contornos, ${camadas.map((c) => hexDe(c.cor)).join(" + ")}, ${(paths.length / 1024).toFixed(1)} KB`);

@@ -85,6 +85,10 @@ dá acesso a recursos do celular: notificações, compartilhar e salvar arquivos
 - **Jornal:** "Baixar em PDF" usa `window.print()`, que não existe no app. Gerar o PDF ou abrir a
   versão de impressão no navegador.
 - **Demandas e Extensões:** os links de e-mail (`mailto:`) abrem o app de e-mail do celular.
+- **Guia dos cursos (`aluno/cursos/`):** as logos dos CAs já são SVG leves e entram no pacote do app.
+  As fotos das turmas pesam: o app deve baixá-las sob demanda e guardar só a do curso do aluno. Um
+  bom recurso do app é o aluno escolher o seu curso na primeira abertura e o SBB Poli abrir direto no
+  guia dele. Os @ do Instagram dos CAs abrem o app do Instagram.
 - **Sou bixo burro (`aluno/bixo/`):**
   - O progresso do Manual do bixo fica no `localStorage` (`manual-bixo:vistos`) e deve ir para
     `@capacitor/preferences`.

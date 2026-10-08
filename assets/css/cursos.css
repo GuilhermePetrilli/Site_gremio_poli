@@ -1,0 +1,72 @@
+/* Guia dos cursos (aluno/cursos/), a vitrine dos centros acadêmicos na Área do aluno e o arquivo
+   das turmas em Meu Amor (componentes/cursos.js). */
+
+/* menu: um cartão por centro acadêmico, com os cursos dele */
+.cas { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-top: 20px; }
+.ca { display: flex; flex-direction: column; gap: 14px; padding: 18px; border: var(--borda); border-radius: var(--raio); background: var(--papel); scroll-margin-top: calc(var(--altura-cabecalho) + 20px); }
+.ca:target { box-shadow: 0 5px 0 var(--sol); }
+.ca__cabeca { display: flex; gap: 14px; align-items: flex-start; }
+.ca__logo { flex: none; width: 72px; height: 72px; border-radius: var(--raio-pequeno); border: 2px solid var(--tinta); }
+.ca__cabeca h2 { font-size: 1.35rem; }
+.ca__cabeca p { margin-top: 2px; font-size: .9rem; line-height: 1.35; color: var(--tinta-suave); }
+.ca__insta { display: inline-block; margin-top: 4px; font-size: .85rem; font-weight: 700; color: var(--azul); }
+.ca__cursos { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.ca__cursos a {
+  display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 9px 12px;
+  border: 2px solid var(--linha); border-radius: var(--raio-pequeno); color: var(--tinta); font-weight: 700; text-decoration: none;
+}
+.ca__cursos a::after { content: "›"; font-size: 1.3rem; line-height: 1; color: var(--azul); }
+.ca__cursos a:hover { border-color: var(--tinta); background: var(--sol-claro); }
+
+/* página do curso */
+.curso__turma { margin: 0 0 22px; border: var(--borda); border-radius: var(--raio); overflow: hidden; background: var(--painel); }
+.curso__turma img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.curso__turma figcaption { padding: 10px 16px; font-size: .95rem; color: var(--tinta-suave); background: var(--papel); border-top: var(--borda); }
+.curso__turma--vazia { display: grid; place-items: center; aspect-ratio: 16 / 6; padding: 20px; border-style: dashed; text-align: center; color: var(--tinta-suave); font-weight: 700; }
+.curso__cabeca h1 { font-size: var(--t-grande); }
+.curso__ca { display: flex; align-items: center; gap: 12px; margin-top: 10px; color: var(--tinta-suave); }
+.curso__ca img { flex: none; border-radius: 6px; border: 2px solid var(--tinta); }
+.curso__ca .ca__insta { margin: 0 0 0 4px; }
+.curso__recado { margin-top: 16px; padding: 16px 18px; border-left: 4px solid var(--sol); background: var(--papel); font-size: 1.05rem; }
+.curso__vazio { margin-top: 12px; padding: 16px 18px; border: 2px dashed var(--linha); border-radius: var(--raio); color: var(--tinta-suave); }
+.curso__materias { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.curso__materias li { padding: 16px; border: 2px solid var(--linha); border-radius: var(--raio); background: var(--papel); }
+.curso__materias b { display: block; margin-top: 4px; }
+.curso__materias p { margin-top: 6px; font-size: .95rem; color: var(--tinta-suave); }
+.curso__codigo { font: 800 .8rem var(--fonte); color: var(--azul); }
+.curso__centrinho { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 12px; }
+.curso__centrinho:has(img) { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.curso__centrinho img { width: 100%; border-radius: var(--raio); border: var(--borda); }
+.curso__centrinho p + p { margin-top: 8px; }
+.curso__sobre { font-size: 1.05rem; }
+.curso__mais { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.curso__mais p { color: var(--tinta-suave); }
+@container (max-width: 640px) { .curso__centrinho:has(img) { grid-template-columns: minmax(0, 1fr); } .curso__turma--vazia { aspect-ratio: 16 / 9; } }
+
+/* vitrine pequena no fim da Área do aluno */
+.cursos-faixa { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; padding: 18px 22px; border: 2px solid var(--linha); border-radius: var(--raio); background: var(--papel); }
+.cursos-faixa h2 { font-size: 1.25rem; }
+.cursos-faixa p { margin-top: 2px; font-size: .95rem; color: var(--tinta-suave); }
+.cursos-faixa__texto { flex: 1 1 28ch; }
+.vitrine-cas { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.vitrine-cas a { display: block; border-radius: 8px; transition: transform .15s ease; }
+.vitrine-cas a:hover { transform: translateY(-3px); }
+.vitrine-cas img { display: block; width: 48px; height: 48px; border-radius: 8px; border: 2px solid var(--tinta); }
+
+/* arquivo das turmas em Meu Amor */
+.turmas { margin-top: 18px; }
+.turmas__anos { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.turmas__anos .chip[aria-pressed="true"] { background: var(--tinta); color: #fff; }
+.turmas__titulo-ano { margin-bottom: 12px; font: 800 1.1rem var(--fonte-titulo); }
+.turmas__ano { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; align-items: start; }
+.turmas__ca { display: grid; gap: 10px; padding: 12px; border: 2px solid var(--linha); border-radius: var(--raio); background: var(--papel); }
+.turmas__ca-nome { display: flex; align-items: center; gap: 10px; color: var(--tinta); text-decoration: none; }
+.turmas__ca-nome img { border-radius: 8px; border: 2px solid var(--tinta); }
+.turmas__ca-nome b { font: 800 1rem var(--fonte-titulo); }
+.turmas__grade { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+.turma-foto { border: 2px solid var(--tinta); border-radius: var(--raio-pequeno); overflow: hidden; background: var(--papel); }
+.turma-foto img, .turma-foto__espera { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.turma-foto__espera { display: grid; place-items: center; background: var(--painel); color: var(--tinta-suave); font-size: .8rem; font-weight: 700; }
+.turma-foto--vazia { border-style: dashed; border-color: var(--linha); }
+.turma-foto p { padding: 6px 10px; font-size: .88rem; font-weight: 700; }
+@media (prefers-reduced-motion: reduce) { .vitrine-cas a { transition: none; } }

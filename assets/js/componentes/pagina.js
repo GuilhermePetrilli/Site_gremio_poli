@@ -7,7 +7,7 @@
 // Com duas ou mais seções que têm itens, a página ganha atalhos "Nesta página" no topo. Para escrever uma página à mão, troque este
 // componente pelo conteúdo em HTML e mantenha a trilha com data-componente="trilha".
 
-import { trilha } from "./trilha.js?v=202610081132";
+import { trilha } from "./trilha.js?v=202610081139";
 
 // Pílula de estado de um nó (campo `estado` no registro).
 export function pilulaEstado({ site }, no) {
@@ -27,7 +27,7 @@ export function linkVeja({ url, destino, encontrar }, no) {
 // estilo "portal": lista numerada, na ordem do registro, com a pílula de estado.
 export function cartoes(contexto, no, ancestrais, estilo = "") {
   const { url, destino } = contexto;
-  const comPagina = (no.filhos || []).filter((f) => f.caminho && !f.botao);
+  const comPagina = (no.filhos || []).filter((f) => f.caminho && !f.botao && f.cartao !== false);
   if (!comPagina.length) return "";
   const tag = estilo === "portal" ? "ol" : "ul";
   return `<${tag} class="recursos${estilo ? ` recursos--${estilo}` : ""}">${comPagina

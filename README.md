@@ -27,6 +27,8 @@ aluno/                     Área do aluno: o portal aberto do Novo Grêmio (pág
   bandejoes/               guia dos bandejões: cardápio do dia, mapa e caminho a pé
   salas/                   salas livres, onde é a minha aula e minha grade (dados do USPolis)
   demandas/                demandas para a diretoria (monta um e-mail)
+  cursos/                  Guia dos cursos, escrito pelos centros acadêmicos (uma pasta por curso)
+  bixo/                    Sou bixo burro: Manual do bixo e vantagens de quem acabou de entrar
 admin/                     Área dos administradores: o portal interno
 loja/                      Loja do Grêmio (em breve)
 transparencia/             receitas, despesas, saldo e dívida do Grêmio (lançados no portal interno)
@@ -63,6 +65,10 @@ Regras de conteúdo: o que é plano aparece como plano, com estado visível; nad
 ## Destaques da Área do aluno
 
 O carrossel no topo de `aluno/` mostra eventos principais, avisos e notícias do momento. Cada peça é só uma imagem, com o texto desenhado nela. Para pôr um destaque no ar, salve a imagem (1600 × 900 px) em `assets/img/destaques/` e acrescente um item em `assets/js/dados/destaques.js`, com o texto da imagem em `alt`, o `link` (opcional) e a data `ate` (opcional, o destaque some sozinho depois dela). O próprio arquivo explica cada campo, inclusive a versão para celular (`imagemCelular`, 1080 × 1350 px).
+
+## Guia dos cursos e fotos das turmas
+
+Tudo vem de `assets/js/dados/cursos.js`: os centros acadêmicos (logo em `assets/img/cas/`, Instagram, centrinho) e os cursos (matérias do primeiro semestre, recado do CA e fotos das turmas). O próprio arquivo explica como cada CA preenche o seu guia. A foto da turma vai em `assets/img/turmas/ANO/CURSO.jpg`: a mais recente abre a página do curso e todas ficam guardadas, por ano e por centro acadêmico, em Meu Amor (`aluno/meu-amor/#turmas`). Nunca apague uma foto antiga.
 
 ## App SBB Poli
 

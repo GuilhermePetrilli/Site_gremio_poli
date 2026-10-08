@@ -10,11 +10,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610081132">
-  <link rel="stylesheet" href="../assets/css/base.css?v=202610081132">
-  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610081132">
-  <link rel="stylesheet" href="../assets/css/portal.css?v=202610081132">
-  <script type="module" src="../assets/js/site.js?v=202610081132"></script>
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610081139">
+  <link rel="stylesheet" href="../assets/css/base.css?v=202610081139">
+  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610081139">
+  <link rel="stylesheet" href="../assets/css/portal.css?v=202610081139">
+  <link rel="stylesheet" href="../assets/css/cursos.css?v=202610081139">
+  <script type="module" src="../assets/js/site.js?v=202610081139"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -40,6 +41,16 @@
         <h2 id="secoes-titulo">As seções do portal</h2>
         <p class="bloco-portal__intro">Cada seção nasce de um compromisso do Novo Grêmio. As marcadas com "Já funciona" você já pode usar hoje.</p>
         <div data-componente="recursos" data-id="aluno" data-estilo="portal"></div>
+      </section>
+
+      <section class="bloco-portal" id="guia-dos-cursos" aria-labelledby="cursos-titulo">
+        <div class="cursos-faixa">
+          <div class="cursos-faixa__texto">
+            <h2 id="cursos-titulo">Guia dos cursos</h2>
+            <p>Feito pelos centros acadêmicos: as matérias do primeiro semestre, o centrinho e a turma de cada curso. <a class="recurso__ir" href="cursos/">Ver o guia</a></p>
+          </div>
+          <div data-componente="cursos" data-modo="vitrine"></div>
+        </div>
       </section>
 
       <section class="bloco-portal" aria-label="Fale com o Grêmio">
