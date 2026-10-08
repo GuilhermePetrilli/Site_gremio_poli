@@ -229,11 +229,8 @@ export const ramificacoes = [
           { id: "curso-naval", titulo: "Engenharia Naval", caminho: "aluno/cursos/naval/" },
           { id: "curso-producao", titulo: "Engenharia de Produção", caminho: "aluno/cursos/producao/" },
           { id: "curso-quimica", titulo: "Engenharia Química", caminho: "aluno/cursos/quimica/" },
-          { id: "curso-materiais", titulo: "Engenharia de Materiais", caminho: "aluno/cursos/materiais/" },
-          { id: "curso-metalurgica", titulo: "Engenharia Metalúrgica", caminho: "aluno/cursos/metalurgica/" },
-          { id: "curso-minas", titulo: "Engenharia de Minas", caminho: "aluno/cursos/minas/" },
-          { id: "curso-petroleo", titulo: "Engenharia de Petróleo", caminho: "aluno/cursos/petroleo/" },
-          { id: "curso-nuclear", titulo: "Engenharia Nuclear", caminho: "aluno/cursos/nuclear/" },
+          { id: "curso-materiais-metalurgica-nuclear", titulo: "Engenharia de Materiais, Metalúrgica e Nuclear", caminho: "aluno/cursos/materiais-metalurgica-nuclear/" },
+          { id: "curso-minas-petroleo", titulo: "Engenharia de Minas e Petróleo", caminho: "aluno/cursos/minas-petroleo/" },
         ],
       },
       // `botao`: fecha o índice da área como botão de cor própria, fora da lista numerada das seções.

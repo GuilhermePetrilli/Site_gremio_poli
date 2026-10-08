@@ -1,5 +1,6 @@
 // Guia dos cursos (aluno/cursos/), escrito pelos centros acadêmicos, e o arquivo das turmas em Meu Amor.
 // Fonte da lista de CAs, cursos, Instagram e do que já se sabe de cada centrinho: página da Poli
+// (logo do CEC colorida a partir de politecnicos.com.br, já que a da Poli estava em preto e branco)
 // "Ingressantes 2026: conheça os Centros Acadêmicos da Poli-USP". Logos redesenhadas em SVG em
 // assets/img/cas/ (ferramentas/vetorizar.mjs).
 //
@@ -57,7 +58,7 @@ export const centros = [
   },
   {
     id: "cmr", sigla: "CMR", nome: "Centro Moraes Rêgo",
-    logo: "assets/img/cas/cmr.svg", instagram: "cmr.poli", cursos: ["materiais", "metalurgica", "minas", "petroleo", "nuclear"],
+    logo: "assets/img/cas/cmr.svg", instagram: "cmr.poli", cursos: ["materiais-metalurgica-nuclear", "minas-petroleo"],
     sobre: "Reúne os estudantes de Engenharia de Materiais, Metalúrgica, de Minas, de Petróleo e Nuclear.",
   },
 ];
@@ -74,11 +75,9 @@ export const cursos = [
   curso("naval", "Engenharia Naval"),
   curso("producao", "Engenharia de Produção"),
   curso("quimica", "Engenharia Química"),
-  curso("materiais", "Engenharia de Materiais"),
-  curso("metalurgica", "Engenharia Metalúrgica"),
-  curso("minas", "Engenharia de Minas"),
-  curso("petroleo", "Engenharia de Petróleo"),
-  curso("nuclear", "Engenharia Nuclear"),
+  // No CMR, os cursos andam em dois grupos, cada um com um guia só.
+  curso("materiais-metalurgica-nuclear", "Engenharia de Materiais, Metalúrgica e Nuclear"),
+  curso("minas-petroleo", "Engenharia de Minas e Petróleo"),
 ];
 
 export const centroDo = (idCurso) => centros.find((c) => c.cursos.includes(idCurso));
