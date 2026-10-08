@@ -3,7 +3,7 @@
 // Os caminhos (href) são relativos à raiz do site, sem barra no início,
 // para funcionar igual em subpasta (github.io/Site_gremio_poli/) ou num domínio próprio.
 
-import { encontrar, destino } from "./ramificacoes.js?v=202610072336";
+import { encontrar, destino } from "./ramificacoes.js?v=202610072351";
 
 const doRegistro = (id, rotulo) => {
   const { no } = encontrar(id);
@@ -44,7 +44,7 @@ export const site = {
   // ("anon") do projeto Supabase; enquanto estiver vazio, o site lê assets/dados/contas.json.
   // Passo a passo em ferramentas/supabase/LEIA-ME.md.
   contas: {
-    supabaseUrl: "",
+    supabaseUrl: "https://axansbhajygavlihtuaa.supabase.co",
     supabaseChave: "",
   },
 

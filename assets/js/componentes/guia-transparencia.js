@@ -2,7 +2,7 @@
 // com o saldo acumulado. Os lançamentos vêm de dados/contas.js (banco Supabase ou arquivo).
 // Uso: marcação em transparencia/index.html e <div data-componente="guia-transparencia"></div>.
 
-import { carregar, ouvir, extrato, reais, dataBR, INICIO_CONTAS } from "../dados/contas.js?v=202610072336";
+import { carregar, ouvir, extrato, reais, dataBR, INICIO_CONTAS } from "../dados/contas.js?v=202610072351";
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -177,7 +177,8 @@ export default async function guiaTransparencia(_alvo, { site, raiz }) {
     // canto do ajuste
     const caixa = $("#ajuste");
     if (!ajuste) {
-      caixa.innerHTML = `<span class="ajuste__titulo">Ajuste de curva</span><span class="ajuste__formula">S(t) = ?</span><small>A função aparece quando houver pelo menos 3 meses de contas. Até lá, faltam dados para o mínimos quadrados.</small>`;
+      caixa.innerHTML = `<span class="ajuste__titulo">ajuste de curva</span><span class="ajuste__formula">S(t) = ?</span><small>Aparece com 3 meses de contas.</small>`;
+      $("#ajustePrevisao").hidden = true;
       return;
     }
     let previsao = "";
@@ -187,10 +188,13 @@ export default async function guiaTransparencia(_alvo, { site, raiz }) {
       if (tCruz) { const mes = Math.ceil(tCruz), mm = ((mes - 1) % 12), aa = +ano + Math.floor((mes - 1) / 12); previsao = `Extrapolando (com toda a cautela de engenheiro), o saldo alcançaria a dívida por volta de ${MESES[mm]}/${aa}.`; }
       else previsao = "No ritmo do ajuste, o saldo não alcança a dívida nos próximos três anos.";
     }
-    caixa.innerHTML = `<span class="ajuste__titulo">Ajuste por mínimos quadrados</span>
+    caixa.innerHTML = `<span class="ajuste__titulo">mínimos quadrados</span>
       <span class="ajuste__formula">${formula(ajuste.coef)}</span>
-      <small>Polinômio de grau ${ajuste.g}, escolhido pelo critério AICc · R² = ${ajuste.r2.toLocaleString("pt-BR", { maximumFractionDigits: 3 })} · t em meses desde dez/${+ano - 1} · S em reais.</small>
-      ${previsao ? `<small>${previsao}</small>` : ""}`;
+      <small>grau ${ajuste.g} (AICc) · R² = ${ajuste.r2.toLocaleString("pt-BR", { maximumFractionDigits: 3 })} · t em meses</small>`;
+    caixa.title = `Polinômio de grau ${ajuste.g} escolhido pelo critério AICc entre os graus 1 a 3. t = meses desde dez/${+ano - 1}; S em reais.`;
+    const prev = $("#ajustePrevisao");
+    prev.hidden = !previsao;
+    prev.textContent = previsao;
   }
 
   function tabela() {

@@ -41,7 +41,22 @@
 .polaroide--azul p { color: var(--sol); }
 .polaroide--sol { background: var(--sol); }
 .polaroide--sol span { color: var(--tinta); }
-.polaroide--envie { border: 3px dashed var(--tinta); background: #fffdf7; }
-.polaroide--envie b { font-size: 1.6rem; }
-.polaroide--envie .botao { margin-top: auto; align-self: flex-start; }
 @media (prefers-reduced-motion: reduce) { .polaroide, .polaroide:hover { transform: none; } }
+
+/* mandar uma foto: polaroide vazia que mostra a foto escolhida */
+.envio-foto__form { display: grid; grid-template-columns: minmax(200px, 260px) minmax(0, 1fr); gap: 24px 36px; align-items: start; padding: clamp(20px, 3vw, 30px); border: var(--borda); border-radius: var(--raio); background: var(--papel); }
+@container (max-width: 640px) { .envio-foto__form { grid-template-columns: 1fr; } }
+.polaroide--vazia { cursor: pointer; min-height: 0; --giro: -2.5deg; }
+.polaroide--vazia::before { background: rgba(255, 216, 77, .8); }
+.polaroide__janela { display: grid; place-items: center; aspect-ratio: 1; overflow: hidden; border: 2px dashed var(--linha); background: var(--fundo); color: var(--tinta-suave); font-size: .9rem; text-align: center; padding: 10px; }
+.polaroide__janela img { width: 100%; height: 100%; object-fit: cover; }
+.polaroide__janela.com-foto { border: 0; padding: 0; }
+.polaroide__legenda { margin-top: 10px; font: 700 1.35rem/1.1 "Caveat", cursive; color: var(--azul); min-height: 1.5em; }
+.polaroide--vazia:focus-within, .polaroide--vazia:hover { transform: rotate(0) scale(1.02); }
+.envio-foto__campos h2 { font-size: clamp(1.5rem, 3.2vw, 2rem); }
+.envio-foto__campos .campo { margin-top: 14px; }
+.envio-foto__campos .campo input { width: 100%; padding: 10px 12px; border: 2px solid var(--linha); border-radius: var(--raio-pequeno); font: 400 1rem var(--fonte); background: var(--fundo); color: var(--tinta); }
+.envio-foto__campos .dupla { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@container (max-width: 520px) { .envio-foto__campos .dupla { grid-template-columns: 1fr; } }
+.envio-foto__campos .formulario__fim { margin-top: 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.ok-foto { margin-top: 12px; padding: 10px 14px; border-radius: var(--raio-pequeno); background: var(--aberto-fundo); color: var(--aberto); font-weight: 700; }

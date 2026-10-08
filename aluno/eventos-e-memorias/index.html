@@ -11,12 +11,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap">
-  <link rel="stylesheet" href="../../assets/css/tokens.css?v=202610072336">
-  <link rel="stylesheet" href="../../assets/css/base.css?v=202610072336">
-  <link rel="stylesheet" href="../../assets/css/componentes.css?v=202610072336">
-  <link rel="stylesheet" href="../../assets/css/portal.css?v=202610072336">
-  <link rel="stylesheet" href="../../assets/css/memorias.css?v=202610072336">
-  <script type="module" src="../../assets/js/site.js?v=202610072336"></script>
+  <link rel="stylesheet" href="../../assets/css/tokens.css?v=202610072351">
+  <link rel="stylesheet" href="../../assets/css/base.css?v=202610072351">
+  <link rel="stylesheet" href="../../assets/css/componentes.css?v=202610072351">
+  <link rel="stylesheet" href="../../assets/css/portal.css?v=202610072351">
+  <link rel="stylesheet" href="../../assets/css/memorias.css?v=202610072351">
+  <script type="module" src="../../assets/js/site.js?v=202610072351"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -93,13 +93,36 @@
             <span>Os bixos chegam e o portal do Novo Grêmio está pronto para eles.</span>
             <p>o próximo capítulo</p>
           </li>
-          <li class="polaroide polaroide--envie">
-            <b>Sua foto aqui</b>
-            <span>Tem uma foto de festa, da Recepção, de campeonato ou da sala? Mande para o mural, com uma legenda.</span>
-            <a class="botao botao--pequeno" href="mailto:administrativo@gremiopolitecnico.com.br?subject=Foto%20para%20o%20Mural%20de%20mem%C3%B3rias">Enviar foto</a>
-          </li>
         </ul>
       </section>
+
+      <!-- Mandar uma foto: vai por e-mail para o Grêmio (FormSubmit, porque o site é estático) -->
+      <section class="bloco-portal envio-foto" id="mande-sua-foto" aria-labelledby="ev-foto">
+        <form class="envio-foto__form" id="formFoto" action="https://formsubmit.co/administrativo@gremiopolitecnico.com.br" method="POST" enctype="multipart/form-data">
+          <label class="polaroide polaroide--vazia" for="fotoArquivo">
+            <span class="polaroide__janela" id="fotoJanela"><span>Toque para escolher uma foto</span></span>
+            <span class="polaroide__legenda" id="fotoLegendaPrevia">sua legenda aqui</span>
+          </label>
+          <div class="envio-foto__campos">
+            <h2 id="ev-foto">Mande uma foto para o mural</h2>
+            <p class="bloco-portal__intro">Festa, Recepção, campeonato, a turma na sala: escolha a foto, escreva uma legenda e ela chega por e-mail ao Grêmio, que monta o mural.</p>
+            <input type="file" id="fotoArquivo" name="foto" accept="image/*" required class="sr">
+            <div class="campo"><label for="fotoLegenda">Legenda</label><input type="text" id="fotoLegenda" name="legenda" maxlength="80" placeholder="Ex.: Recepção de 2027, primeiro dia" required></div>
+            <div class="dupla">
+              <div class="campo"><label for="fotoNome">Seu nome (opcional)</label><input type="text" id="fotoNome" name="nome" autocomplete="name"></div>
+              <div class="campo"><label for="fotoEmail">Seu e-mail (opcional)</label><input type="email" id="fotoEmail" name="email" autocomplete="email"></div>
+            </div>
+            <input type="hidden" name="_subject" value="Foto para o Mural de memórias">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" id="fotoVolta" value="">
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="sr" aria-hidden="true">
+            <p class="formulario__erro" id="fotoErro" role="alert" hidden></p>
+            <p class="ok-foto" id="fotoOk" role="status" hidden>Foto enviada! Obrigado: ela chega ao Grêmio e pode entrar no próximo mural.</p>
+            <div class="formulario__fim"><button class="botao" type="submit">Enviar para o Grêmio</button><p class="nota">Fotos de até 5 MB. Ao enviar, você autoriza o Grêmio a publicar a foto no mural.</p></div>
+          </div>
+        </form>
+      </section>
+      <div data-componente="foto-mural"></div>
     </main>
   </div>
 

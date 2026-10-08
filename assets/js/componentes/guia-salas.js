@@ -6,7 +6,7 @@
 //   turmas     [disciplina, turma, [[dia da semana (0 = seg), início, fim, sala|null]], professores]
 // A grade do aluno fica só no navegador dele (localStorage), sem ir a lugar nenhum.
 
-import { hora, agoraSP, hojeSP } from "../dados/tempo.js?v=202610072336";
+import { hora, agoraSP, hojeSP } from "../dados/tempo.js?v=202610072351";
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
