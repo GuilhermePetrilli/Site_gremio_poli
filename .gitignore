@@ -1,0 +1,3 @@
+# configuração local do Claude Code e segredos (nunca publicar)
+.mcp.json
+.env.local
