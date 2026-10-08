@@ -234,6 +234,7 @@ export const ramificacoes = [
     filhos: [
       { id: "contas", titulo: "Contas do Grêmio", texto: "Receitas, despesas, dívida e saldo inicial, publicados na Transparência." },
       { id: "projetos", titulo: "Projetos e parcerias", texto: "Projetos com GEX e empresas, com prazo e atualizações, publicados em Parcerias." },
+      { id: "vendas", titulo: "Vendas da loja", texto: "Cada venda entra sozinha na Transparência, somada por dia e sem dados de quem comprou." },
     ],
   },
   {

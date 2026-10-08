@@ -18,6 +18,17 @@ leitura pública, escrita só para administradores, atualização ao vivo. Plano
 7. Publique o site. Pronto: os administradores entram em **Área dos administradores > Contas do
    Grêmio**, lançam receitas e despesas, e a Transparência atualiza sozinha.
 
+## Projetos e vendas da loja
+
+Depois do `contas.sql`, rode no SQL Editor:
+
+- `projetos.sql`: projetos com GEX e empresas, publicados na página Parcerias.
+- `loja.sql`: vendas da loja. Cada venda registrada em `vendas` (pelo painel **Vendas da loja**
+  do admin ou, no futuro, pelo checkout online) dispara um gatilho que soma as vendas do dia e
+  publica uma receita "Vendas da loja" em `lancamentos`, que aparece na Transparência. A venda não
+  guarda nada de quem comprou, e o público só vê o total do dia. Para ligar um checkout online,
+  basta ele inserir cada pedido pago em `vendas` com `canal = 'online'`.
+
 ## Sem o banco
 
 Enquanto `site.contas` estiver vazio, a Transparência lê `assets/dados/contas.json` (só leitura) e o

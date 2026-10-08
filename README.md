@@ -82,6 +82,8 @@ A página `transparencia/` (botão vermelho no fim do índice) mostra o saldo do
 
 As contas ficam num banco Supabase (leitura pública, escrita só para a lista de administradores). Passo a passo em `ferramentas/supabase/LEIA-ME.md`, tabelas e regras em `ferramentas/supabase/contas.sql`, e a ligação em `site.contas` no `config.js`. Enquanto o banco não estiver ligado, a Transparência lê `assets/dados/contas.json`.
 
+As vendas da loja entram sozinhas na Transparência: o painel **Vendas da loja** (em `admin/`) grava cada venda na tabela `vendas`, e um gatilho do banco (`ferramentas/supabase/loja.sql`) publica o total de cada dia como uma receita, sem nenhum dado de quem comprou. O futuro checkout online só precisa gravar os pedidos pagos na mesma tabela.
+
 ## Salas da Poli
 
 A página `aluno/salas/` lê `assets/dados/salas.json`, gerado por `node ferramentas/salas.mjs` a partir do USPolis (sistema de alocação de salas da Poli). Como o USPolis não aceita chamadas diretas do navegador, o padrão é o mesmo do cardápio: o agendamento em `.github/workflows/salas.yml` roda o script três vezes por dia. De reuniões e eventos o arquivo guarda só o tipo, sem título nem quem reservou. A grade montada pelo aluno fica apenas no navegador dele.

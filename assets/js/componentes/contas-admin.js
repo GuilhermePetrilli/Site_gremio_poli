@@ -4,9 +4,10 @@
 // sem ele, mostra o passo a passo. A permissão real está nas regras do banco (contas.sql).
 // Uso: <div class="painel-contas" id="painelContas"></div> e <div data-componente="contas-admin"></div>.
 
-import { supabase, configurado, carregar, extrato, reais, dataBR, CATEGORIAS, INICIO_CONTAS } from "../dados/contas.js?v=202610080756";
-import { hojeSP } from "../dados/tempo.js?v=202610080756";
-import { projetosAdmin, avisoProjetos } from "./projetos-admin.js?v=202610080756";
+import { supabase, configurado, carregar, extrato, reais, dataBR, CATEGORIAS, INICIO_CONTAS } from "../dados/contas.js?v=202610080820";
+import { hojeSP } from "../dados/tempo.js?v=202610080820";
+import { projetosAdmin, avisoProjetos } from "./projetos-admin.js?v=202610080820";
+import { vendasAdmin, avisoVendas } from "./vendas-admin.js?v=202610080820";
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
@@ -46,7 +47,7 @@ export default async function contasAdmin(_alvo, contexto) {
     if (!session) return telaEntrar();
     const { data: lista } = await db.from("administradores").select("email").eq("email", session.user.email);
     if (!lista || !lista.length) {
-      avisoProjetos("Só administradores lançam projetos.");
+      avisoProjetos("Só administradores lançam projetos."); avisoVendas("Só administradores registram vendas.");
       painel.innerHTML = `<p>Você entrou como <b>${esc(session.user.email)}</b>, mas esta conta não está na lista de administradores. Peça à diretoria responsável para incluir o seu e-mail.</p><button type="button" class="botao botao--linha botao--pequeno" id="sair">Sair</button>`;
       painel.querySelector("#sair").onclick = async () => { await db.auth.signOut(); tela(); };
       return;
@@ -55,7 +56,7 @@ export default async function contasAdmin(_alvo, contexto) {
   }
 
   function telaEntrar(msg = "", ok = "") {
-    avisoProjetos("Entre na área de contas acima para lançar projetos.");
+    avisoProjetos("Entre na área de contas acima para lançar projetos."); avisoVendas("Entre na área de contas acima para registrar vendas.");
     painel.innerHTML = `
       <form class="formulario" id="fEntrar">
         <p>Entre com o e-mail e a senha de administrador.</p>
@@ -85,7 +86,7 @@ export default async function contasAdmin(_alvo, contexto) {
   }
 
   function telaNovaSenha(msg = "") {
-    avisoProjetos("Crie a senha nova acima para continuar.");
+    avisoProjetos("Crie a senha nova acima para continuar."); avisoVendas("Crie a senha nova acima para continuar.");
     painel.innerHTML = `
       <form class="formulario" id="fSenha">
         <p>Crie a sua senha nova de administrador.</p>
@@ -107,6 +108,7 @@ export default async function contasAdmin(_alvo, contexto) {
 
   async function telaLancar(email, aviso = "") {
     projetosAdmin(db, site);
+    vendasAdmin(db);
     const r = await carregar(site, raiz);
     const ex = extrato(r.lancamentos, r.parametros);
     const recentes = r.lancamentos.slice().sort((a, b) => String(b.criado_em).localeCompare(String(a.criado_em))).slice(0, 15);
@@ -143,7 +145,7 @@ export default async function contasAdmin(_alvo, contexto) {
           <span class="tab">${dataBR(l.data)}</span>
           <span>${esc(l.descricao)} <small>(${esc(l.categoria)})</small></span>
           <b class="tab" style="color:${l.tipo === "receita" ? "var(--aberto)" : "var(--vermelho)"}">${l.tipo === "receita" ? "+" : "−"} ${reais(l.valor)}</b>
-          <button type="button" data-excluir="${esc(l.id)}">Excluir</button>
+          ${l.origem === "loja" ? `<small title="Gerado pelas vendas da loja; muda quando as vendas do dia mudam">automático</small>` : `<button type="button" data-excluir="${esc(l.id)}">Excluir</button>`}
         </li>`).join("")}</ul>` : `<p class="nota">Nenhum lançamento ainda.</p>`}
 
       <h3 style="margin-top:22px">Dívida e saldo inicial</h3>
