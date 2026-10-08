@@ -23,32 +23,98 @@
 .jornal__estado { margin: 14px 0 0; text-align: center; font-size: .95rem; }
 .jornal__estado .pill { font-family: var(--fonte); margin-right: 6px; }
 
-/* manchete */
-.jornal__manchete { padding: 22px 0 20px; border-bottom: 1px solid var(--fio-jornal); }
-.jornal__manchete h2 { font-size: clamp(2rem, 6.2cqi, 3.6rem); font-weight: 800; line-height: 1.02; text-align: center; font-variation-settings: "opsz" 60; }
-.jornal__linha-fina { margin: 12px auto 0; max-width: 60ch; text-align: center; font-style: italic; font-size: 1.15rem; line-height: 1.45; }
-.jornal__colunas { margin-top: 20px; columns: 3 14rem; column-gap: 28px; column-rule: 1px solid var(--fio-jornal); font-size: 1.05rem; line-height: 1.55; text-align: left; }
-.jornal__colunas p + p { margin-top: .7em; }
-.jornal__colunas p:first-child::first-letter { float: left; font-size: 3.4em; line-height: .82; font-weight: 800; margin: 4px 8px 0 0; }
+/* linha fina e texto corrido (usados nas manchetes de todas as páginas) */
+.jornal__linha-fina { margin: 10px 0 0; max-width: 62ch; font-style: italic; font-size: 1.15rem; line-height: 1.45; }
+.jornal__colunas { margin-top: 16px; columns: 2 15rem; column-gap: 26px; column-rule: 1px solid var(--fio-jornal); column-fill: balance; font-size: 1.05rem; line-height: 1.55; text-align: left; hyphens: auto; }
+.jornal__colunas p:first-child::first-letter { float: left; font-size: 3.6em; line-height: .8; font-weight: 800; margin: 5px 8px 0 0; }
 
-/* grade de matérias */
-.jornal__grade { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.1fr); border-bottom: 4px double var(--fio-jornal); }
-.jornal__grade > * { padding: 18px 20px; }
-.jornal__grade > * + * { border-left: 1px solid var(--fio-jornal); }
-.jornal__grade > :first-child { padding-left: 0; }
-.jornal__grade > :last-child { padding-right: 0; }
+/* primeira página: manchete larga, coluna lateral e classificados encaixados, sem buracos */
+.primeira { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); grid-template-areas: "manchete lateral" "classificados classificados"; border-bottom: 4px double var(--fio-jornal); }
+.primeira__manchete { grid-area: manchete; padding: 22px 24px 22px 0; border-right: 1px solid var(--fio-jornal); }
+.primeira__manchete h2 { font-size: clamp(2rem, 5.6cqi, 3.4rem); font-weight: 800; line-height: 1.02; font-variation-settings: "opsz" 60; }
+.primeira__lateral { grid-area: lateral; display: flex; flex-direction: column; padding: 22px 0 22px 22px; }
+.primeira__lateral .jornal__materia + .jornal__materia { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--fio-jornal); }
+.primeira__classificados { grid-area: classificados; padding: 16px 0 18px; border-top: 1px solid var(--fio-jornal); }
+.anuncios { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 @container (max-width: 760px) {
-  .jornal__grade { grid-template-columns: 1fr; }
-  .jornal__grade > * { padding-inline: 0; }
-  .jornal__grade > * + * { border-left: 0; border-top: 1px solid var(--fio-jornal); }
+  .primeira { grid-template-columns: 1fr; grid-template-areas: "manchete" "lateral" "classificados"; }
+  .primeira__manchete { padding-right: 0; border-right: 0; }
+  .primeira__lateral { padding: 16px 0; border-top: 1px solid var(--fio-jornal); }
+  .anuncios { grid-template-columns: 1fr; }
 }
-.jornal__materia h2 { font-size: 1.55rem; font-weight: 700; line-height: 1.1; }
-.jornal__materia p { margin-top: 10px; font-size: 1.05rem; line-height: 1.55; }
+.jornal__materia h2 { font-size: 1.5rem; font-weight: 700; line-height: 1.1; }
+.jornal__materia p { margin-top: 8px; font-size: 1.02rem; line-height: 1.55; }
 
-.jornal__classificados h2 { font-size: 1rem; font-variant: small-caps; letter-spacing: .12em; text-align: center; border-bottom: 1px solid var(--fio-jornal); padding-bottom: 6px; }
-.anuncio { margin-top: 12px; padding: 12px 14px; border: 1px solid var(--fio-jornal); }
-.anuncio h3 { font-size: 1.15rem; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; }
+.jornal__classificados h2 { font-size: 1rem; font-variant: small-caps; letter-spacing: .12em; text-align: center; padding-bottom: 6px; }
+.anuncio { padding: 12px 14px; border: 1px solid var(--fio-jornal); }
+.anuncio h3 { font-size: 1.12rem; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; }
 .anuncio p { margin-top: 6px; font-size: .98rem; line-height: 1.45; }
 .anuncio a { display: inline-block; margin-top: 8px; color: var(--tinta-jornal); font-weight: 700; font-style: italic; }
 
 .jornal__rodape { padding-top: 10px; text-align: center; font-size: .82rem; font-variant: small-caps; letter-spacing: .08em; }
+
+/* páginas internas */
+.jornal__cabeca--interna { border-bottom: 2px solid var(--fio-jornal); padding-bottom: 0; }
+.interna { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); border-bottom: 4px double var(--fio-jornal); }
+.interna__principal { padding: 22px 24px 22px 0; border-right: 1px solid var(--fio-jornal); }
+.interna__principal h2, .interna__titulo { font-size: clamp(1.9rem, 5cqi, 3rem); font-weight: 800; line-height: 1.04; font-variation-settings: "opsz" 60; }
+.interna__titulo { margin: 20px 0 14px; text-align: center; }
+.interna__lateral { display: flex; flex-direction: column; gap: 18px; padding: 22px 0 22px 22px; }
+@container (max-width: 760px) {
+  .interna { grid-template-columns: 1fr; }
+  .interna__principal { padding-right: 0; border-right: 0; }
+  .interna__lateral { padding: 16px 0; border-top: 1px solid var(--fio-jornal); }
+}
+.chapeu { font-variant: small-caps; letter-spacing: .1em; font-size: .9rem; margin-bottom: 4px; }
+.quadro { padding: 14px 16px; border: 2px solid var(--fio-jornal); }
+.quadro h3 { font-size: 1.2rem; font-weight: 800; }
+.quadro ol { margin: 10px 0 0; padding-left: 20px; line-height: 1.5; }
+.quadro ol li + li { margin-top: 6px; }
+.quadro p { margin-top: 8px; line-height: 1.8; }
+.quadro__acao { display: inline-block; margin-top: 12px; padding: 6px 12px; background: var(--tinta-jornal); color: var(--papel-jornal); font-weight: 700; text-decoration: none; }
+.quadro--cupom { border-style: dashed; }
+.citacao { margin: 0; padding: 4px 0 0 14px; border-left: 4px solid var(--fio-jornal); font-size: 1.3rem; font-style: italic; line-height: 1.35; }
+.citacao cite { display: block; margin-top: 6px; font-size: .85rem; font-style: normal; font-variant: small-caps; letter-spacing: .06em; }
+.secoes-jornal { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--fio-jornal); border-bottom: 1px solid var(--fio-jornal); }
+.secoes-jornal section { padding: 16px 18px; border-left: 1px solid var(--fio-jornal); }
+.secoes-jornal section:nth-child(3n + 1) { border-left: 0; padding-left: 0; }
+.secoes-jornal section:nth-child(n + 4) { border-top: 1px solid var(--fio-jornal); }
+.secoes-jornal h3 { font-size: 1.3rem; font-weight: 800; }
+.secoes-jornal p { margin-top: 6px; line-height: 1.5; }
+@container (max-width: 760px) {
+  .secoes-jornal { grid-template-columns: 1fr; }
+  .secoes-jornal section { border-left: 0; padding-left: 0; border-top: 1px solid var(--fio-jornal); }
+  .secoes-jornal section:first-child { border-top: 0; }
+}
+.fecho { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; padding: 18px 0; border-bottom: 4px double var(--fio-jornal); }
+@container (max-width: 760px) { .fecho { grid-template-columns: 1fr; } }
+.expediente h3 { font-variant: small-caps; letter-spacing: .1em; font-size: 1rem; }
+.expediente p { margin-top: 6px; font-size: .95rem; line-height: 1.5; }
+
+/* edição: folhas empilhadas no mesmo lugar e a virada de página */
+.jornal-barra { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 14px; }
+.jornal-barra__seta { width: 42px; height: 42px; border: var(--borda); border-radius: 50%; background: var(--papel); font: 700 1.4rem/1 var(--fonte); color: var(--tinta); cursor: pointer; }
+.jornal-barra__seta:disabled { opacity: .35; cursor: default; }
+.jornal-barra__pagina { min-width: 110px; text-align: center; font: 700 .95rem var(--fonte); }
+.jornal-barra__pdf { margin-left: auto; }
+.edicao { position: relative; perspective: 2200px; }
+.edicao.pronta { transition: height .45s ease; }
+.edicao.pronta .folha { position: absolute; inset: 0 0 auto 0; display: block; backface-visibility: hidden; transform-origin: left center; }
+.edicao.pronta .folha:not(.atual):not(.virando):not(.voltando) { visibility: hidden; }
+.edicao.pronta .folha:not(:last-child) .jornal__rodape { cursor: pointer; }
+.folha.virando { z-index: 2; animation: virar .75s cubic-bezier(.45, .05, .35, 1) forwards; }
+.folha.voltando { z-index: 2; animation: voltar .75s cubic-bezier(.45, .05, .35, 1) forwards; }
+@keyframes virar { from { transform: rotateY(0); } 60% { box-shadow: 30px 10px 50px -10px rgba(0, 0, 0, .45); } to { transform: rotateY(-115deg); opacity: 0; } }
+@keyframes voltar { from { transform: rotateY(-115deg); opacity: 0; } to { transform: rotateY(0); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .folha.virando, .folha.voltando { animation: none; } }
+
+/* PDF: imprime só o jornal, uma folha por página A3 (o tamanho do jornal impresso) */
+@media print {
+  @page { size: A3; margin: 12mm; }
+  body { background: #fff; }
+  .aviso, .cabecalho, .gaveta, .rodape, .indice--lateral, .trilha, .jornal-barra, .pular { display: none !important; }
+  .leiaute { display: block; padding: 0; max-width: none; }
+  .edicao, .edicao.pronta { display: block; perspective: none; height: auto !important; }
+  .edicao .folha, .edicao.pronta .folha { position: static !important; display: block !important; visibility: visible !important; transform: none !important; animation: none !important; opacity: 1 !important; box-shadow: none; border-radius: 0; break-after: page; page-break-after: always; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .edicao .folha:last-child { break-after: auto; page-break-after: auto; }
+}
