@@ -8,20 +8,15 @@
 .evento h3 { font-size: 1.3rem; }
 .evento p { color: var(--tinta-suave); }
 
-/* mural de memórias em carrossel: cada foto quase da largura toda, as vizinhas aparecendo nas beiradas */
-.carrossel { position: relative; margin-top: 22px; }
-.carrossel__trilho {
-  position: relative; list-style: none; margin: 0; padding: 4px 6% 8px; display: flex; gap: 14px;
-  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; outline: none;
-}
-.carrossel__trilho::-webkit-scrollbar { display: none; }
-.carrossel__trilho:focus-visible .slide.ativa { box-shadow: 0 0 0 4px var(--sol); }
+/* mural de memórias: cada foto quase da largura toda, as vizinhas aparecendo nas beiradas
+   (a faixa, as setas e os pontinhos do carrossel ficam em componentes.css) */
 .slide {
   flex: 0 0 88%; scroll-snap-align: center; display: grid; grid-template-rows: minmax(0, 1fr) auto;
   height: clamp(360px, 46vw, 540px); border: var(--borda); border-radius: var(--raio); overflow: hidden;
   background: var(--papel); cursor: pointer; opacity: .55; transition: opacity .3s ease;
 }
 .slide.ativa { opacity: 1; cursor: default; }
+@media (max-width: 560px) { .slide { flex-basis: 90%; height: 420px; } }
 .slide--foto img { width: 100%; height: 100%; min-height: 0; object-fit: cover; filter: sepia(.3) contrast(1.05); }
 .slide--inteira { background: #d8c6a6; }
 .slide--inteira img { object-fit: contain; }
@@ -35,35 +30,11 @@
 .slide--azul .slide__corpo span { color: rgba(255, 255, 255, .85); }
 .slide--sol .slide__corpo { background: var(--sol); }
 .slide--sol .slide__corpo span { color: var(--tinta); }
-.carrossel__seta { position: absolute; top: calc(50% - 44px); z-index: 2; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: var(--borda); background: var(--papel); color: var(--tinta); cursor: pointer; box-shadow: 0 3px 0 var(--tinta); }
-.carrossel__seta:hover { background: var(--sol); }
-.carrossel__seta:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--tinta); }
-.carrossel__seta--ant { left: calc(6% - 24px); }
-.carrossel__seta--prox { right: calc(6% - 24px); }
-@media (max-width: 560px) {
-  .carrossel__trilho { padding-inline: 5%; gap: 10px; }
-  .slide { flex-basis: 90%; height: 420px; }
-  .carrossel__seta { width: 40px; height: 40px; top: auto; bottom: 4px; }
-  .carrossel .carrossel__pontos { min-height: 56px; padding-top: 6px; }
-  .carrossel__seta--ant { left: 5%; } .carrossel__seta--prox { right: 5%; }
-}
-.carrossel__pontos { display: flex; justify-content: center; gap: 8px; min-height: 40px; align-items: center; }
-.carrossel__pontos button { width: 12px; height: 12px; padding: 0; border-radius: 50%; border: 2px solid var(--tinta); background: var(--papel); cursor: pointer; transition: width .2s ease; }
-.carrossel__pontos button[aria-current="true"] { width: 30px; border-radius: 999px; background: var(--sol); }
 
 .polaroide { flex: 0 0 var(--larg); min-height: 340px; scroll-snap-align: center; cursor: pointer; opacity: .78; transform: rotate(var(--giro, -2deg)) scale(.9); transition: transform .35s ease, opacity .35s ease; }
 .carrossel__trilho > .polaroide.ativa { opacity: 1; transform: rotate(0) scale(1); cursor: default; z-index: 1; }
 .carrossel__trilho > .polaroide:hover { transform: rotate(0) scale(.94); }
 .carrossel__trilho > .polaroide.ativa:hover { transform: rotate(0) scale(1); }
-.carrossel__seta { position: absolute; top: calc(50% - 30px); z-index: 2; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: var(--borda); background: var(--papel); color: var(--tinta); cursor: pointer; box-shadow: 0 3px 0 var(--tinta); }
-.carrossel__seta:hover { background: var(--sol); }
-.carrossel__seta:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--tinta); }
-.carrossel__seta--ant { left: 22px; }
-.carrossel__seta--prox { right: 22px; }
-@media (max-width: 560px) { .carrossel__seta { width: 40px; height: 40px; top: auto; bottom: 12px; } .carrossel__seta--ant { left: 20px; } .carrossel__seta--prox { right: 20px; } }
-.carrossel__pontos { display: flex; justify-content: center; gap: 8px; min-height: 30px; align-items: center; }
-.carrossel__pontos button { width: 12px; height: 12px; padding: 0; border-radius: 50%; border: 2px solid var(--tinta); background: #fffdf7; cursor: pointer; transition: width .2s ease; }
-.carrossel__pontos button[aria-current="true"] { width: 30px; border-radius: 999px; background: var(--sol); }
 .polaroide {
   position: relative; display: flex; flex-direction: column; gap: 8px; min-height: 230px;
   padding: 14px 14px 12px; background: #fffdf7; color: var(--tinta);

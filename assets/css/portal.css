@@ -144,6 +144,12 @@
 .cartao--link p { margin-top: 0; }
 .cartao--link:hover { box-shadow: 0 4px 0 var(--tinta); }
 .cartao--link .pill { align-self: flex-start; }
+/* faixa fina na largura toda: texto à esquerda, chamada à direita */
+.cartao--faixa { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 24px; padding: 14px 22px; }
+.cartao--faixa > div { flex: 1 1 32ch; }
+.cartao--faixa h3 { font-size: 1.1rem; }
+.cartao--faixa p { margin-top: 2px; }
+.cartao--faixa .recurso__ir { margin-top: 0; padding-top: 0; white-space: nowrap; }
 @container (max-width: 520px) {
   .semestre ol { grid-template-columns: 1fr; gap: 6px; }
   .semestre li { display: flex; align-items: baseline; gap: 10px; text-align: left; padding: 10px 12px; }

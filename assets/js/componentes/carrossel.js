@@ -1,9 +1,10 @@
-// Carrossel de fotos (Mural de memórias, em aluno/meu-amor/): polaroides numa faixa
+// Carrossel (Mural de memórias, em aluno/meu-amor/, e destaques da Área do aluno): peças numa faixa
 // que desliza, com a da vez no centro, setas, pontinhos, arrastar no celular e as setas do teclado.
 // Passa sozinho a cada 5 segundos enquanto está na tela, e para quando a pessoa passa o mouse,
 // toca, usa o teclado ou pede menos movimento no sistema.
 // Uso: <div class="carrossel" data-carrossel> com .carrossel__trilho (lista), .carrossel__seta
 // [data-passo="-1"|"1"] e .carrossel__pontos; e <div data-componente="carrossel"></div>.
+// Um componente que desenha o próprio carrossel chama montar(elemento) direto (ver destaques.js).
 
 const reduzir = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -11,7 +12,7 @@ export default function carrossel() {
   document.querySelectorAll("[data-carrossel]").forEach(montar);
 }
 
-function montar(c) {
+export function montar(c) {
   const trilho = c.querySelector(".carrossel__trilho"), itens = [...trilho.children], pontos = c.querySelector(".carrossel__pontos");
   if (!itens.length) return;
   itens.forEach((el, i) => { el.setAttribute("role", "group"); el.setAttribute("aria-roledescription", "foto"); el.setAttribute("aria-label", `${i + 1} de ${itens.length}`); });

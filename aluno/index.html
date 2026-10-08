@@ -10,11 +10,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610081037">
-  <link rel="stylesheet" href="../assets/css/base.css?v=202610081037">
-  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610081037">
-  <link rel="stylesheet" href="../assets/css/portal.css?v=202610081037">
-  <script type="module" src="../assets/js/site.js?v=202610081037"></script>
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610081041">
+  <link rel="stylesheet" href="../assets/css/base.css?v=202610081041">
+  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610081041">
+  <link rel="stylesheet" href="../assets/css/portal.css?v=202610081041">
+  <script type="module" src="../assets/js/site.js?v=202610081041"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -32,22 +32,22 @@
         <div class="horizonte" aria-hidden="true"><div class="horizonte__sol"></div><div class="horizonte__faixa2"></div><div class="horizonte__faixa1"></div></div>
       </section>
 
+      <section class="bloco-portal" aria-label="Destaques do momento">
+        <div data-componente="destaques"></div>
+      </section>
+
       <section class="bloco-portal" aria-labelledby="secoes-titulo">
         <h2 id="secoes-titulo">As seções do portal</h2>
         <p class="bloco-portal__intro">Cada seção nasce de um compromisso do Novo Grêmio. As marcadas com "Já funciona" você já pode usar hoje.</p>
         <div data-componente="recursos" data-id="aluno" data-estilo="portal"></div>
       </section>
 
-      <section class="bloco-portal duas" aria-label="Mais do portal">
-        <a class="cartao cartao--forte cartao--link" href="../loja/">
-          <span class="pill pill--breve">Mais adiante</span>
-          <h3>Loja do Grêmio</h3>
-          <p>Do vestuário ao almoço no Triedro, tudo pela palma da mão.</p>
-          <span class="recurso__ir">Ver a loja</span>
-        </a>
-        <a class="cartao cartao--link" href="#contato">
-          <h3>Não achou o que procurava?</h3>
-          <p>Escreva para o Grêmio pelo canal que preferir. A gente responde e o portal melhora com a sua dúvida.</p>
+      <section class="bloco-portal" aria-label="Fale com o Grêmio">
+        <a class="cartao cartao--link cartao--faixa" href="#contato">
+          <div>
+            <h3>Não achou o que procurava?</h3>
+            <p>Escreva para o Grêmio pelo canal que preferir. A gente responde e o portal melhora com a sua dúvida.</p>
+          </div>
           <span class="recurso__ir">Fale com o Grêmio</span>
         </a>
       </section>

@@ -428,3 +428,45 @@
 .convite p { margin-top: 10px; color: rgba(255, 255, 255, .82); max-width: 56ch; }
 .convite .botao:not(.botao--claro) { background: var(--sol); color: var(--tinta); }
 .convite .botao:not(.botao--claro):hover { background: #fff; }
+
+/* Carrossel (componentes/carrossel.js): faixa que desliza com a peça da vez no centro e as vizinhas
+   aparecendo nas beiradas, setas e pontinhos. Usado pelo mural de memórias e pelos destaques. */
+.carrossel { position: relative; margin-top: 22px; }
+.carrossel__trilho {
+  position: relative; list-style: none; margin: 0; padding: 4px 6% 8px; display: flex; gap: 14px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; outline: none;
+}
+.carrossel__trilho::-webkit-scrollbar { display: none; }
+.carrossel__trilho:focus-visible > .ativa { box-shadow: 0 0 0 4px var(--sol); }
+.carrossel__seta { position: absolute; top: calc(50% - 30px); z-index: 2; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: var(--borda); background: var(--papel); color: var(--tinta); cursor: pointer; box-shadow: 0 3px 0 var(--tinta); }
+.carrossel__seta:hover { background: var(--sol); }
+.carrossel__seta:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--tinta); }
+.carrossel__seta--ant { left: 22px; }
+.carrossel__seta--prox { right: 22px; }
+.carrossel__pontos { display: flex; justify-content: center; gap: 8px; min-height: 30px; align-items: center; }
+.carrossel__pontos button { width: 12px; height: 12px; padding: 0; border-radius: 50%; border: 2px solid var(--tinta); background: #fffdf7; cursor: pointer; transition: width .2s ease; }
+.carrossel__pontos button[aria-current="true"] { width: 30px; border-radius: 999px; background: var(--sol); }
+@media (max-width: 560px) {
+  .carrossel__trilho { padding-inline: 5%; gap: 10px; }
+  .carrossel__seta { width: 40px; height: 40px; top: auto; bottom: 12px; }
+  .carrossel__seta--ant { left: 20px; } .carrossel__seta--prox { right: 20px; }
+  .carrossel .carrossel__pontos { min-height: 56px; padding-top: 6px; }
+}
+
+/* Destaques (componentes/destaques.js): cada peça é só a imagem, com o texto já desenhado nela. */
+.destaques { margin-top: 0; }
+.destaque {
+  flex: 0 0 88%; scroll-snap-align: center; aspect-ratio: 16 / 9; overflow: hidden;
+  border: var(--borda); border-radius: var(--raio); background: var(--papel);
+  cursor: pointer; opacity: .55; transition: opacity .3s ease;
+}
+.destaque.ativa { opacity: 1; cursor: default; }
+.destaque > a, .destaque picture, .destaque img { display: block; width: 100%; height: 100%; }
+.destaque img { object-fit: cover; }
+.destaque.ativa > a { cursor: pointer; }
+.destaque > a:focus-visible { outline: 4px solid var(--sol); outline-offset: -4px; }
+@media (max-width: 560px) {
+  .destaque { flex-basis: 90%; }
+  .destaques--celular .destaque { aspect-ratio: 4 / 5; }
+}
+@media (prefers-reduced-motion: reduce) { .destaque { transition: none; } }
