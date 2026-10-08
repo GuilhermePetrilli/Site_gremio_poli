@@ -16,6 +16,9 @@
   --aberto: #1d7a52;       /* estado "aberto agora" */
   --aberto-fundo: #ddf2e7;
   --marca-texto: var(--sol);
+  --vermelho: #b3263e;     /* transparência: contas e dívida */
+  --vermelho-forte: #8f1d31;
+  --vermelho-claro: #fbe3e7;
 
   /* Duas famílias: Bricolage Grotesque nos títulos e números, Nunito no texto. */
   --fonte: "Nunito", system-ui, sans-serif;

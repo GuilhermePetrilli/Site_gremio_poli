@@ -26,9 +26,10 @@ aluno/                     Área do aluno: o portal aberto do Novo Grêmio (pág
   minerva/                 grandes anúncios e Aulas Magnas
   bandejoes/               guia dos bandejões: cardápio do dia, mapa e caminho a pé
   salas/                   salas livres, onde é a minha aula e minha grade (dados do USPolis)
-  demandas/                demandas para a diretoria (monta um e-mail) e transparência
+  demandas/                demandas para a diretoria (monta um e-mail)
 admin/                     Área dos administradores: o portal interno
 loja/                      Loja do Grêmio (em breve)
+transparencia/             receitas, despesas, saldo e dívida do Grêmio (lançados no portal interno)
 .github/workflows/         agendador do cardápio (opcional; ver "Cardápio dos bandejões")
 .nojekyll                  faz o GitHub Pages servir os arquivos como estão
 assets/
@@ -74,6 +75,12 @@ node ferramentas/cardapio.mjs
 O script consulta o serviço que alimenta o app Cardápio+ da USP. O serviço não aceita chamadas direto do navegador (não envia cabeçalhos CORS), por isso o cardápio passa pelo arquivo. Hoje o agendamento em `.github/workflows/cardapio.yml` roda o script quatro vezes por dia e publica o arquivo quando o cardápio muda. Em outra hospedagem, basta um cron rodando o mesmo comando e publicando o arquivo.
 
 Como esse agendador faz commits no `main`, rode `git pull --rebase` antes de enviar as suas mudanças.
+
+## Transparência e contas
+
+A página `transparencia/` (botão vermelho no fim do índice) mostra o saldo do Grêmio desde 1º de janeiro de 2027, a barra da dívida, o gráfico mês a mês e o extrato completo, com download em CSV. Os lançamentos são feitos pelos administradores em `admin/` (Contas do Grêmio) e aparecem na Transparência ao vivo.
+
+As contas ficam num banco Supabase (leitura pública, escrita só para a lista de administradores). Passo a passo em `ferramentas/supabase/LEIA-ME.md`, tabelas e regras em `ferramentas/supabase/contas.sql`, e a ligação em `site.contas` no `config.js`. Enquanto o banco não estiver ligado, a Transparência lê `assets/dados/contas.json`.
 
 ## Salas da Poli
 

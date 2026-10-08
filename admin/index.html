@@ -10,11 +10,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610071213">
-  <link rel="stylesheet" href="../assets/css/base.css?v=202610071213">
-  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610071213">
-  <link rel="stylesheet" href="../assets/css/portal.css?v=202610071213">
-  <script type="module" src="../assets/js/site.js?v=202610071213"></script>
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610072231">
+  <link rel="stylesheet" href="../assets/css/base.css?v=202610072231">
+  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610072231">
+  <link rel="stylesheet" href="../assets/css/portal.css?v=202610072231">
+  <script type="module" src="../assets/js/site.js?v=202610072231"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -43,6 +43,12 @@
         </div>
       </section>
 
+      <section class="bloco-portal" id="contas" aria-labelledby="admin-contas">
+        <h2 id="admin-contas">Contas do Grêmio</h2>
+        <p class="bloco-portal__intro">Lance aqui cada receita e despesa do Grêmio. Ela aparece na hora na página Transparência, com o saldo atualizado.</p>
+        <div class="painel-contas" id="painelContas"><p class="nota">Carregando…</p></div>
+      </section>
+
       <section class="bloco-portal duas" aria-label="Princípios do portal interno">
         <div class="cartao cartao--forte">
           <h3>Menos horas, mais vida</h3>
@@ -53,6 +59,7 @@
           <p>Quem se compromete com o Grêmio fica com a parte boa do trabalho: inovar e descobrir os próprios gostos e os caminhos profissionais que as habilidades desenvolvidas aqui abrem.</p>
         </div>
       </section>
+      <div data-componente="contas-admin"></div>
     </main>
   </div>
 

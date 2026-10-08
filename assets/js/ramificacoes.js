@@ -29,6 +29,9 @@ export const grupos = [
   { id: "mais", titulo: "Mais do Grêmio" },
 ];
 
+// Nós com grupo "fim" não entram nas listas do índice: aparecem como botão no fim dele
+// (hoje, a Transparência, em vermelho).
+
 export const ramificacoes = [
   {
     id: "projetos",
@@ -207,10 +210,10 @@ export const ramificacoes = [
       },
       {
         id: "demandas",
-        titulo: "Demandas e transparência",
+        titulo: "Demandas",
         caminho: "aluno/demandas/",
         estado: "no-ar",
-        resumo: "Leve uma proposta, demanda ou denúncia ao Grêmio e acompanhe como o dinheiro do Grêmio é gasto.",
+        resumo: "Leve uma proposta, demanda ou denúncia direto para a diretoria responsável do Grêmio.",
         chamada: "Enviar uma demanda",
       },
     ],
@@ -231,6 +234,13 @@ export const ramificacoes = [
     caminho: "loja/",
     resumo: "Vista a camisa politécnica e faça a diferença. Os lucros da loja apoiam os projetos sociais do Grêmio.",
     filhos: [],
+  },
+  {
+    id: "transparencia",
+    grupo: "fim",
+    titulo: "Transparência",
+    caminho: "transparencia/",
+    resumo: "Todas as receitas e despesas do Grêmio desde o começo de 2027, com o saldo atualizado na hora e a situação da dívida.",
   },
 ];
 

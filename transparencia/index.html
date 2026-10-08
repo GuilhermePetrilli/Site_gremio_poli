@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transparência | Grêmio Politécnico da USP</title>
+  <meta name="description" content="Todas as receitas e despesas do Grêmio desde o começo de 2027, com o saldo atualizado na hora e a situação da dívida.">
+  <meta name="theme-color" content="#fbfbfe">
+  <link rel="icon" href="../assets/img/marca/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610072231">
+  <link rel="stylesheet" href="../assets/css/base.css?v=202610072231">
+  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610072231">
+  <link rel="stylesheet" href="../assets/css/portal.css?v=202610072231">
+  <link rel="stylesheet" href="../assets/css/transparencia.css?v=202610072231">
+  <script type="module" src="../assets/js/site.js?v=202610072231"></script>
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+  <div data-componente="cabecalho"></div>
+
+  <div class="container leiaute leiaute--pagina">
+    <div data-componente="indice" data-modo="lateral"></div>
+    <main id="conteudo" class="leiaute__principal portal transparencia">
+      <div data-componente="trilha" data-id="transparencia"></div>
+
+      <!-- Abertura: o saldo do Grêmio, ao vivo -->
+      <section class="abertura abertura--noite transp-abertura" aria-labelledby="transp-titulo">
+        <div>
+          <h1 id="transp-titulo">Transparência</h1>
+          <p class="abertura__lead">Cada real que entra e sai do Grêmio, aberto para todos os alunos.</p>
+          <p class="ao-vivo" id="aoVivo"><i aria-hidden="true"></i><span>Carregando as contas…</span></p>
+        </div>
+        <div class="saldo" aria-live="polite">
+          <span class="saldo__rotulo" id="saldoRotulo">Saldo desde 1º de janeiro de 2027</span>
+          <b class="saldo__valor tab" id="saldoValor">R$ 0,00</b>
+          <dl class="saldo__partes">
+            <div><dt>Receitas</dt><dd class="tab" id="totReceitas">R$ 0,00</dd></div>
+            <div><dt>Despesas</dt><dd class="tab" id="totDespesas">R$ 0,00</dd></div>
+            <div><dt>Lançamentos</dt><dd class="tab" id="totLanc">0</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- Dívida -->
+      <section class="bloco-portal divida" aria-labelledby="divida-titulo">
+        <div class="divida__topo">
+          <h2 id="divida-titulo">A dívida do Grêmio</h2>
+          <p class="divida__valor" id="dividaValor">Valor a confirmar</p>
+        </div>
+        <div class="divida__barra" id="dividaBarra" role="img" aria-label="Valor da dívida ainda a confirmar"><i id="dividaPago"></i></div>
+        <p class="divida__legenda" id="dividaLegenda">O valor total está sendo levantado e será publicado aqui. Cada pagamento lançado pelo Grêmio vai encher esta barra.</p>
+      </section>
+
+      <!-- Mês a mês -->
+      <section class="bloco-portal" aria-labelledby="meses-titulo">
+        <h2 id="meses-titulo">Mês a mês</h2>
+        <p class="bloco-portal__intro">Receitas e despesas de cada mês de 2027, com a linha do saldo.</p>
+        <figure class="meses">
+          <svg id="grafMeses" role="img" aria-label="Receitas, despesas e saldo por mês"></svg>
+          <figcaption class="legenda-contas"><span><i class="lg lg--receita"></i>Receitas</span><span><i class="lg lg--despesa"></i>Despesas</span><span><i class="lg lg--saldo"></i>Saldo</span></figcaption>
+        </figure>
+      </section>
+
+      <!-- Extrato -->
+      <section class="bloco-portal" id="extrato" aria-labelledby="extrato-titulo">
+        <div class="extrato-topo">
+          <div>
+            <h2 id="extrato-titulo">Todas as contas</h2>
+            <p class="bloco-portal__intro">Cada receita e despesa, na ordem em que aconteceu, com o saldo depois de cada uma.</p>
+          </div>
+          <button type="button" class="botao botao--linha botao--pequeno" id="baixarCsv">Baixar planilha (CSV)</button>
+        </div>
+        <div class="filtros-contas" role="group" aria-label="Filtrar contas">
+          <div class="chips-filtro" id="fTipo">
+            <button type="button" class="chip" data-tipo="todos" aria-pressed="true">Tudo</button>
+            <button type="button" class="chip" data-tipo="receita" aria-pressed="false">Receitas</button>
+            <button type="button" class="chip" data-tipo="despesa" aria-pressed="false">Despesas</button>
+          </div>
+          <label class="sr" for="fCategoria">Categoria</label>
+          <select id="fCategoria"><option value="">Todas as categorias</option></select>
+          <label class="sr" for="fBusca">Buscar</label>
+          <input type="search" id="fBusca" placeholder="Buscar na descrição">
+        </div>
+        <div class="tabela-contas" id="tabelaContas"></div>
+      </section>
+
+      <section class="bloco-portal duas" aria-label="Como funciona">
+        <div class="cartao cartao--forte">
+          <h3>Lançado pelas diretorias, publicado na hora</h3>
+          <p>As receitas e despesas são registradas pela gestão no portal interno e aparecem aqui assim que são lançadas. Publicar as contas é um dos princípios do Novo Grêmio.</p>
+        </div>
+        <a class="cartao cartao--link" href="../aluno/demandas/">
+          <h3>Encontrou algo estranho?</h3>
+          <p>Pergunte, questione ou denuncie. Sua mensagem vai direto para a diretoria responsável.</p>
+          <span class="recurso__ir">Enviar uma demanda</span>
+        </a>
+      </section>
+
+      <div data-componente="guia-transparencia"></div>
+    </main>
+  </div>
+
+  <div data-componente="rodape"></div>
+</body>
+</html>

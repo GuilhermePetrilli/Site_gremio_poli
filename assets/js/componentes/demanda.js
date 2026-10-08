@@ -33,7 +33,7 @@ export default function demanda(_alvo, { site }) {
       valor("nome") ? `Nome: ${valor("nome")}` : "",
       valor("curso") ? `Curso e ano: ${valor("curso")}` : "",
       "",
-      "Enviado pela página Demandas e transparência do site do Grêmio Politécnico.",
+      "Enviado pela página Demandas do site do Grêmio Politécnico.",
     ].filter((linha, i, todas) => linha || todas[i - 1]).join("\n");
 
     location.href = `mailto:${site.contato.email}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;

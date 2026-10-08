@@ -1,0 +1,85 @@
+/* Transparência (transparencia/) e painel de contas do portal interno (admin/).
+   Vermelho marca a dívida e as despesas; verde, as receitas; amarelo, o saldo. */
+
+.transparencia { --receita: #1d7a52; --receita-claro: #c9f0d9; --despesa: var(--vermelho); --despesa-claro: var(--vermelho-claro); }
+
+/* abertura e saldo */
+.transp-abertura { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px 40px; align-items: end; box-shadow: inset 0 -6px 0 var(--vermelho); }
+@container (max-width: 760px) { .transp-abertura { grid-template-columns: 1fr; } }
+.ao-vivo { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: .92rem; color: rgba(255, 255, 255, .8); }
+.ao-vivo i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, .4); }
+.ao-vivo.on i { background: #3fdc8a; box-shadow: 0 0 0 0 rgba(63, 220, 138, .6); animation: pulso-vivo 2s ease-out infinite; }
+@keyframes pulso-vivo { to { box-shadow: 0 0 0 10px rgba(63, 220, 138, 0); } }
+.saldo { padding: 20px 22px; border-radius: var(--raio); background: rgba(255, 255, 255, .06); border: 2px solid rgba(255, 255, 255, .18); }
+.saldo__rotulo { font-size: .9rem; color: rgba(255, 255, 255, .75); }
+.saldo__valor { display: block; margin-top: 4px; font: 800 clamp(2.2rem, 6.5cqi, 3.6rem)/1 var(--fonte-titulo); color: var(--sol); letter-spacing: -.02em; }
+.saldo__valor.negativo { color: #ff8a9b; }
+.saldo__partes { display: flex; flex-wrap: wrap; gap: 10px 26px; margin: 16px 0 0; }
+.saldo__partes dt { font-size: .78rem; color: rgba(255, 255, 255, .65); }
+.saldo__partes dd { margin: 2px 0 0; font: 700 1.05rem var(--fonte-titulo); color: #fff; }
+
+/* dívida */
+.divida { padding: clamp(20px, 3vw, 28px); border: 2px solid var(--vermelho); border-radius: var(--raio); background: var(--papel); }
+.divida__topo { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 20px; }
+.divida__topo h2 { font-size: clamp(1.5rem, 3.2vw, 2rem); }
+.divida__valor { font: 800 1.3rem var(--fonte-titulo); color: var(--vermelho); }
+.divida__barra { position: relative; height: 26px; margin-top: 16px; border-radius: 999px; border: 2px solid var(--tinta); overflow: hidden; background: var(--vermelho-claro); }
+.divida__barra.a-confirmar { background: repeating-linear-gradient(-45deg, var(--vermelho-claro) 0 12px, #f6c9d1 12px 24px); }
+.divida__barra i { position: absolute; inset: 0 auto 0 0; width: 0; background: #2fbf71; transition: width .6s ease; }
+.divida__legenda { margin-top: 12px; color: var(--tinta-suave); max-width: 70ch; }
+
+/* gráfico mês a mês */
+.meses { margin: 16px 0 0; padding: 16px 16px 10px; border: var(--borda); border-radius: var(--raio); background: var(--papel); }
+.meses svg { display: block; width: 100%; height: 240px; }
+.meses .eixo { stroke: var(--linha); stroke-width: 1; }
+.meses .zero { stroke: var(--tinta); stroke-width: 1.5; }
+.meses .barra-r { fill: #2fbf71; }
+.meses .barra-d { fill: var(--vermelho); }
+.meses .linha-saldo { fill: none; stroke: var(--sol); stroke-width: 3; stroke-linejoin: round; }
+.meses .ponto-saldo { fill: var(--sol); stroke: var(--tinta); stroke-width: 2; }
+.meses .rot { font: 600 11px var(--fonte); fill: var(--tinta-suave); }
+.legenda-contas { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 8px; font-size: .85rem; color: var(--tinta-suave); }
+.legenda-contas span { display: inline-flex; align-items: center; gap: 6px; }
+.lg { width: 14px; height: 10px; border-radius: 3px; display: inline-block; }
+.lg--receita { background: #2fbf71; } .lg--despesa { background: var(--vermelho); } .lg--saldo { background: var(--sol); height: 4px; }
+
+/* extrato */
+.extrato-topo { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px; }
+.filtros-contas { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 16px; }
+.filtros-contas select, .filtros-contas input { padding: 8px 12px; border: 2px solid var(--linha); border-radius: var(--raio-pequeno); font: 600 .95rem var(--fonte); background: var(--papel); color: var(--tinta); }
+.filtros-contas input { flex: 1 1 200px; }
+.tabela-contas { margin-top: 14px; border: var(--borda); border-radius: var(--raio); overflow: hidden; background: var(--papel); }
+.tabela-contas table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.tabela-contas th { text-align: left; padding: 10px 12px; background: var(--painel); font-size: .82rem; color: var(--tinta-suave); border-bottom: 2px solid var(--tinta); white-space: nowrap; }
+.tabela-contas td { padding: 10px 12px; border-top: 1px solid var(--linha); vertical-align: top; }
+.tabela-contas td.num, .tabela-contas th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tabela-contas .valor-r { color: var(--receita); font-weight: 800; }
+.tabela-contas .valor-d { color: var(--vermelho); font-weight: 800; }
+.tabela-contas .cat { display: inline-block; margin-top: 3px; font-size: .78rem; padding: 1px 8px; border-radius: 999px; background: var(--painel); color: var(--tinta-suave); }
+.tabela-contas .cat--divida { background: var(--vermelho-claro); color: var(--vermelho); font-weight: 700; }
+.tabela-contas .novo td { animation: chegou 2.4s ease-out; }
+@keyframes chegou { from { background: var(--sol-claro); } }
+.contas-vazio { padding: 30px 20px; text-align: center; color: var(--tinta-suave); }
+.contas-vazio b { display: block; font: 700 1.2rem var(--fonte-titulo); color: var(--tinta); margin-bottom: 6px; }
+@container (max-width: 640px) {
+  .tabela-contas thead { display: none; }
+  .tabela-contas tr { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 10px 12px; border-top: 1px solid var(--linha); }
+  .tabela-contas td { border: 0; padding: 0; }
+  .tabela-contas td.c-data { grid-column: 1 / -1; font-size: .8rem; color: var(--tinta-suave); }
+  .tabela-contas td.c-saldo { grid-column: 1 / -1; text-align: left; font-size: .8rem; color: var(--tinta-suave); }
+  .tabela-contas td.c-saldo::before { content: "Saldo depois: "; }
+}
+
+/* painel de contas no portal interno */
+.painel-contas { margin-top: 18px; padding: clamp(18px, 3vw, 26px); border: var(--borda); border-radius: var(--raio); background: var(--papel); }
+.painel-contas__topo { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 14px; }
+.painel-contas .formulario { padding: 0; border: 0; }
+.tres { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@container (max-width: 640px) { .tres { grid-template-columns: 1fr; } }
+.lista-admin { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 6px; }
+.lista-admin li { display: grid; grid-template-columns: 92px minmax(0, 1fr) auto auto; gap: 10px; align-items: center; padding: 8px 10px; border: 1px solid var(--linha); border-radius: var(--raio-pequeno); font-size: .92rem; }
+.lista-admin button { border: 0; background: none; color: var(--vermelho); font: 700 .85rem var(--fonte); cursor: pointer; }
+.passos { margin: 10px 0 0; padding-left: 20px; color: var(--tinta-suave); }
+.passos li + li { margin-top: 6px; }
+.passos code { font-size: .88em; background: var(--painel); padding: 1px 6px; border-radius: 4px; }
+.ok-msg { color: var(--aberto); font-weight: 700; }

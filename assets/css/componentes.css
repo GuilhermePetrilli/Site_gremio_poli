@@ -370,3 +370,12 @@
 /* recado em destaque dentro de um item do índice (campo `destaque` do registro) */
 .indice__destaque { display: block; width: fit-content; margin-top: 4px; padding: 1px 8px; border-radius: 999px; background: var(--sol); color: var(--tinta); font-size: .76rem; font-weight: 800; line-height: 1.4; }
 .indice a[aria-current="page"] .indice__destaque { background: var(--sol); color: var(--tinta); }
+
+/* ---------- transparência: botão vermelho no fim do índice ---------- */
+.botao--transparencia { background: var(--vermelho); box-shadow: 0 0 0 3px var(--vermelho-claro); gap: 10px; }
+.botao--transparencia:hover { background: var(--vermelho-forte); }
+.indice__fim { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--linha); }
+.indice__fim .botao--transparencia { width: 100%; justify-content: flex-start; color: #fff; font-weight: 800; }
+.indice .indice__fim a.botao--transparencia { display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 16px; border-radius: var(--raio); line-height: 1; }
+.indice .indice__fim a.botao--transparencia:hover { background: var(--vermelho-forte); }
+.indice .indice__fim a.botao--transparencia[aria-current="page"] { background: var(--vermelho-forte); color: #fff; box-shadow: 0 0 0 3px var(--vermelho-claro), 0 4px 0 var(--tinta); }

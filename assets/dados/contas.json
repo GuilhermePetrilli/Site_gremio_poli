@@ -1,0 +1,5 @@
+{
+ "observacao": "Usado só enquanto o banco Supabase não estiver configurado em assets/js/config.js (site.contas).",
+ "parametros": { "divida": { "total": null }, "saldo_inicial": { "valor": null } },
+ "lancamentos": []
+}

@@ -45,7 +45,18 @@ export function arvore(contexto) {
       const nos = registro.filter((no) => no.grupo === g.id);
       return nos.length ? `<div class="indice__grupo"><p class="indice__titulo">${g.titulo}</p>${ramo(contexto, nos)}</div>` : "";
     })
-    .join("")}`;
+    .join("")}${botoesDoFim(contexto)}`;
+}
+
+// Nós do grupo "fim" (hoje, a Transparência) fecham o índice como botão vermelho.
+const iconeContas = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>`;
+function botoesDoFim(contexto) {
+  const { registro, url, destino } = contexto;
+  const { ehAtual } = posicao(contexto);
+  const fim = registro.filter((no) => no.grupo === "fim");
+  return fim.length
+    ? `<div class="indice__fim">${fim.map((no) => `<a class="botao botao--transparencia" href="${url(destino(no, []))}"${ehAtual(no) ? ' aria-current="page"' : ""}>${iconeContas}<span>${no.titulo}</span></a>`).join("")}</div>`
+    : "";
 }
 
 // Índice de uma única ramificação e das suas subpáginas.
