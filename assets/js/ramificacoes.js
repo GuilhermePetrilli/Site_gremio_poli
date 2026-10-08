@@ -217,10 +217,10 @@ export const ramificacoes = [
         caminho: "aluno/bixo/",
         estado: "em-construcao",
         botao: "bixo",
-        resumo: "O espaço do ingressante de 2027: o Manual do bixo, um passo a passo pelo portal, e os benefícios de quem acabou de entrar.",
+        resumo: "O cantinho do bixo: o Manual do bixo, pra não lesar na primeira semana, e as vantagens de quem acabou de chegar.",
         filhos: [
           { id: "manual", titulo: "Manual do bixo", texto: "Onde comer, onde é a sua aula, a Semana de Recepção, os grupos de extensão e como falar com o Grêmio." },
-          { id: "beneficios", titulo: "Benefícios", texto: "Os benefícios do Grêmio para quem entra em 2027." },
+          { id: "beneficios", titulo: "Vantagens", texto: "As vantagens de ser bixo, pra quem entra em 2027." },
         ],
       },
     ],

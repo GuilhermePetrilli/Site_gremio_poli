@@ -64,6 +64,10 @@ Regras de conteúdo: o que é plano aparece como plano, com estado visível; nad
 
 O carrossel no topo de `aluno/` mostra eventos principais, avisos e notícias do momento. Cada peça é só uma imagem, com o texto desenhado nela. Para pôr um destaque no ar, salve a imagem (1600 × 900 px) em `assets/img/destaques/` e acrescente um item em `assets/js/dados/destaques.js`, com o texto da imagem em `alt`, o `link` (opcional) e a data `ate` (opcional, o destaque some sozinho depois dela). O próprio arquivo explica cada campo, inclusive a versão para celular (`imagemCelular`, 1080 × 1350 px).
 
+## App SBB Poli
+
+A Área do aluno vai virar um app de iOS e Android chamado **SBB Poli** (Sou Bixo Burro). O caminho e o que muda em cada página estão em [`ferramentas/app-sbb-poli/LEIA-ME.md`](ferramentas/app-sbb-poli/LEIA-ME.md). Ao criar ou mudar uma página da Área do aluno, acrescente lá o que ela precisa no app.
+
 ## Identidade visual
 
 Títulos e números em Bricolage Grotesque, texto em Nunito. Bordas de 2px na cor tinta, cantos de 10px, botões e chips em pílula, números em "fichas" com borda. O azul da logo marca ações e links; o amarelo (`--sol`) é o sol do horizonte e o destaque. Esses elementos vieram do protótipo do guia dos bandejões e valem para o site inteiro.
