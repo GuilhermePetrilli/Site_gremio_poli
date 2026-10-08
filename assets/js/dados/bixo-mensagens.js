@@ -9,11 +9,4 @@
 //   { tipo: "video", arquivo: "assets/video/arquivo.mp4", capa: "assets/img/bixo/capa.jpg", titulo: "do que é o vídeo" }
 // Vídeo pesa: prefira o YouTube a um .mp4 dentro do site.
 
-export const mensagens = [
-  {
-    tipo: "frase",
-    antes: "Você passou na Poli. Ok.",
-    frase: "Mas, acima de tudo, agora você é politécnico.",
-    destaque: "politécnico",
-  },
-];
+export const mensagens = [];
