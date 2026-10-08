@@ -4,8 +4,8 @@
 // sem ele, mostra o passo a passo. A permissão real está nas regras do banco (contas.sql).
 // Uso: <div class="painel-contas" id="painelContas"></div> e <div data-componente="contas-admin"></div>.
 
-import { supabase, configurado, carregar, extrato, reais, dataBR, CATEGORIAS, INICIO_CONTAS } from "../dados/contas.js?v=202610072323";
-import { hojeSP } from "../dados/tempo.js?v=202610072323";
+import { supabase, configurado, carregar, extrato, reais, dataBR, CATEGORIAS, INICIO_CONTAS } from "../dados/contas.js?v=202610072325";
+import { hojeSP } from "../dados/tempo.js?v=202610072325";
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
