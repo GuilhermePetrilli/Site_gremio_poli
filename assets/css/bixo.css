@@ -1,0 +1,54 @@
+/* Sou bixo burro (aluno/bixo/): o Manual do bixo, um passo a passo com a página de verdade
+   numa moldura de celular ao lado, e os benefícios para quem entra. */
+
+.manual { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; margin-top: 20px; scroll-margin-top: calc(var(--altura-cabecalho) + 20px); }
+.manual__trilha { display: flex; flex-direction: column; gap: 14px; }
+.manual__progresso { display: grid; gap: 6px; font-size: var(--t-pequeno); font-weight: 700; color: var(--tinta-suave); }
+.manual__barra { height: 10px; border: 2px solid var(--tinta); border-radius: 999px; overflow: hidden; background: var(--papel); }
+.manual__barra i { display: block; height: 100%; width: 0; background: var(--sol); transition: width .4s ease; }
+.manual__abas { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+.manual__abas button {
+  display: flex; align-items: center; gap: 10px; padding: 10px 12px; text-align: left; line-height: 1.2;
+  border: 2px solid var(--linha); border-radius: var(--raio); background: var(--papel); color: var(--tinta);
+  font: 700 1rem var(--fonte); cursor: pointer;
+}
+.manual__abas button:hover { border-color: var(--tinta); }
+.manual__abas button[aria-selected="true"] { border-color: var(--tinta); background: var(--sol); box-shadow: 0 3px 0 var(--tinta); }
+.manual__marca { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--tinta); background: var(--papel); font: 800 .95rem var(--fonte-titulo); }
+.manual__abas button.visto .manual__marca { background: var(--tinta); color: var(--sol); }
+
+.manual__painel { display: grid; gap: 28px; padding: clamp(20px, 3vw, 32px); border: var(--borda); border-radius: var(--raio); background: var(--papel); }
+.manual__painel--com-previa { grid-template-columns: minmax(0, 1fr) 300px; align-items: start; }
+.manual__progresso { grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 14px; }
+.manual__painel:focus-visible { outline: 4px solid var(--sol); outline-offset: 2px; }
+.manual__numero { display: inline-block; padding: 2px 10px; border-radius: 999px; background: var(--azul-tinta); color: var(--azul); font: 800 .8rem var(--fonte); }
+.manual__texto h3 { margin-top: 10px; font-size: clamp(1.5rem, 3cqi, 2rem); }
+.manual__texto > p { margin-top: 10px; color: var(--tinta-suave); }
+.manual__como { margin: 18px 0 0; padding: 0; list-style: none; counter-reset: como; display: grid; gap: 12px; }
+.manual__como li { position: relative; padding-left: 40px; counter-increment: como; }
+.manual__como li::before { content: counter(como); position: absolute; left: 0; top: -2px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--sol); border: 2px solid var(--tinta); font: 800 .85rem var(--fonte-titulo); }
+.manual__extra { margin-top: 16px; padding: 12px 14px; border-radius: var(--raio-pequeno); background: var(--painel); font-size: .95rem; color: var(--tinta-suave); }
+.manual__acoes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+/* a página de verdade, num celular */
+.manual__celular { margin: 0; display: grid; gap: 8px; justify-items: center; }
+.manual__tela { width: 300px; height: 560px; border: 10px solid var(--tinta); border-radius: 34px; overflow: hidden; background: var(--fundo); box-shadow: 0 6px 0 var(--sol); }
+.manual__tela iframe { width: 390px; height: 747px; border: 0; transform: scale(.7179); transform-origin: 0 0; }
+.manual__celular figcaption { font-size: .82rem; color: var(--tinta-suave); text-align: center; }
+
+.manual__canais { margin: 18px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.manual__canais li { display: grid; gap: 2px; padding: 12px 14px; border: 2px solid var(--linha); border-radius: var(--raio-pequeno); }
+.manual__canais b { font-size: var(--t-pequeno); color: var(--tinta-suave); }
+.manual__canais a { font-weight: 800; color: var(--azul); overflow-wrap: anywhere; }
+
+@container (max-width: 700px) { .manual__painel--com-previa { grid-template-columns: minmax(0, 1fr); } .manual__celular { display: none; } }
+@container (max-width: 640px) {
+  .manual__abas { display: flex; overflow-x: auto; scrollbar-width: none; padding-bottom: 6px; }
+  .manual__abas button { flex: none; }
+}
+@media (prefers-reduced-motion: reduce) { .manual__barra i { transition: none; } }
+
+/* benefícios */
+.beneficios { margin-top: 18px; padding: clamp(20px, 3vw, 30px); border: 2px dashed var(--tinta); border-radius: var(--raio); background: var(--sol-claro); }
+.beneficios p { max-width: 62ch; }
+.beneficios .pill { margin-bottom: 10px; background: var(--papel); }
