@@ -125,3 +125,6 @@
 .entrada-admin .dupla { grid-template-columns: 1fr; }
 .sessao-admin { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-top: 20px; padding: 10px 14px; border: 1px solid var(--linha); border-radius: var(--raio-pequeno); background: var(--papel); font-size: .92rem; color: var(--tinta-suave); }
 .sessao-admin b { color: var(--tinta); }
+
+/* dívida: nota bem pequena sobre a estimativa */
+.divida__nota { margin-top: 6px; font-size: .74rem; color: var(--tinta-suave); opacity: .85; }

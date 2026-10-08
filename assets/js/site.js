@@ -4,16 +4,16 @@
 // Componentes pesados, usados numa página só, entram em `sobDemanda`: o arquivo
 // só é baixado quando a página tem aquele componente.
 
-import { site } from "./config.js?v=202610081152";
-import { ramificacoes as registro, grupos, encontrar, destino } from "./ramificacoes.js?v=202610081152";
-import cabecalho from "./componentes/cabecalho.js?v=202610081152";
-import rodape from "./componentes/rodape.js?v=202610081152";
-import agora from "./componentes/agora.js?v=202610081152";
-import ramificacoes from "./componentes/ramificacoes.js?v=202610081152";
-import indice from "./componentes/indice.js?v=202610081152";
-import pagina from "./componentes/pagina.js?v=202610081152";
-import trilha from "./componentes/trilha.js?v=202610081152";
-import recursos from "./componentes/recursos.js?v=202610081152";
+import { site } from "./config.js?v=202610081415";
+import { ramificacoes as registro, grupos, encontrar, destino } from "./ramificacoes.js?v=202610081415";
+import cabecalho from "./componentes/cabecalho.js?v=202610081415";
+import rodape from "./componentes/rodape.js?v=202610081415";
+import agora from "./componentes/agora.js?v=202610081415";
+import ramificacoes from "./componentes/ramificacoes.js?v=202610081415";
+import indice from "./componentes/indice.js?v=202610081415";
+import pagina from "./componentes/pagina.js?v=202610081415";
+import trilha from "./componentes/trilha.js?v=202610081415";
+import recursos from "./componentes/recursos.js?v=202610081415";
 
 // Raiz do site calculada a partir deste arquivo (assets/js/site.js),
 // então funciona em qualquer domínio, subpasta ou hospedagem.
@@ -22,20 +22,20 @@ export const url = (caminho) => (/^[a-z]+:/i.test(caminho) ? caminho : new URL(c
 
 const componentes = { cabecalho, rodape, agora, ramificacoes, indice, pagina, trilha, recursos };
 const sobDemanda = {
-  "guia-transparencia": () => import("./componentes/guia-transparencia.js?v=202610081152"),
-  "contas-admin": () => import("./componentes/contas-admin.js?v=202610081152"),
-  "guia-parcerias": () => import("./componentes/guia-parcerias.js?v=202610081152"),
-  "foto-mural": () => import("./componentes/foto-mural.js?v=202610081152"),
-  carrossel: () => import("./componentes/carrossel.js?v=202610081152"),
-  destaques: () => import("./componentes/destaques.js?v=202610081152"),
-  "manual-bixo": () => import("./componentes/manual-bixo.js?v=202610081152"),
-  "bixo-mensagens": () => import("./componentes/bixo-mensagens.js?v=202610081152"),
-  cursos: () => import("./componentes/cursos.js?v=202610081152"),
-  jornal: () => import("./componentes/jornal.js?v=202610081152"),
-  "mapa-servicos": () => import("./componentes/mapa-servicos.js?v=202610081152"),
-  "guia-salas": () => import("./componentes/guia-salas.js?v=202610081152"),
-  demanda: () => import("./componentes/demanda.js?v=202610081152"),
-  "guia-bandejoes": () => import("./componentes/guia-bandejoes.js?v=202610081152"),
+  "guia-transparencia": () => import("./componentes/guia-transparencia.js?v=202610081415"),
+  "contas-admin": () => import("./componentes/contas-admin.js?v=202610081415"),
+  "guia-parcerias": () => import("./componentes/guia-parcerias.js?v=202610081415"),
+  "foto-mural": () => import("./componentes/foto-mural.js?v=202610081415"),
+  carrossel: () => import("./componentes/carrossel.js?v=202610081415"),
+  destaques: () => import("./componentes/destaques.js?v=202610081415"),
+  "manual-bixo": () => import("./componentes/manual-bixo.js?v=202610081415"),
+  "bixo-mensagens": () => import("./componentes/bixo-mensagens.js?v=202610081415"),
+  cursos: () => import("./componentes/cursos.js?v=202610081415"),
+  jornal: () => import("./componentes/jornal.js?v=202610081415"),
+  "mapa-servicos": () => import("./componentes/mapa-servicos.js?v=202610081415"),
+  "guia-salas": () => import("./componentes/guia-salas.js?v=202610081415"),
+  demanda: () => import("./componentes/demanda.js?v=202610081415"),
+  "guia-bandejoes": () => import("./componentes/guia-bandejoes.js?v=202610081415"),
 };
 const contexto = { site, url, raiz: RAIZ, registro, grupos, encontrar, destino };
 
