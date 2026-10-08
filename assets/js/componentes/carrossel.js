@@ -18,19 +18,27 @@ function montar(c) {
   pontos.innerHTML = itens.map((_, i) => `<button type="button" aria-label="Ir para a foto ${i + 1} de ${itens.length}"></button>`).join("");
   let atual = 0;
 
+  const destacar = (i) => {
+    atual = i;
+    itens.forEach((el, k) => el.classList.toggle("ativa", k === i));
+    [...pontos.children].forEach((b, k) => b.setAttribute("aria-current", k === i ? "true" : "false"));
+  };
   const ir = (i) => {
-    const el = itens[(i + itens.length) % itens.length];
+    const n = (i + itens.length) % itens.length, el = itens[n];
+    destacar(n);
     trilho.scrollTo({ left: el.offsetLeft - (trilho.clientWidth - el.offsetWidth) / 2, behavior: reduzir() ? "auto" : "smooth" });
   };
   const marcar = () => {
     const meio = trilho.scrollLeft + trilho.clientWidth / 2;
-    let perto = Infinity;
-    itens.forEach((el, i) => { const d = Math.abs(el.offsetLeft + el.offsetWidth / 2 - meio); if (d < perto) { perto = d; atual = i; } });
-    itens.forEach((el, i) => el.classList.toggle("ativa", i === atual));
-    [...pontos.children].forEach((b, i) => b.setAttribute("aria-current", i === atual ? "true" : "false"));
+    let perto = Infinity, mais = 0;
+    itens.forEach((el, i) => { const d = Math.abs(el.offsetLeft + el.offsetWidth / 2 - meio); if (d < perto) { perto = d; mais = i; } });
+    destacar(mais);
   };
-  let quadro;
-  trilho.addEventListener("scroll", () => { cancelAnimationFrame(quadro); quadro = requestAnimationFrame(marcar); }, { passive: true });
+  let quadro, espera;
+  trilho.addEventListener("scroll", () => {
+    cancelAnimationFrame(quadro); quadro = requestAnimationFrame(marcar);
+    clearTimeout(espera); espera = setTimeout(marcar, 120); // garante a marcação no fim do deslize
+  }, { passive: true });
   new ResizeObserver(marcar).observe(trilho);
 
   c.querySelectorAll("[data-passo]").forEach((b) => b.addEventListener("click", () => ir(atual + Number(b.dataset.passo))));
