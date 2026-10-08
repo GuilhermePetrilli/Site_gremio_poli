@@ -3,7 +3,7 @@
 // "Índice" e a gaveta também traz os links do menu.
 // Qualquer elemento com data-abrir-gaveta, em qualquer lugar da página, abre a mesma gaveta.
 
-import { arvore } from "./indice.js?v=202610081145";
+import { arvore } from "./indice.js?v=202610081152";
 
 export default function cabecalho(alvo, contexto) {
   const { site, url } = contexto;
@@ -31,7 +31,7 @@ export default function cabecalho(alvo, contexto) {
     <header class="cabecalho">
       <div class="container cabecalho__barra">
         <a class="marca" href="${url("./")}" aria-label="${site.nomeCompleto}, página inicial">
-          <img src="${url("assets/img/marca/gremio-azul.png")}" alt="" width="40" height="40">
+          <img src="${url("assets/img/marca/gremio-azul.png?v=bef84bef")}" alt="" width="40" height="40">
           <span>${site.nome}</span>
         </a>
         <button class="botao--indice cabecalho__indice" type="button" data-abrir-gaveta aria-haspopup="dialog">${iconeIndice}Índice do site</button>

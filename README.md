@@ -113,7 +113,7 @@ Quando o site deixar de ser de uma pessoa e passar a ser do Grêmio, transfira t
 
 ## Versão dos arquivos (cache)
 
-As referências a `.css` e `.js` levam `?v=AAAAMMDDHHMM`. Isso impede que o navegador misture arquivos novos com versões antigas em cache depois de uma publicação. O script `ferramentas/versionar.mjs` atualiza todas as versões de uma vez e roda sozinho antes de cada commit, se o gancho estiver instalado:
+As referências a `.css` e `.js` levam `?v=AAAAMMDDHHMM`. Isso impede que o navegador misture arquivos novos com versões antigas em cache depois de uma publicação. As imagens (`.svg`, `.png`, `.jpg`, `.webp`) levam `?v=` com um código tirado do conteúdo do arquivo: uma imagem trocada com o mesmo nome aparece na hora, e as que não mudaram continuam em cache. O script `ferramentas/versionar.mjs` atualiza todas as versões de uma vez e roda sozinho antes de cada commit, se o gancho estiver instalado:
 
 ```sh
 printf '#!/bin/sh\nnode ferramentas/versionar.mjs && git add -u\n' > .git/hooks/pre-commit

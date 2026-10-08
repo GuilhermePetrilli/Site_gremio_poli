@@ -13,17 +13,17 @@
 
 export const destaques = [
   {
-    imagem: "assets/img/destaques/mural-de-memorias.jpg",
+    imagem: "assets/img/destaques/mural-de-memorias.jpg?v=33f8d368",
     alt: "Mural de memórias: mande a sua foto da Poli. Em Meu Amor.",
     link: "aluno/meu-amor/#mande-sua-foto",
   },
   {
-    imagem: "assets/img/destaques/grade-horaria.png",
+    imagem: "assets/img/destaques/grade-horaria.png?v=b600e010",
     alt: "Monte a sua grade com as salas e baixe em PDF. Salas e grade horária.",
     link: "aluno/salas/",
   },
   {
-    imagem: "assets/img/destaques/bandejoes.png",
+    imagem: "assets/img/destaques/bandejoes.png?v=ed4950a9",
     alt: "O cardápio de hoje dos quatro bandejões, com o caminho a pé até cada um.",
     link: "aluno/bandejoes/",
   },

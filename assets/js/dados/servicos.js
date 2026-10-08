@@ -10,7 +10,7 @@ export const servicos = [
   {
     id: "copiadora",
     nome: "Copiadora Politécnica",
-    logo: "assets/img/servicos/copiadora.svg",
+    logo: "assets/img/servicos/copiadora.svg?v=e6a35b1a",
     frase: "A salvação da véspera.",
     texto: "Plano de cotas com preços mais acessíveis durante toda a graduação, itens de conveniência e impressão de material de divulgação.",
     onde: "No prédio do Biênio, junto do Triedro",
@@ -19,7 +19,7 @@ export const servicos = [
   {
     id: "triedro",
     nome: "Lanchonete Triedro",
-    logo: "assets/img/servicos/triedro.svg",
+    logo: "assets/img/servicos/triedro.svg?v=92d2ca1e",
     frase: "Entre uma aula e outra.",
     texto: "Refeições a preços acessíveis para quem não tem tempo de ir até o bandejão.",
     onde: "No prédio do Biênio",
@@ -28,7 +28,7 @@ export const servicos = [
   {
     id: "poliglota",
     nome: "Poliglota Idiomas",
-    logo: "assets/img/servicos/poliglota.svg",
+    logo: "assets/img/servicos/poliglota.svg?v=6d904fe8",
     frase: "O idioma do seu intercâmbio começa aqui.",
     texto: "Há mais de 30 anos ensinando alemão, espanhol, francês, inglês, italiano e português, com bolsas integrais para alunos.",
     numeros: [{ valor: "6", rotulo: "idiomas" }, { valor: "30+", rotulo: "anos" }, { valor: "900+", rotulo: "bolsas integrais" }],

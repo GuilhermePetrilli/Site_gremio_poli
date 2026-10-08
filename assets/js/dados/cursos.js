@@ -20,45 +20,45 @@ export const arquivoDesde = 2026;
 export const centros = [
   {
     id: "cec", sigla: "CEC", nome: "Centro Acadêmico de Engenharia Civil Prof. Milton Vargas",
-    logo: "assets/img/cas/cec.svg", instagram: "cecpoliusp", cursos: ["civil"],
+    logo: "assets/img/cas/cec.svg?v=8205bb3c", instagram: "cecpoliusp", cursos: ["civil"],
     sobre: "Nomeado em homenagem ao professor Milton Vargas, reúne os estudantes da grande área da Engenharia Civil.",
   },
   {
     id: "caea", sigla: "CAEA", nome: "Centro Acadêmico de Engenharia Ambiental",
-    logo: "assets/img/cas/caea.svg", instagram: "caeapoliusp", cursos: ["ambiental"],
+    logo: "assets/img/cas/caea.svg?v=301741d6", instagram: "caeapoliusp", cursos: ["ambiental"],
     sobre: "Fundado em 2016, organiza o \"Tô na Poli, e agora?\" e a Semana de Engenharia Ambiental.",
   },
   {
     id: "cee", sigla: "CEE", nome: "Centro Acadêmico de Engenharia Elétrica e de Computação",
-    logo: "assets/img/cas/cee.svg", instagram: "ceepoliusp", cursos: ["eletrica", "computacao"],
+    logo: "assets/img/cas/cee.svg?v=84e7eb68", instagram: "ceepoliusp", cursos: ["eletrica", "computacao"],
     sobre: "Com mais de 65 anos de história, recebe os calouros da Elétrica e da Computação.",
     centrinho: { texto: "Tem salas de estudo individuais e coletivas." },
   },
   {
     id: "cam", sigla: "CAM", nome: "Centro Acadêmico de Mecânica e Mecatrônica",
-    logo: "assets/img/cas/cam.svg", instagram: "campoliusp", cursos: ["mecanica", "mecatronica"],
+    logo: "assets/img/cas/cam.svg?v=6a32c77f", instagram: "campoliusp", cursos: ["mecanica", "mecatronica"],
     sobre: "O centro acadêmico de quem faz Mecânica ou Mecatrônica.",
     centrinho: { onde: "No prédio da Engenharia Naval, Mecânica e Mecatrônica.", texto: "Um espaço de convivência e descanso, com sofá, videogame, televisão e sinuca." },
   },
   {
     id: "cen", sigla: "CEN", nome: "Centro Acadêmico de Engenharia Naval",
-    logo: "assets/img/cas/cen.svg", instagram: "cenpoliusp", cursos: ["naval"],
+    logo: "assets/img/cas/cen.svg?v=b326d158", instagram: "cenpoliusp", cursos: ["naval"],
     sobre: "Acolhe todos os estudantes de Engenharia Naval, com eventos de integração.",
   },
   {
     id: "caep", sigla: "CAEP", nome: "Centro Acadêmico de Engenharia de Produção",
-    logo: "assets/img/cas/caep.svg", instagram: "caepusp", cursos: ["producao"],
+    logo: "assets/img/cas/caep.svg?v=cfb2043c", instagram: "caepusp", cursos: ["producao"],
     sobre: "Organiza a SEGEP, a Semana Acadêmica de Engenharia de Produção, e o CAEPré-cálculo.",
   },
   {
     id: "aeq", sigla: "AEQ", nome: "Associação da Engenharia Química",
-    logo: "assets/img/cas/aeq.svg", instagram: "aeqpoliusp", cursos: ["quimica"],
+    logo: "assets/img/cas/aeq.svg?v=160dada8", instagram: "aeqpoliusp", cursos: ["quimica"],
     sobre: "O lugar dos estudantes de Engenharia Química para conviver, conversar e descansar.",
     centrinho: { onde: "No prédio da Poli Química, ao lado do bandejão." },
   },
   {
     id: "cmr", sigla: "CMR", nome: "Centro Moraes Rêgo",
-    logo: "assets/img/cas/cmr.svg", instagram: "cmr.poli", cursos: ["materiais-metalurgica-nuclear", "minas-petroleo"],
+    logo: "assets/img/cas/cmr.svg?v=cbcb3d46", instagram: "cmr.poli", cursos: ["materiais-metalurgica-nuclear", "minas-petroleo"],
     sobre: "Reúne os estudantes de Engenharia de Materiais, Metalúrgica, de Minas, de Petróleo e Nuclear.",
   },
 ];

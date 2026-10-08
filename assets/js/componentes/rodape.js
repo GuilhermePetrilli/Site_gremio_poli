@@ -21,7 +21,7 @@ export default function rodape(alvo, { site, url, registro, destino }) {
         </div>
 
         <div class="carimbo" role="group" aria-label="Dados da entidade">
-          <div class="carimbo__logo"><img src="${url("assets/img/marca/gremio-azul.png")}" alt="${site.nomeCompleto}" width="88" height="88"></div>
+          <div class="carimbo__logo"><img src="${url("assets/img/marca/gremio-azul.png?v=bef84bef")}" alt="${site.nomeCompleto}" width="88" height="88"></div>
           <div class="carimbo__campo carimbo__campo--largo"><span>Entidade</span>${site.nomeCompleto}</div>
           <div class="carimbo__campo"><span>Fundação</span>1º de setembro de 1903</div>
           <div class="carimbo__campo carimbo__campo--largo"><span>Sede</span>${contato.endereco}</div>
