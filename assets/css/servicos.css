@@ -52,6 +52,5 @@
 .ms-onde { font: 600 12px var(--fonte); fill: var(--tinta-suave); paint-order: stroke; stroke: #fbfcfe; stroke-width: 4px; }
 .serv__linha { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 12px; }
 .serv__linha .serv__onde { margin-top: 0; }
-.serv__em-breve { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 4px 14px 4px 11px; border-radius: var(--raio); background: var(--azul-tinta); color: var(--azul); font: 700 .9rem/1.15 var(--fonte); cursor: default; }
-.serv__em-breve svg { flex: none; color: var(--sol); filter: drop-shadow(0 0 .5px var(--azul)); }
-.serv__em-breve small { display: block; font-weight: 600; font-size: .74rem; color: var(--tinta-suave); }
+.serv__em-breve { display: inline-flex; align-items: center; min-height: 40px; padding: 4px 14px; border-radius: var(--raio); background: var(--azul-tinta); color: var(--azul); font: 700 1rem/1.15 var(--fonte-titulo); letter-spacing: -.01em; cursor: default; }
+.serv__em-breve small { display: block; margin-top: 1px; font: 600 .78rem/1.2 var(--fonte); letter-spacing: 0; color: var(--tinta-suave); }
