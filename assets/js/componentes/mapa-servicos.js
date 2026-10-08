@@ -1,11 +1,11 @@
 // Página Serviços: mapa do campus com zoom (arrastar, rodinha, pinça e botões) e os
-// empreendimentos do Grêmio marcados com a logo. Os pontos vêm de dados/servicos.js; para
-// expandir o mapa, basta acrescentar itens lá. Usa o mesmo mapa-base do guia dos bandejões.
+// empreendimentos do Grêmio num só marcador com as logos (dados/servicos.js). Tocar numa
+// logo leva ao cartão do serviço. Usa o mesmo mapa-base do guia dos bandejões.
 // Uso: <div class="mapa-serv" id="mapaServ"></div>, cartões com data-servico, e
 // <div data-componente="mapa-servicos"></div>.
 
-import { L } from "../dados/mapa-campus.js?v=202610080015";
-import { servicos } from "../dados/servicos.js?v=202610080015";
+import { L } from "../dados/mapa-campus.js?v=202610080028";
+import { servicos, pontoNoMapa } from "../dados/servicos.js?v=202610080028";
 
 const NS = "http://www.w3.org/2000/svg";
 const el = (t, a = {}, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
@@ -39,16 +39,22 @@ export default function mapaServicos(_alvo, { url }) {
   const fixos = [];
   const fixo = (g, x, y) => { g.dataset.x = x; g.dataset.y = y; fixos.push(g); return g; };
   rotulos.forEach(([t, x, y, c, fs]) => { const g = fixo(el("g", {}, marcas), x, y); const tx = el("text", { class: c, "font-size": fs, "text-anchor": "middle" }, g); tx.textContent = t; });
-  const comLugar = servicos.filter((s) => s.x != null);
-  for (const s of comLugar) {
-    const g = fixo(el("g", { class: "ms-marca", tabindex: "0", role: "button", "aria-label": `${s.nome}: ${s.onde || ""}` }, marcas), s.x, s.y);
-    el("path", { d: "M0 0 C-6 -10 -26 -18 -26 -40 a26 26 0 0 1 52 0 c0 22 -20 30 -26 40z", class: "ms-pino" }, g);
-    el("image", { href: url(s.logo), x: -18, y: -58, width: 36, height: 36 }, g);
-    const esq = s.lado === "esquerda", lx = esq ? -32 : 32, ancora = esq ? "end" : "start";
-    const t = el("text", { class: "ms-nome", x: lx, y: -36, "text-anchor": ancora }, g); t.textContent = s.nome;
-    const t2 = el("text", { class: "ms-onde", x: lx, y: -20, "text-anchor": ancora }, g); t2.textContent = s.onde || "";
-    const ir = () => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "center" });
-    g.addEventListener("click", ir); g.addEventListener("keydown", (e) => { if (e.key === "Enter") ir(); });
+  // um só marcador para os serviços vizinhos: balão com as logos lado a lado, ponta no Triedro
+  const juntos = servicos.filter((s) => s.noPonto);
+  if (juntos.length) {
+    const P = pontoNoMapa, n = juntos.length, lado = 44, folga = 7, T = -(14 + lado + 12), meio = (n * lado + (n + 1) * folga) / 2;
+    const g = fixo(el("g", { class: "ms-grupo" }, marcas), P.x, P.y);
+    el("path", { d: `M${-meio + 12} ${T} H${meio - 12} a12 12 0 0 1 12 12 V-26 a12 12 0 0 1 -12 12 H8 L0 0 L-8 -14 H${-meio + 12} a12 12 0 0 1 -12 -12 V${T + 12} a12 12 0 0 1 12 -12z`, class: "ms-pino" }, g);
+    juntos.forEach((s, i) => {
+      const x = -meio + folga + i * (lado + folga);
+      const m = el("g", { class: "ms-marca", tabindex: "0", role: "button", "aria-label": `${s.nome}: ir para o cartão` }, g);
+      el("rect", { x: x - 3, y: T + 2, width: lado + 6, height: lado + 8, rx: 8, class: "ms-alvo" }, m);
+      el("image", { href: url(s.logo), x, y: T + 6, width: lado, height: lado }, m);
+      const ir = () => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "center" });
+      m.addEventListener("click", ir); m.addEventListener("keydown", (e) => { if (e.key === "Enter") ir(); });
+    });
+    const t = el("text", { class: "ms-nome", x: meio + 10, y: T + 26 }, g); t.textContent = P.nome;
+    const t2 = el("text", { class: "ms-onde", x: meio + 10, y: T + 42 }, g); t2.textContent = P.onde;
   }
 
   // visão e zoom
@@ -85,12 +91,6 @@ export default function mapaServicos(_alvo, { url }) {
   const soltar = (e) => { dedos.delete(e.pointerId); if (dedos.size < 2) pinca = null; if (!dedos.size) { arrasto = null; caixa.classList.remove("arrastando"); } };
   svg.addEventListener("pointerup", soltar); svg.addEventListener("pointercancel", soltar);
   new ResizeObserver(() => aplicar()).observe(caixa);
-
-  // botões "Ver no mapa" dos cartões
-  document.querySelectorAll("[data-ver-no-mapa]").forEach((b) => b.addEventListener("click", () => {
-    const s = servicos.find((x) => x.id === b.dataset.verNoMapa); if (!s || s.x == null) return;
-    caixa.scrollIntoView({ behavior: "smooth", block: "center" }); centrar(s.x, s.y - 20, 260);
-  }));
 
   poli();
 }

@@ -45,8 +45,13 @@
 .ms-rot--agua { fill: var(--tinta); opacity: .55; font-style: italic; font-family: var(--fonte); }
 .ms-marca { cursor: pointer; }
 .ms-pino { fill: #fff; stroke: var(--tinta); stroke-width: 3; }
-.ms-marca:hover .ms-pino, .ms-marca:focus .ms-pino { fill: var(--sol); }
+.ms-alvo { fill: transparent; }
+.ms-marca:hover .ms-alvo, .ms-marca:focus .ms-alvo { fill: var(--sol); }
+.ms-marca:focus { outline: none; }
 .ms-nome { font: 800 15px var(--fonte-titulo); fill: var(--tinta); paint-order: stroke; stroke: #fbfcfe; stroke-width: 4px; }
 .ms-onde { font: 600 12px var(--fonte); fill: var(--tinta-suave); paint-order: stroke; stroke: #fbfcfe; stroke-width: 4px; }
-.serv__em-breve { display: inline-flex; align-items: baseline; gap: 6px; margin: 12px 0 0 10px; padding: 6px 12px; border-radius: var(--raio); background: var(--sol-claro); border: 1px solid #f1df9a; color: var(--tinta); font: 700 .88rem var(--fonte); cursor: default; }
-.serv__em-breve small { font-weight: 600; color: var(--tinta-suave); }
+.serv__linha { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 12px; }
+.serv__linha .serv__onde { margin-top: 0; }
+.serv__em-breve { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 4px 14px 4px 11px; border-radius: var(--raio); background: var(--azul-tinta); color: var(--azul); font: 700 .9rem/1.15 var(--fonte); cursor: default; }
+.serv__em-breve svg { flex: none; color: var(--sol); filter: drop-shadow(0 0 .5px var(--azul)); }
+.serv__em-breve small { display: block; font-weight: 600; font-size: .74rem; color: var(--tinta-suave); }
