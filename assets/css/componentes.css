@@ -381,6 +381,12 @@
 .indice__fim .botao--transparencia { width: 100%; justify-content: flex-start; color: #fff; font-weight: 800; }
 .indice .indice__fim a.botao--transparencia { display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 16px; border-radius: var(--raio); line-height: 1; }
 .indice .indice__fim a.botao--transparencia:hover { background: var(--vermelho-forte); }
+/* Sou bixo burro: fecha o índice da Área do aluno em amarelo-sol */
+.indice .indice__fim a.botao--bixo { display: flex; align-items: center; min-height: 46px; padding: 0 16px; border: var(--borda); border-radius: var(--raio); background: var(--sol); color: var(--tinta); font-weight: 800; line-height: 1; box-shadow: 0 3px 0 var(--tinta); }
+.indice .indice__fim a.botao--bixo:hover { background: #ffcf26; }
+.indice .indice__fim a.botao--bixo:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--tinta); }
+.indice .indice__fim a.botao--bixo[aria-current="page"] { background: var(--sol); color: var(--tinta); box-shadow: 0 0 0 3px var(--sol-claro), 0 4px 0 var(--tinta); }
+.indice__fim + .indice__voltar { margin-top: 18px; }
 .indice .indice__fim a.botao--transparencia[aria-current="page"] { background: var(--vermelho-forte); color: #fff; box-shadow: 0 0 0 3px var(--vermelho-claro), 0 4px 0 var(--tinta); }
 
 /* ---------- página inicial institucional ---------- */

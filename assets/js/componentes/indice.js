@@ -59,20 +59,25 @@ function botoesDoFim(contexto) {
     : "";
 }
 
-// Índice de uma única ramificação e das suas subpáginas.
+// Índice de uma única ramificação e das suas subpáginas. Subpáginas com `botao` (ex.: Sou bixo burro)
+// fecham a lista como botão de cor própria, logo antes de "Voltar ao início do site".
 export function arvoreDaArea(contexto, id) {
   const { url, destino, encontrar } = contexto;
   const achado = encontrar(id);
   if (!achado) return arvore(contexto);
   const { no, ancestrais } = achado;
   const { ehAtual } = posicao(contexto);
-  const filhos = no.filhos || [];
+  const filhos = (no.filhos || []).filter((f) => !f.botao);
+  const botoes = (no.filhos || []).filter((f) => f.botao);
   return `<a class="indice__cabeca" href="${url(destino(no, ancestrais))}"${ehAtual(no) ? ' aria-current="page"' : ""}>
       <strong>${no.titulo}</strong><span>Página de entrada</span>
     </a>
     ${filhos.length
       ? `<div class="indice__grupo"><p class="indice__titulo">Nesta área</p>${ramo(contexto, filhos, [...ancestrais, no])}</div>`
       : `<p class="indice__titulo">As páginas desta área aparecem aqui conforme forem criadas.</p>`}
+    ${botoes.length
+      ? `<div class="indice__fim">${botoes.map((b) => `<a class="botao botao--${b.botao}" href="${url(destino(b, [...ancestrais, no]))}"${ehAtual(b) ? ' aria-current="page"' : ""}><span>${b.titulo}</span></a>`).join("")}</div>`
+      : ""}
     <p class="indice__voltar"><a href="${url("./")}">Voltar ao início do site</a></p>`;
 }
 

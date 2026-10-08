@@ -210,6 +210,15 @@ export const ramificacoes = [
         resumo: "Leve uma proposta, demanda ou denúncia direto para a diretoria responsável do Grêmio.",
         chamada: "Enviar uma demanda",
       },
+      // `botao`: fecha o índice da área como botão de cor própria, fora da lista numerada das seções.
+      {
+        id: "bixo",
+        titulo: "Sou bixo burro",
+        caminho: "aluno/bixo/",
+        estado: "em-construcao",
+        botao: "bixo",
+        resumo: "O espaço do ingressante de 2027: para se sentir em casa desde o primeiro dia na Poli.",
+      },
     ],
   },
   {
