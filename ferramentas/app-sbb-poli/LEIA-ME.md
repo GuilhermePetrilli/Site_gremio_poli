@@ -91,3 +91,7 @@ dá acesso a recursos do celular: notificações, compartilhar e salvar arquivos
   - As prévias do manual são iframes das próprias páginas. No app funcionam, mas pesam. Melhor
     trocar por "abrir a aba" correspondente na barra de baixo.
   - É a cara do app: vale abrir nele na primeira vez que o bixo usa o SBB Poli.
+  - As mensagens pro bixo (`assets/js/dados/bixo-mensagens.js`: frases, fotos e vídeos) são uma boa
+    tela de boas-vindas na primeira abertura do app. Vídeos do YouTube precisam de internet. Fotos e
+    frases entram no cache para abrir sem sinal. Um `.mp4` dentro do app aumenta o download, então
+    prefira o YouTube.

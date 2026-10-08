@@ -52,3 +52,26 @@
 .beneficios { margin-top: 18px; padding: clamp(20px, 3vw, 30px); border: 2px dashed var(--tinta); border-radius: var(--raio); background: var(--sol-claro); }
 .beneficios p { max-width: 62ch; }
 .beneficios .pill { margin-bottom: 10px; background: var(--papel); }
+
+/* mensagens daora (componentes/bixo-mensagens.js): frase grande, foto ou vídeo */
+.mensagem { margin: 0; border-radius: var(--raio); overflow: hidden; }
+.mensagem--frase {
+  display: flex; flex-direction: column; justify-content: center; gap: clamp(14px, 2.4cqi, 26px);
+  min-height: clamp(300px, 46cqi, 460px); padding: clamp(28px, 6cqi, 72px);
+  background: var(--tinta); color: #fff; border: var(--borda);
+}
+.mensagem__antes { font: 700 clamp(1.2rem, 3.2cqi, 1.9rem)/1.2 var(--fonte); color: rgba(255, 255, 255, .7); }
+.mensagem__frase { max-width: 17ch; font: 800 clamp(2.3rem, 7.4cqi, 4.8rem)/1 var(--fonte-titulo); letter-spacing: -.035em; text-wrap: balance; }
+.mensagem__frase mark { background: none; color: var(--sol); }
+.mensagem--espera .mensagem__antes, .mensagem--espera .mensagem__frase { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.mensagem--espera .mensagem__frase { transition-delay: .9s; }
+.mensagem--entra .mensagem__antes, .mensagem--entra .mensagem__frase { opacity: 1; transform: none; }
+.mensagem--foto { border: var(--borda); }
+.mensagem--foto img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.mensagem--foto figcaption { padding: 10px 16px; font-size: .95rem; color: var(--tinta-suave); background: var(--papel); }
+.mensagem--video { aspect-ratio: 16 / 9; border: var(--borda); background: var(--tinta); }
+.mensagem--video iframe, .mensagem--video video { display: block; width: 100%; height: 100%; border: 0; }
+.mensagens__item { flex: 0 0 88%; scroll-snap-align: center; opacity: .55; transition: opacity .3s ease; cursor: pointer; }
+.mensagens__item.ativa { opacity: 1; cursor: default; }
+.mensagens__item .mensagem { height: 100%; }
+@media (max-width: 560px) { .mensagens__item { flex-basis: 90%; } }
