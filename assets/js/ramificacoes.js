@@ -92,28 +92,10 @@ export const ramificacoes = [
     ],
   },
   {
-    id: "eventos",
-    grupo: "frentes",
-    titulo: "Eventos e extensão",
-    caminho: "eventos/",
-    construcao: true,
-    resumo: "Da recepção dos calouros à feira que apresenta os grupos de extensão da Poli.",
-    numeros: [
-      { valor: "50+", rotulo: "grupos na Feira de Extensões de 2026" },
-      { valor: "400+", rotulo: "alunos presentes na feira" },
-    ],
-    filhos: [
-      { id: "recepcao", titulo: "Semana de Recepção", texto: "Integração dos calouros à vida universitária e à comunidade politécnica." },
-      { id: "festas", titulo: "Festas e confraternizações", texto: "Encontros que aproximam turmas e cursos.", veja: "meu-amor" },
-      { id: "feira-de-extensoes", titulo: "Feira de Extensões", texto: "Duas vezes por ano, os grupos de extensão e coletivos da Poli reunidos num só lugar.", veja: "extensoes" },
-    ],
-  },
-  {
     id: "servicos",
     grupo: "frentes",
     titulo: "Serviços",
     caminho: "servicos/",
-    construcao: true,
     resumo: "Serviços mantidos pelo Grêmio no campus para o dia a dia de quem estuda na Poli.",
     numeros: [
       { valor: "6", rotulo: "idiomas no Poliglota" },
@@ -173,6 +155,20 @@ export const ramificacoes = [
           { id: "festas-e-viagens", titulo: "Eventos", texto: "Próximas festas e viagens, contato para compra, aviso de novos lotes e as novidades de cada evento." },
           { id: "esportes", titulo: "Esportes", texto: "O espaço da AAAP: jogos da rodada, resultados do fim de semana e links para assistir." },
           { id: "exposicao-cultural", titulo: "Cultura", texto: "Exposição livre de arte: grupos de teatro, dança e música, e a arte de cada aluno." },
+        ],
+      },
+      {
+        id: "eventos-e-memorias",
+        titulo: "Eventos e memórias",
+        caminho: "aluno/eventos-e-memorias/",
+        estado: "no-ar",
+        resumo: "A Semana de Recepção, as festas e a Feira de Extensão, e o mural com as memórias que a Poli guarda desde 1903.",
+        chamada: "Ver eventos e memórias",
+        filhos: [
+          { id: "recepcao", titulo: "Semana de Recepção", texto: "Integração dos calouros à vida universitária e à comunidade politécnica." },
+          { id: "festas", titulo: "Festas e confraternizações", texto: "Encontros que aproximam turmas e cursos.", veja: "meu-amor" },
+          { id: "feira-de-extensoes", titulo: "Feira de Extensão", texto: "Duas vezes por ano, os grupos de extensão e coletivos da Poli reunidos num só lugar.", veja: "extensoes" },
+          { id: "mural", titulo: "Mural de memórias", texto: "Fotos e momentos da Poli, enviados pelos alunos." },
         ],
       },
       {

@@ -83,3 +83,27 @@
 .passos li + li { margin-top: 6px; }
 .passos code { font-size: .88em; background: var(--painel); padding: 1px 6px; border-radius: 4px; }
 .ok-msg { color: var(--aberto); font-weight: 700; }
+
+/* saldo acumulado x dívida, com o ajuste de curva num canto de papel quadriculado */
+.acumulado { position: relative; margin: 16px 0 0; padding: 16px 16px 10px; border: var(--borda); border-radius: var(--raio); background: var(--papel); }
+.acumulado svg { display: block; width: 100%; height: 280px; }
+.acumulado .barra-s { fill: var(--azul); }
+.acumulado .barra-s.neg { fill: var(--vermelho); opacity: .75; }
+.acumulado .linha-divida { stroke: var(--vermelho); stroke-width: 3; stroke-dasharray: 10 6; }
+.acumulado .rot-divida { font: 800 12px var(--fonte); fill: var(--vermelho); }
+.acumulado .curva-ajuste { fill: none; stroke: var(--tinta); stroke-width: 2.5; stroke-dasharray: 5 5; }
+.acumulado .rot { font: 600 11px var(--fonte); fill: var(--tinta-suave); }
+.acumulado .zero { stroke: var(--tinta); stroke-width: 1.5; }
+.lg--saldo-barra { background: var(--azul); }
+.lg--divida { background: var(--vermelho); height: 4px; }
+.lg--ajuste { background: repeating-linear-gradient(90deg, var(--tinta) 0 4px, transparent 4px 7px); height: 3px; }
+.ajuste {
+  position: absolute; top: 18px; left: 22px; max-width: min(360px, 70%); padding: 10px 12px;
+  border: 1.5px solid #9bb3d8; border-radius: 4px; color: #1d2a5c; font-size: .82rem; line-height: 1.4;
+  background: #f7fbff linear-gradient(#dbe7f7 1px, transparent 1px) 0 0 / 12px 12px, linear-gradient(90deg, #dbe7f7 1px, transparent 1px) 0 0 / 12px 12px;
+  box-shadow: 2px 3px 0 rgba(18, 23, 53, .12); transform: rotate(-.6deg);
+}
+.ajuste__titulo { display: block; font: 700 1.05rem "Caveat", "Comic Sans MS", cursive; color: var(--azul); }
+.ajuste__formula { display: block; margin: 4px 0; font: italic 600 1rem/1.35 "Cambria Math", Cambria, Georgia, serif; color: var(--tinta); overflow-wrap: anywhere; }
+.ajuste small { display: block; color: #4a5a8a; }
+@container (max-width: 640px) { .ajuste { position: static; max-width: none; margin-top: 10px; transform: none; } }

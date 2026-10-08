@@ -71,7 +71,7 @@ export function arvoreDaArea(contexto, id) {
       <strong>${no.titulo}</strong><span>Página de entrada</span>
     </a>
     ${filhos.length
-      ? `<div class="indice__grupo"><p class="indice__titulo">Nesta área</p>${ramo(contexto, filhos, [...ancestrais, no], true)}</div>`
+      ? `<div class="indice__grupo"><p class="indice__titulo">Nesta área</p>${ramo(contexto, filhos, [...ancestrais, no])}</div>`
       : `<p class="indice__titulo">As páginas desta área aparecem aqui conforme forem criadas.</p>`}
     <p class="indice__voltar"><a href="${url("./")}">Voltar ao início do site</a></p>`;
 }

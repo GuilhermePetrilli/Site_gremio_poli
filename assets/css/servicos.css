@@ -1,0 +1,50 @@
+/* Serviços (servicos/): cartões com as logos vetoriais e o mapa da Poli com zoom. */
+
+.serv-topo { padding-bottom: 28px; border-bottom: var(--borda); }
+.serv-topo h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); }
+
+/* cartões: logo grande à esquerda, texto à direita, como uma vitrine */
+.serv-cartoes { display: grid; gap: 16px; margin-top: 28px; }
+.serv { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 20px 28px; align-items: center; padding: 22px; background: var(--papel); border: var(--borda); border-radius: var(--raio); scroll-margin-top: calc(var(--altura-cabecalho) + 24px); }
+.serv:target { box-shadow: 0 6px 0 var(--sol); }
+@container (max-width: 620px) { .serv { grid-template-columns: 1fr; } }
+.serv__logo { display: grid; place-items: center; aspect-ratio: 1; padding: 18px; border-radius: var(--raio-pequeno); background: var(--fundo); border: 2px solid var(--linha); }
+.serv__logo img { width: 100%; height: 100%; object-fit: contain; }
+@container (max-width: 620px) { .serv__logo { aspect-ratio: auto; height: 170px; } }
+.serv__frase { font: italic 700 1rem var(--fonte); color: var(--azul); }
+.serv h2 { margin-top: 4px; font-size: clamp(1.5rem, 3vw, 2rem); }
+.serv__texto > p:not(.serv__frase):not(.serv__onde) { margin-top: 8px; color: var(--tinta-suave); max-width: 60ch; }
+.serv .fichas { margin-top: 14px; }
+.serv__onde { margin-top: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; }
+.serv__onde::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--azul); }
+.serv__onde--pendente { color: var(--tinta-suave); font-weight: 600; }
+.serv__onde--pendente::before { background: transparent; border: 2px dashed var(--tinta-suave); }
+.serv .botao { margin-top: 12px; margin-left: 10px; }
+
+/* mapa */
+.serv-mapa { margin-top: clamp(40px, 6vw, 64px); }
+.serv-mapa h2 { font-size: clamp(1.6rem, 3.6vw, 2.3rem); }
+.serv-mapa__intro { margin-top: 8px; color: var(--tinta-suave); max-width: 62ch; }
+.mapa-serv { position: relative; margin-top: 16px; aspect-ratio: 16 / 9; max-height: 70vh; border: var(--borda); border-radius: var(--raio); overflow: hidden; background: #fbfcfe; touch-action: none; cursor: grab; user-select: none; }
+.mapa-serv.arrastando { cursor: grabbing; }
+@container (max-width: 620px) { .mapa-serv { aspect-ratio: 1 / 1.05; } }
+.mapa-serv__svg { display: block; width: 100%; height: 100%; }
+.mapa-serv__zoom { position: absolute; right: 10px; top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.mapa-serv__zoom button { width: 40px; height: 40px; border-radius: var(--raio-pequeno); border: var(--borda); background: var(--papel); font: 700 1.2rem var(--fonte); color: var(--tinta); cursor: pointer; }
+.mapa-serv__zoom button.txt { font-size: .7rem; }
+.mapa-serv__dica { position: absolute; left: 10px; bottom: 10px; margin: 0; padding: 4px 12px; border-radius: 999px; background: var(--tinta); color: #fff; font: 700 .8rem var(--fonte); pointer-events: none; }
+.ms-chao { fill: #fbfcfe; } .ms-agua { fill: #d3e6f0; } .ms-raia { fill: #a3c9da; }
+.ms-campus { fill: #eef1f8; stroke: var(--tinta); stroke-width: 1.5; stroke-dasharray: 6 5; fill-rule: evenodd; }
+.ms-livre { fill: #e2e7f2; }
+.ms-poli { fill: #dfe4fb; stroke: var(--azul); stroke-width: 2.5; stroke-linejoin: round; }
+.ms-rua { fill: #fff; stroke: #d3d8e6; stroke-width: .6; }
+.ms-predio { fill: rgba(18, 23, 53, .2); }
+.ms-predio-poli { fill: var(--azul); fill-opacity: .45; }
+.ms-rot { font-family: var(--fonte-titulo); font-weight: 700; paint-order: stroke; stroke: #fbfcfe; stroke-width: 4px; }
+.ms-rot--poli { fill: var(--azul); letter-spacing: .1em; }
+.ms-rot--agua { fill: var(--tinta); opacity: .55; font-style: italic; font-family: var(--fonte); }
+.ms-marca { cursor: pointer; }
+.ms-pino { fill: #fff; stroke: var(--tinta); stroke-width: 3; }
+.ms-marca:hover .ms-pino, .ms-marca:focus .ms-pino { fill: var(--sol); }
+.ms-nome { font: 800 15px var(--fonte-titulo); fill: var(--tinta); paint-order: stroke; stroke: #fbfcfe; stroke-width: 4px; }
+.ms-onde { font: 600 12px var(--fonte); fill: var(--tinta-suave); paint-order: stroke; stroke: #fbfcfe; stroke-width: 4px; }

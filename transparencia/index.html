@@ -9,13 +9,14 @@
   <link rel="icon" href="../assets/img/marca/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610072231">
-  <link rel="stylesheet" href="../assets/css/base.css?v=202610072231">
-  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610072231">
-  <link rel="stylesheet" href="../assets/css/portal.css?v=202610072231">
-  <link rel="stylesheet" href="../assets/css/transparencia.css?v=202610072231">
-  <script type="module" src="../assets/js/site.js?v=202610072231"></script>
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610072323">
+  <link rel="stylesheet" href="../assets/css/base.css?v=202610072323">
+  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610072323">
+  <link rel="stylesheet" href="../assets/css/portal.css?v=202610072323">
+  <link rel="stylesheet" href="../assets/css/transparencia.css?v=202610072323">
+  <script type="module" src="../assets/js/site.js?v=202610072323"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -61,6 +62,17 @@
         <figure class="meses">
           <svg id="grafMeses" role="img" aria-label="Receitas, despesas e saldo por mês"></svg>
           <figcaption class="legenda-contas"><span><i class="lg lg--receita"></i>Receitas</span><span><i class="lg lg--despesa"></i>Despesas</span><span><i class="lg lg--saldo"></i>Saldo</span></figcaption>
+        </figure>
+      </section>
+
+      <!-- Dívida x saldo acumulado, com a curva ajustada -->
+      <section class="bloco-portal" aria-labelledby="acum-titulo">
+        <h2 id="acum-titulo">Saldo acumulado contra a dívida</h2>
+        <p class="bloco-portal__intro">As barras mostram o saldo no fim de cada mês; a linha vermelha, o valor da dívida. A curva tracejada é a função contínua que melhor descreve o saldo até aqui.</p>
+        <figure class="acumulado">
+          <svg id="grafAcum" role="img" aria-label="Saldo acumulado por mês comparado à dívida"></svg>
+          <aside class="ajuste" id="ajuste" aria-live="polite"></aside>
+          <figcaption class="legenda-contas"><span><i class="lg lg--saldo-barra"></i>Saldo no fim do mês</span><span><i class="lg lg--divida"></i>Dívida</span><span><i class="lg lg--ajuste"></i>Curva ajustada</span></figcaption>
         </figure>
       </section>
 

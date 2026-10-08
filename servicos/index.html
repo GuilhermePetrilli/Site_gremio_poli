@@ -10,10 +10,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610072231">
-  <link rel="stylesheet" href="../assets/css/base.css?v=202610072231">
-  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610072231">
-  <script type="module" src="../assets/js/site.js?v=202610072231"></script>
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610072323">
+  <link rel="stylesheet" href="../assets/css/base.css?v=202610072323">
+  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610072323">
+  <link rel="stylesheet" href="../assets/css/servicos.css?v=202610072323">
+  <script type="module" src="../assets/js/site.js?v=202610072323"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -21,11 +22,53 @@
 
   <div class="container leiaute leiaute--pagina">
     <div data-componente="indice" data-modo="lateral"></div>
-    <main id="conteudo" class="leiaute__principal">
-      <!-- Conteúdo montado a partir do registro (assets/js/ramificacoes.js, id "servicos").
-           Para escrever esta página à mão, troque o div abaixo pelo HTML da página e use
-           <div data-componente="trilha" data-id="servicos"></div> para manter a trilha. -->
-      <div data-componente="pagina" data-id="servicos"></div>
+    <main id="conteudo" class="leiaute__principal servicos">
+      <div data-componente="trilha" data-id="servicos"></div>
+
+      <header class="serv-topo">
+        <h1>Serviços</h1>
+        <p class="pagina__resumo">Os empreendimentos do Grêmio no campus: a cópia da véspera, o lanche entre uma aula e outra e o idioma do intercâmbio. Tudo feito por alunos, para alunos.</p>
+      </header>
+
+      <section class="serv-cartoes" aria-label="Empreendimentos do Grêmio">
+        <article class="serv" id="copiadora">
+          <div class="serv__logo"><img src="../assets/img/servicos/copiadora.svg" alt="Logo da Copiadora Politécnica" width="240" height="210"></div>
+          <div class="serv__texto">
+            <p class="serv__frase">A salvação da véspera.</p>
+            <h2>Copiadora Politécnica</h2>
+            <p>Plano de cotas com preços mais acessíveis durante toda a graduação, itens de conveniência e impressão de material de divulgação.</p>
+            <p class="serv__onde serv__onde--pendente">Local no mapa a confirmar</p>
+          </div>
+        </article>
+        <article class="serv" id="triedro">
+          <div class="serv__logo"><img src="../assets/img/servicos/triedro.svg" alt="Logo da Lanchonete Triedro" width="160" height="210"></div>
+          <div class="serv__texto">
+            <p class="serv__frase">Entre uma aula e outra.</p>
+            <h2>Lanchonete Triedro</h2>
+            <p>Refeições a preços acessíveis para quem não tem tempo de ir até o bandejão.</p>
+            <p class="serv__onde">No prédio do Biênio</p>
+            <button type="button" class="botao botao--linha botao--pequeno" data-ver-no-mapa="triedro">Ver no mapa</button>
+          </div>
+        </article>
+        <article class="serv" id="poliglota">
+          <div class="serv__logo"><img src="../assets/img/servicos/poliglota.svg" alt="Logo do Poliglota Idiomas" width="210" height="210"></div>
+          <div class="serv__texto">
+            <p class="serv__frase">O idioma do seu intercâmbio começa aqui.</p>
+            <h2>Poliglota Idiomas</h2>
+            <p>Há mais de 30 anos ensinando alemão, espanhol, francês, inglês, italiano e português, com bolsas integrais para alunos da Poli.</p>
+            <dl class="fichas"><div class="ficha"><dt>6</dt><dd>idiomas</dd></div><div class="ficha"><dt>30+</dt><dd>anos</dd></div><div class="ficha"><dt>900+</dt><dd>bolsas integrais</dd></div></dl>
+            <p class="serv__onde serv__onde--pendente">Local no mapa a confirmar</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="bloco-portal serv-mapa" aria-labelledby="mapa-titulo">
+        <h2 id="mapa-titulo">Tudo pertinho, na Poli</h2>
+        <p class="serv-mapa__intro">Aproxime, arraste e toque num ponto para ir até o serviço. O mapa é o mesmo do guia dos bandejões e vai ganhar novos pontos com o tempo.</p>
+        <div class="mapa-serv" id="mapaServ"></div>
+      </section>
+
+      <div data-componente="mapa-servicos"></div>
     </main>
   </div>
 
