@@ -3,130 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Eventos e memórias | Grêmio Politécnico da USP</title>
-  <meta name="description" content="A Semana de Recepção, as festas e a Feira de Extensão, e o mural com as memórias que a Poli guarda desde 1903.">
-  <meta name="theme-color" content="#fbfbfe">
-  <link rel="icon" href="../../assets/img/marca/favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap">
-  <link rel="stylesheet" href="../../assets/css/tokens.css?v=202610080835">
-  <link rel="stylesheet" href="../../assets/css/base.css?v=202610080835">
-  <link rel="stylesheet" href="../../assets/css/componentes.css?v=202610080835">
-  <link rel="stylesheet" href="../../assets/css/portal.css?v=202610080835">
-  <link rel="stylesheet" href="../../assets/css/memorias.css?v=202610080835">
-  <script type="module" src="../../assets/js/site.js?v=202610080835"></script>
+  <title>Meu Amor | Grêmio Politécnico da USP</title>
+  <meta name="robots" content="noindex">
+  <!-- Endereço antigo: "Eventos e memórias" agora faz parte de Meu Amor, na Área do aluno.
+       Este arquivo só redireciona, mantendo a âncora (ex.: aluno/eventos-e-memorias/#mural vai para aluno/meu-amor/#mural). -->
+  <meta http-equiv="refresh" content="0; url=../meu-amor/">
+  <link rel="canonical" href="../meu-amor/">
+  <script>location.replace("../meu-amor/" + location.hash);</script>
 </head>
 <body>
-  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
-  <div data-componente="cabecalho"></div>
-
-  <div class="container leiaute leiaute--pagina">
-    <div data-componente="indice" data-modo="lateral" data-raiz="aluno"></div>
-    <main id="conteudo" class="leiaute__principal portal memorias">
-      <div data-componente="trilha" data-id="eventos-e-memorias"></div>
-
-      <section class="abertura abertura--sol" aria-labelledby="ev-titulo">
-        <h1 id="ev-titulo">Eventos e memórias</h1>
-        <p class="abertura__lead">Da primeira semana como bixo à última festa antes da formatura: os eventos do Grêmio e as memórias que a Poli guarda desde 1903.</p>
-        <nav class="pagina__atalhos" aria-label="Nesta página"><a class="chip" href="#recepcao">Semana de Recepção</a><a class="chip" href="#festas">Festas</a><a class="chip" href="#feira-de-extensoes">Feira de Extensão</a><a class="chip" href="#mural">Mural de memórias</a></nav>
-      </section>
-
-      <!-- Eventos do Grêmio -->
-      <section class="bloco-portal" aria-labelledby="ev-eventos">
-        <h2 id="ev-eventos">Os eventos do Grêmio</h2>
-        <div class="eventos">
-          <article class="evento" id="recepcao">
-            <span class="evento__quando">Todo começo de ano</span>
-            <h3>Semana de Recepção</h3>
-            <p>A chegada dos calouros à Poli: integração, apresentação do campus, dos grupos e de tudo o que o Grêmio faz. Em 2027, é nela que o portal do Novo Grêmio estreia.</p>
-          </article>
-          <article class="evento" id="festas">
-            <span class="evento__quando">Ao longo do ano</span>
-            <h3>Festas e confraternizações</h3>
-            <p>Encontros que aproximam turmas e cursos. Datas, lotes e novidades ficam em Meu Amor.</p>
-            <a class="veja" href="../meu-amor/#festas-e-viagens">Ver também: Meu Amor</a>
-          </article>
-          <article class="evento" id="feira-de-extensoes">
-            <span class="evento__quando">Duas vezes por ano</span>
-            <h3>Feira de Extensão</h3>
-            <p>Os grupos de extensão e coletivos da Poli reunidos num só lugar. Na de 2026, foram mais de 50 grupos e 400 alunos.</p>
-            <dl class="fichas"><div class="ficha"><dt>50+</dt><dd>grupos</dd></div><div class="ficha"><dt>400+</dt><dd>alunos</dd></div></dl>
-            <a class="veja" href="../extensoes/">Ver também: Extensões</a>
-          </article>
-        </div>
-        <p class="nota">As datas dos próximos eventos entram aqui assim que forem anunciadas.</p>
-      </section>
-
-      <!-- Mural de memórias -->
-      <section class="bloco-portal" id="mural" aria-labelledby="ev-mural">
-        <h2 id="ev-mural">Mural de memórias</h2>
-        <p class="bloco-portal__intro">Mais de um século de Poli, um retrato de cada vez. O mural cresce com as fotos que vocês mandarem.</p>
-        <div class="carrossel" data-carrossel aria-roledescription="carrossel" aria-label="Fotos do Mural de memórias">
-        <button type="button" class="carrossel__seta carrossel__seta--ant" data-passo="-1" aria-label="Foto anterior"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <ul class="carrossel__trilho" tabindex="0" aria-label="Fotos do mural; use as setas do teclado para passar">
-          <li class="slide slide--foto slide--inteira">
-            <img src="../../assets/img/historia/gremio-antigo.jpg" alt="Ilustração antiga do prédio do Grêmio Politécnico" width="900" height="900" loading="lazy">
-            <p class="slide__legenda">a sede do Grêmio, num desenho antigo</p>
-          </li>
-          <li class="slide">
-            <div class="slide__corpo"><b>1903</b><span>Estudantes da Poli fundam o Grêmio, em 1º de setembro. Hoje, a segunda entidade estudantil mais antiga do Brasil.</span></div>
-            <p class="slide__legenda">onde tudo começou</p>
-          </li>
-          <li class="slide slide--jornal">
-            <div class="slide__corpo"><b>1944</b><span>Sai a primeira edição de O Politécnico, escrito por alunos.</span></div>
-            <p class="slide__legenda">82 anos de jornal</p>
-          </li>
-          <li class="slide">
-            <div class="slide__corpo"><b>1989</b><span>Acontece a primeira Semana de Arte da Poli, a SAPO.</span></div>
-            <p class="slide__legenda">arte na Poli? sim!</p>
-          </li>
-          <li class="slide slide--azul">
-            <div class="slide__corpo"><b>2026</b><span>A Feira de Extensão reúne mais de 50 grupos e 400 alunos.</span></div>
-            <p class="slide__legenda">casa cheia</p>
-          </li>
-          <li class="slide slide--sol">
-            <div class="slide__corpo"><b>2027</b><span>Os bixos chegam e o portal do Novo Grêmio está pronto para eles.</span></div>
-            <p class="slide__legenda">o próximo capítulo</p>
-          </li>
-        </ul>
-        <button type="button" class="carrossel__seta carrossel__seta--prox" data-passo="1" aria-label="Próxima foto"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
-        <div class="carrossel__pontos"></div>
-        </div>
-        <div data-componente="carrossel"></div>
-      </section>
-
-      <!-- Mandar uma foto: vai por e-mail para o Grêmio (FormSubmit, porque o site é estático) -->
-      <section class="bloco-portal envio-foto" id="mande-sua-foto" aria-labelledby="ev-foto">
-        <form class="envio-foto__form" id="formFoto" action="https://formsubmit.co/guilhermepetrilli@gmail.com" method="POST" enctype="multipart/form-data">
-          <label class="polaroide polaroide--vazia" for="fotoArquivo">
-            <span class="polaroide__janela" id="fotoJanela"><span>Toque para escolher uma foto</span></span>
-            <span class="polaroide__legenda" id="fotoLegendaPrevia">sua legenda aqui</span>
-          </label>
-          <div class="envio-foto__campos">
-            <h2 id="ev-foto">Mande uma foto para o mural</h2>
-            <p class="bloco-portal__intro">Festa, Recepção, campeonato, a turma na sala: escolha a foto, escreva uma legenda e ela chega por e-mail à gestão do site, que monta o mural.</p>
-            <input type="file" id="fotoArquivo" name="foto" accept="image/*" required class="sr">
-            <div class="campo"><label for="fotoLegenda">Legenda</label><input type="text" id="fotoLegenda" name="legenda" maxlength="80" placeholder="Ex.: Recepção de 2027, primeiro dia" required></div>
-            <div class="dupla">
-              <div class="campo"><label for="fotoNome">Seu nome (opcional)</label><input type="text" id="fotoNome" name="nome" autocomplete="name"></div>
-              <div class="campo"><label for="fotoEmail">Seu e-mail (opcional)</label><input type="email" id="fotoEmail" name="email" autocomplete="email"></div>
-            </div>
-            <input type="hidden" name="_subject" value="Foto para o Mural de memórias">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_next" id="fotoVolta" value="">
-            <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="sr" aria-hidden="true">
-            <p class="formulario__erro" id="fotoErro" role="alert" hidden></p>
-            <p class="ok-foto" id="fotoOk" role="status" hidden>Foto enviada! Obrigado: ela chega ao Grêmio e pode entrar no próximo mural.</p>
-            <div class="formulario__fim"><button class="botao" type="submit">Enviar para o Grêmio</button><p class="nota">Fotos de até 5 MB. Ao enviar, você autoriza o Grêmio a publicar a foto no mural.</p></div>
-          </div>
-        </form>
-      </section>
-      <div data-componente="foto-mural"></div>
-    </main>
-  </div>
-
-  <div data-componente="rodape"></div>
+  <p>Esta página mudou de endereço: <a href="../meu-amor/">Meu Amor, na Área do aluno</a>.</p>
 </body>
 </html>

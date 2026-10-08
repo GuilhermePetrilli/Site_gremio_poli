@@ -1,4 +1,4 @@
-// Carrossel de fotos (Mural de memórias, em aluno/eventos-e-memorias/): polaroides numa faixa
+// Carrossel de fotos (Mural de memórias, em aluno/meu-amor/): polaroides numa faixa
 // que desliza, com a da vez no centro, setas, pontinhos, arrastar no celular e as setas do teclado.
 // Passa sozinho a cada 5 segundos enquanto está na tela, e para quando a pessoa passa o mouse,
 // toca, usa o teclado ou pede menos movimento no sistema.

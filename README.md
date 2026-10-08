@@ -21,7 +21,7 @@ projetos/, eventos/, …     uma pasta por ramificação, gerada por ferramentas
 aluno/                     Área do aluno: o portal aberto do Novo Grêmio (páginas escritas à mão)
   fuja-do-nabo/            hub de estudos
   extensoes/               hub dos grupos de extensão
-  meu-amor/                eventos, esportes e cultura
+  meu-amor/                eventos, esportes, cultura e o mural de memórias
   jornal/                  Jornal O Politécnico (estética de papel-jornal, assets/css/jornal.css)
   minerva/                 grandes anúncios e Aulas Magnas
   bandejoes/               guia dos bandejões: cardápio do dia, mapa e caminho a pé
@@ -94,7 +94,7 @@ Quando o site deixar de ser de uma pessoa e passar a ser do Grêmio, transfira t
 
 1. **Repositório**: transfira o repositório no GitHub para uma conta ou organização do Grêmio (Settings > Danger Zone > Transfer). Os agendamentos de cardápio e salas vão junto.
 2. **Supabase (contas da Transparência)**: convide uma conta do Grêmio para o projeto (Organization > Members, como Owner) ou transfira o projeto para uma organização do Grêmio. Atualize a lista `administradores` com os e-mails da nova gestão e confira em Authentication > URL Configuration o Site URL e os Redirect URLs, se o endereço do site mudar.
-3. **FormSubmit (fotos do mural)**: hoje os envios vão para o e-mail pessoal do administrador do site. Troque pelo e-mail do Grêmio no action do formulário de `aluno/eventos-e-memorias/` e confirme o novo e-mail no primeiro envio.
+3. **FormSubmit (fotos do mural)**: hoje os envios vão para o e-mail pessoal do administrador do site. Troque pelo e-mail do Grêmio no action do formulário de `aluno/meu-amor/` e confirme o novo e-mail no primeiro envio.
 4. **Domínio próprio**: se entrar um domínio, atualize o Site URL no Supabase e o endereço de retorno do formulário (é calculado sozinho pela página).
 
 ## Versão dos arquivos (cache)

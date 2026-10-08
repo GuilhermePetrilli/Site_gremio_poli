@@ -1,4 +1,4 @@
-// Mandar uma foto para o Mural de memórias (aluno/eventos-e-memorias/).
+// Mandar uma foto para o Mural de memórias (aluno/meu-amor/).
 // Mostra a foto escolhida dentro da polaroide, confere o tamanho e envia o formulário ao
 // FormSubmit, que repassa a foto por e-mail ao administrador do site (o site é estático, sem servidor).
 // O endereço de destino fica no action do formulário, na página.

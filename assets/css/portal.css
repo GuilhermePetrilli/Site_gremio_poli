@@ -85,6 +85,8 @@
 .amor__secao ul { margin: 0; padding-left: 18px; }
 .amor__secao li + li { margin-top: 6px; }
 .amor__secao .acoes { margin-top: 16px; }
+.amor__secao--eventos .eventos, .amor__secao--eventos > .nota { grid-column: 1 / -1; margin-top: 0; }
+.amor__secao--eventos .evento { background: var(--fundo); }
 @container (max-width: 680px) { .amor__secao { grid-template-columns: 1fr; } }
 
 /* Minerva: calendário das Aulas Magnas */
