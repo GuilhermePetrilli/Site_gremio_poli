@@ -1,6 +1,7 @@
 // Mandar uma foto para o Mural de memórias (aluno/eventos-e-memorias/).
 // Mostra a foto escolhida dentro da polaroide, confere o tamanho e envia o formulário ao
-// FormSubmit, que repassa a foto por e-mail ao Grêmio (o site é estático, sem servidor).
+// FormSubmit, que repassa a foto por e-mail ao administrador do site (o site é estático, sem servidor).
+// O endereço de destino fica no action do formulário, na página.
 // Uso: <form id="formFoto"> da página e <div data-componente="foto-mural"></div>.
 
 const LIMITE = 5 * 1024 * 1024;

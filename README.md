@@ -92,7 +92,7 @@ Quando o site deixar de ser de uma pessoa e passar a ser do Grêmio, transfira t
 
 1. **Repositório**: transfira o repositório no GitHub para uma conta ou organização do Grêmio (Settings > Danger Zone > Transfer). Os agendamentos de cardápio e salas vão junto.
 2. **Supabase (contas da Transparência)**: convide uma conta do Grêmio para o projeto (Organization > Members, como Owner) ou transfira o projeto para uma organização do Grêmio. Atualize a lista `administradores` com os e-mails da nova gestão e confira em Authentication > URL Configuration o Site URL e os Redirect URLs, se o endereço do site mudar.
-3. **FormSubmit (fotos do mural)**: os envios vão para administrativo@gremiopolitecnico.com.br. Se o e-mail mudar, troque o endereço no formulário de `aluno/eventos-e-memorias/` e confirme o novo e-mail no primeiro envio.
+3. **FormSubmit (fotos do mural)**: hoje os envios vão para o e-mail pessoal do administrador do site. Troque pelo e-mail do Grêmio no action do formulário de `aluno/eventos-e-memorias/` e confirme o novo e-mail no primeiro envio.
 4. **Domínio próprio**: se entrar um domínio, atualize o Site URL no Supabase e o endereço de retorno do formulário (é calculado sozinho pela página).
 
 ## Versão dos arquivos (cache)

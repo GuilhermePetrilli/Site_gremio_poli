@@ -106,7 +106,7 @@
 .campo > label, .campo > legend { font-weight: 800; padding: 0; }
 .campo fieldset, fieldset.campo { border: 0; margin: 0; padding: 0; min-width: 0; }
 .campo .ajuda { font-size: var(--t-pequeno); color: var(--tinta-suave); }
-.campo input[type="text"], .campo input[type="email"], .campo select, .campo textarea {
+.campo input[type="text"], .campo input[type="email"], .campo input[type="password"], .campo input[type="number"], .campo input[type="date"], .campo select, .campo textarea {
   width: 100%; padding: 11px 13px; border: 2px solid var(--linha); border-radius: var(--raio-pequeno);
   font: 400 1rem var(--fonte); color: var(--tinta); background: var(--fundo);
 }

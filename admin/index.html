@@ -4,17 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Área dos administradores | Grêmio Politécnico da USP</title>
-  <meta name="description" content="O portal interno do Grêmio: as tarefas e os e-mails de cada diretoria numa só tela.">
+  <meta name="description" content="O portal interno do Grêmio: contas, projetos e parcerias lançados pela gestão e publicados na hora.">
   <meta name="theme-color" content="#fbfbfe">
   <link rel="icon" href="../assets/img/marca/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
-  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610072351">
-  <link rel="stylesheet" href="../assets/css/base.css?v=202610072351">
-  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610072351">
-  <link rel="stylesheet" href="../assets/css/portal.css?v=202610072351">
-  <script type="module" src="../assets/js/site.js?v=202610072351"></script>
+  <link rel="stylesheet" href="../assets/css/tokens.css?v=202610080015">
+  <link rel="stylesheet" href="../assets/css/base.css?v=202610080015">
+  <link rel="stylesheet" href="../assets/css/componentes.css?v=202610080015">
+  <link rel="stylesheet" href="../assets/css/portal.css?v=202610080015">
+  <link rel="stylesheet" href="../assets/css/transparencia.css?v=202610080015">
+  <link rel="stylesheet" href="../assets/css/parcerias.css?v=202610080015">
+  <script type="module" src="../assets/js/site.js?v=202610080015"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -27,12 +29,24 @@
 
       <section class="abertura abertura--noite" aria-labelledby="admin-titulo">
         <h1 id="admin-titulo">Área dos administradores</h1>
-        <p class="abertura__lead">O portal interno do Grêmio, onde diretores e trainees fazem o trabalho acontecer.</p>
-        <div class="abertura__estado"><span class="pill pill--breve">Em construção</span><span>Acesso restrito à gestão do Grêmio. Entra no ar junto com o portal aberto.</span></div>
+        <p class="abertura__lead">O portal interno do Grêmio. O que a gestão lança aqui vai a público na hora, nas páginas Transparência e Parcerias.</p>
+        <div class="abertura__estado"><span class="pill pill--aberto">No ar</span><span>Acesso restrito a quem está na lista de administradores. Entre com o seu e-mail e a sua senha.</span></div>
+      </section>
+
+      <section class="bloco-portal" id="contas" aria-labelledby="admin-contas">
+        <h2 id="admin-contas">Contas do Grêmio</h2>
+        <p class="bloco-portal__intro">Lance cada receita e despesa do Grêmio. Ela aparece na hora na <a href="../transparencia/">Transparência</a>, com o saldo atualizado.</p>
+        <div class="painel-contas" id="painelContas"><p class="nota">Carregando…</p></div>
+      </section>
+
+      <section class="bloco-portal" id="projetos" aria-labelledby="admin-projetos">
+        <h2 id="admin-projetos">Projetos e parcerias</h2>
+        <p class="bloco-portal__intro">Lance os projetos com grupos de extensão e com empresas: início, término previsto e o que cada um busca atingir. Depois, publique as atualizações do andamento. Tudo aparece em <a href="../parcerias/">Parcerias</a>.</p>
+        <div class="painel-contas" id="painelProjetos"><p class="nota">Carregando…</p></div>
       </section>
 
       <section class="bloco-portal" aria-labelledby="admin-tela">
-        <h2 id="admin-tela">Uma tela para o trabalho de cada diretor</h2>
+        <h2 id="admin-tela">Em breve: uma tela para o trabalho de cada diretor <span class="pill pill--breve">Em construção</span></h2>
         <p class="bloco-portal__intro">Cada diretor vai encontrar as suas tarefas e os seus e-mails na tela principal, e concluir o que é dele.</p>
         <div class="interno__tela" role="img" aria-label="Esboço da tela principal do portal interno, com tarefas e e-mails">
           <div class="interno__barra"><i></i><i></i><i></i><span>Portal interno, tela do diretor</span></div>
@@ -41,12 +55,6 @@
             <div><h3>E-mails</h3><p>As mensagens que chegam para a sua diretoria, inclusive as demandas enviadas pelos alunos.</p></div>
           </div>
         </div>
-      </section>
-
-      <section class="bloco-portal" id="contas" aria-labelledby="admin-contas">
-        <h2 id="admin-contas">Contas do Grêmio</h2>
-        <p class="bloco-portal__intro">Lance aqui cada receita e despesa do Grêmio. Ela aparece na hora na página Transparência, com o saldo atualizado.</p>
-        <div class="painel-contas" id="painelContas"><p class="nota">Carregando…</p></div>
       </section>
 
       <section class="bloco-portal duas" aria-label="Princípios do portal interno">

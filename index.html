@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Grêmio Politécnico da USP</title>
-  <meta name="description" content="Grêmio Politécnico da USP: representação discente, apoio ao aluno, projetos culturais e sociais, eventos e serviços para os alunos da Escola Politécnica desde 1903.">
+  <meta name="description" content="Grêmio Politécnico da USP: desde 1903 a entidade dos alunos da Escola Politécnica. Projetos sociais, serviços, representação, parcerias e contas abertas.">
   <meta name="theme-color" content="#fbfbfe">
   <link rel="icon" href="assets/img/marca/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
-  <link rel="stylesheet" href="assets/css/tokens.css?v=202610072351">
-  <link rel="stylesheet" href="assets/css/base.css?v=202610072351">
-  <link rel="stylesheet" href="assets/css/componentes.css?v=202610072351">
-  <script type="module" src="assets/js/site.js?v=202610072351"></script>
+  <link rel="stylesheet" href="assets/css/tokens.css?v=202610080015">
+  <link rel="stylesheet" href="assets/css/base.css?v=202610080015">
+  <link rel="stylesheet" href="assets/css/componentes.css?v=202610080015">
+  <script type="module" src="assets/js/site.js?v=202610080015"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -21,83 +21,88 @@
 
   <main id="conteudo">
 
-    <!-- Início: a pergunta e os atalhos mais procurados -->
-    <section class="inicio">
+    <!-- Abertura institucional: quem somos e as duas portas (alunos / empresas e instituições) -->
+    <section class="inicio inicio--instituicao" aria-labelledby="inicio-titulo">
       <div class="container">
-        <h1>Do que você precisa hoje?</h1>
-        <p class="inicio__intro">O Grêmio Politécnico é a entidade dos alunos da Poli desde 1903. Representação, apoio, cultura, projetos sociais e serviços, tudo começa por aqui.</p>
+        <p class="inicio__selo">Grêmio Politécnico da USP · desde 1903</p>
+        <h1 id="inicio-titulo">A entidade dos alunos da Poli, de volta ao que ela pode ser.</h1>
+        <p class="inicio__intro">O Grêmio Politécnico representa os alunos da Escola Politécnica da USP, mantém projetos sociais e serviços que fazem parte da vida na Poli, e está trabalhando para voltar a ser uma instituição funcional, transparente e próxima de quem estuda aqui.</p>
+
+        <div class="portas">
+          <article class="porta porta--aluno">
+            <p class="porta__para">Sou aluno da Poli</p>
+            <h2>Tudo o que você precisa está no Portal do aluno.</h2>
+            <p>Cardápio do bandejão, salas livres, estudos, eventos, demandas e muito mais, num só lugar.</p>
+            <a class="botao botao--grande" href="aluno/">Entrar no Portal do aluno</a>
+            <nav class="porta__atalhos" aria-label="Atalhos do portal">
+              <a href="aluno/bandejoes/">Bandejões</a><a href="aluno/salas/">Salas livres</a><a href="aluno/fuja-do-nabo/">Fuja do Nabo</a><a href="aluno/demandas/">Demandas</a>
+            </nav>
+          </article>
+          <article class="porta porta--parceiro">
+            <p class="porta__para">Empresas e instituições</p>
+            <h2>Conheça o Grêmio e construa algo com a gente.</h2>
+            <p>Projetos sociais, eventos e grupos de extensão que alcançam milhares de alunos, com as contas abertas para todos verem.</p>
+            <div class="acoes">
+              <a class="botao botao--linha" href="parcerias/">Conhecer as parcerias</a>
+              <a class="botao botao--linha" href="transparencia/">Ver as contas do Grêmio</a>
+            </div>
+          </article>
+        </div>
+
         <div class="inicio__navegar">
           <button class="botao--indice" type="button" data-abrir-gaveta aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h13"/></svg>Abrir o índice do site</button>
-          <p>Todas as páginas do Grêmio, da Área do aluno a cada projeto, num só lugar.</p>
-        </div>
-
-        <div class="inicio__grade">
-          <nav class="balcao" aria-label="Atalhos">
-            <a class="balcao__item" href="aluno/fuja-do-nabo/">
-              <span class="balcao__acao">Revisar a matéria antes da prova</span>
-              <span class="balcao__onde">Fuja do Nabo</span>
-              <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a class="balcao__item" href="projetos/#emprestimo">
-              <span class="balcao__acao">Pegar uma calculadora ou jaleco</span>
-              <span class="balcao__onde">Empréstimo de material</span>
-              <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a class="balcao__item" href="servicos/#copiadora">
-              <span class="balcao__acao">Imprimir ou tirar cópias</span>
-              <span class="balcao__onde">Copiadora Politécnica</span>
-              <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a class="balcao__item" href="projetos/#bolsas">
-              <span class="balcao__acao">Estudar um idioma com bolsa</span>
-              <span class="balcao__onde">Poliglota Idiomas</span>
-              <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a class="balcao__item" href="aluno/salas/">
-              <span class="balcao__acao">Achar uma sala livre agora</span>
-              <span class="balcao__onde">Salas da Poli</span>
-              <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a class="balcao__item" href="representacao/">
-              <span class="balcao__acao">Levar uma demanda à Poli</span>
-              <span class="balcao__onde">Representação discente</span>
-              <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a class="balcao__item" href="#contato">
-              <span class="balcao__acao">Tirar uma dúvida</span>
-              <span class="balcao__onde">E-mail, telefone e redes</span>
-              <svg class="balcao__seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-          </nav>
-
-          <div data-componente="agora"></div>
+          <p>Todas as páginas do Grêmio, da representação a cada projeto, num só lugar.</p>
         </div>
       </div>
-      <!-- Horizonte: o sol nasce sobre a faixa azul, que continua na faixa de acesso abaixo. -->
+      <!-- Horizonte: o sol nasce sobre a faixa azul, que continua na faixa de impacto abaixo. -->
       <div class="horizonte" aria-hidden="true"><div class="horizonte__sol"></div><div class="horizonte__faixa2"></div><div class="horizonte__faixa1"></div></div>
     </section>
 
-    <!-- Acessos: área do aluno em destaque e área da gestão -->
-    <section class="faixa-acesso" id="acessos">
-      <div class="container faixa-acesso__grade">
-        <div class="faixa-acesso__texto">
-          <h2>Acesse a sua área</h2>
-          <p>Informações e ferramentas do Grêmio para cada público, num só lugar.</p>
-        </div>
-        <div data-componente="ramificacoes" data-grupo="acessos"></div>
+    <!-- Impacto em números -->
+    <section class="faixa-impacto" aria-labelledby="impacto-titulo">
+      <div class="container">
+        <h2 id="impacto-titulo">O que o Grêmio já faz, dentro e fora da Poli</h2>
+        <dl class="impacto">
+          <div><dt>1903</dt><dd>fundado por alunos; a segunda entidade estudantil mais antiga do Brasil</dd></div>
+          <div><dt>700+</dt><dd>alunos por ano nas aulas de reforço do Fuja do Nabo</dd></div>
+          <div><dt>900+</dt><dd>bolsas integrais de idiomas concedidas no Poliglota</dd></div>
+          <div><dt>1000+</dt><dd>estudantes de escolas públicas alcançados pelo Poli Vai à Escola</dd></div>
+          <div><dt>75</dt><dd>alunas do ensino médio no Meninas na Poli em 2025</dd></div>
+          <div><dt>50+</dt><dd>grupos de extensão reunidos na Feira de Extensão de 2026</dd></div>
+        </dl>
       </div>
     </section>
 
-    <!-- A nova era: o portal aberto do Novo Grêmio (seções vindas do nó "aluno" do registro) -->
-    <section class="bloco bloco--papel nova-era" id="nova-era" aria-labelledby="nova-era-titulo">
-      <div class="container nova-era__grade">
-        <div class="nova-era__texto">
-          <h2 id="nova-era-titulo">A nova era do Grêmio</h2>
-          <p>O Novo Grêmio começa pela digitalização: um portal aberto, para ajudar, integrar e ampliar os horizontes de quem estuda na Poli, e um portal interno, para que as diretorias trabalhem melhor.</p>
-          <p class="nova-era__meta"><span class="pill pill--breve">Semana de Recepção de 2027</span> O portal recebe os calouros e cresce a cada semestre.</p>
-          <a class="botao" href="aluno/">Conhecer o portal</a>
+    <!-- Ações sociais -->
+    <section class="bloco bloco--papel" id="acoes-sociais" aria-labelledby="sociais-titulo">
+      <div class="container">
+        <div class="bloco__topo">
+          <h2 id="sociais-titulo">Ações sociais</h2>
+          <p>A Poli indo até as escolas públicas, abrindo as portas para quem ainda vai chegar e garantindo que dinheiro não seja barreira para aprender.</p>
         </div>
-        <div class="nova-era__secoes" data-componente="recursos" data-id="aluno" data-estilo="portal"></div>
+        <div class="sociais">
+          <article class="social"><h3>Poli Vai à Escola</h3><p>Desde 2023, politécnicos levam a universidade até escolas públicas. Mais de mil estudantes já foram alcançados.</p></article>
+          <article class="social"><h3>Meninas na Poli</h3><p>Alunas do ensino médio de escolas públicas conhecem os laboratórios, as atividades estudantis e a rotina da Escola.</p></article>
+          <article class="social"><h3>Semana da Mulher Politécnica</h3><p>Uma programação dedicada às mulheres da Poli.</p></article>
+          <article class="social"><h3>Bolsas de idiomas</h3><p>Bolsas integrais no Poliglota Idiomas, para que todo aluno possa estudar uma língua.</p></article>
+        </div>
+        <p class="sociais__mais"><a href="projetos/#social">Ver todos os projetos e o apoio ao aluno</a></p>
+      </div>
+    </section>
+
+    <!-- Compromissos do Novo Grêmio -->
+    <section class="bloco bloco--painel" id="compromissos" aria-labelledby="compromissos-titulo">
+      <div class="container">
+        <div class="bloco__topo">
+          <h2 id="compromissos-titulo">Um Grêmio funcional de novo</h2>
+          <p>Mais de um século de história pede um Grêmio à altura. Estes são os compromissos da nova gestão, e cada um já tem lugar neste site.</p>
+        </div>
+        <ol class="compromissos">
+          <li><a href="transparencia/"><b>Contas abertas</b><span>Cada receita e despesa publicada, com o saldo e a dívida à vista de todos.</span></a></li>
+          <li><a href="aluno/"><b>Um portal para os alunos</b><span>Estudos, salas, bandejões, eventos e demandas num só lugar, pronto para a Semana de Recepção de 2027.</span></a></li>
+          <li><a href="parcerias/"><b>Parcerias que fazem diferença</b><span>Projetos com os grupos de extensão e com empresas, cada um com prazo e objetivo publicados.</span></a></li>
+          <li><a href="representacao/"><b>Voz nas decisões</b><span>Representação discente com voz e voto na graduação e na pós-graduação.</span></a></li>
+        </ol>
       </div>
     </section>
 
@@ -111,10 +116,26 @@
         <div class="leiaute__principal">
           <div class="bloco__topo">
             <h2>O que o Grêmio faz</h2>
-            <p>Três frentes de trabalho, com projetos que já fazem parte da vida na Poli. Cada uma tem sua página.</p>
+            <p>As frentes de trabalho do Grêmio, com projetos que já fazem parte da vida na Poli. Cada uma tem sua página.</p>
           </div>
           <div data-componente="ramificacoes" data-grupo="frentes"></div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- Convite para parceiros -->
+    <section class="bloco bloco--papel" aria-labelledby="convite-titulo">
+      <div class="container">
+        <div class="convite">
+          <div>
+            <h2 id="convite-titulo">Sua empresa pode fazer parte</h2>
+            <p>Apoie projetos sociais, a Semana de Recepção, a Feira de Extensão ou as Aulas Magnas. Toda parceria vira um projeto público, com prazo, objetivo e contas abertas.</p>
+          </div>
+          <div class="acoes">
+            <a class="botao" href="mailto:administrativo@gremiopolitecnico.com.br?subject=Proposta%20de%20parceria%20com%20o%20Gr%C3%AAmio%20Polit%C3%A9cnico">Propor uma parceria</a>
+            <a class="botao botao--claro" href="parcerias/">Ver as parcerias</a>
+          </div>
         </div>
       </div>
     </section>

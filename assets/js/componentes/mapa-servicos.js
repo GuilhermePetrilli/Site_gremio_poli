@@ -4,8 +4,8 @@
 // Uso: <div class="mapa-serv" id="mapaServ"></div>, cartões com data-servico, e
 // <div data-componente="mapa-servicos"></div>.
 
-import { L } from "../dados/mapa-campus.js?v=202610072351";
-import { servicos } from "../dados/servicos.js?v=202610072351";
+import { L } from "../dados/mapa-campus.js?v=202610080015";
+import { servicos } from "../dados/servicos.js?v=202610080015";
 
 const NS = "http://www.w3.org/2000/svg";
 const el = (t, a = {}, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
@@ -44,8 +44,9 @@ export default function mapaServicos(_alvo, { url }) {
     const g = fixo(el("g", { class: "ms-marca", tabindex: "0", role: "button", "aria-label": `${s.nome}: ${s.onde || ""}` }, marcas), s.x, s.y);
     el("path", { d: "M0 0 C-6 -10 -26 -18 -26 -40 a26 26 0 0 1 52 0 c0 22 -20 30 -26 40z", class: "ms-pino" }, g);
     el("image", { href: url(s.logo), x: -18, y: -58, width: 36, height: 36 }, g);
-    const t = el("text", { class: "ms-nome", x: 32, y: -36 }, g); t.textContent = s.nome;
-    const t2 = el("text", { class: "ms-onde", x: 32, y: -20 }, g); t2.textContent = s.onde || "";
+    const esq = s.lado === "esquerda", lx = esq ? -32 : 32, ancora = esq ? "end" : "start";
+    const t = el("text", { class: "ms-nome", x: lx, y: -36, "text-anchor": ancora }, g); t.textContent = s.nome;
+    const t2 = el("text", { class: "ms-onde", x: lx, y: -20, "text-anchor": ancora }, g); t2.textContent = s.onde || "";
     const ir = () => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "center" });
     g.addEventListener("click", ir); g.addEventListener("keydown", (e) => { if (e.key === "Enter") ir(); });
   }

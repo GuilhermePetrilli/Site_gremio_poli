@@ -48,3 +48,5 @@
 .ms-marca:hover .ms-pino, .ms-marca:focus .ms-pino { fill: var(--sol); }
 .ms-nome { font: 800 15px var(--fonte-titulo); fill: var(--tinta); paint-order: stroke; stroke: #fbfcfe; stroke-width: 4px; }
 .ms-onde { font: 600 12px var(--fonte); fill: var(--tinta-suave); paint-order: stroke; stroke: #fbfcfe; stroke-width: 4px; }
+.serv__em-breve { display: inline-flex; align-items: baseline; gap: 6px; margin: 12px 0 0 10px; padding: 6px 12px; border-radius: var(--raio); background: var(--sol-claro); border: 1px solid #f1df9a; color: var(--tinta); font: 700 .88rem var(--fonte); cursor: default; }
+.serv__em-breve small { font-weight: 600; color: var(--tinta-suave); }

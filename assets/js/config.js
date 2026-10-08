@@ -3,7 +3,7 @@
 // Os caminhos (href) são relativos à raiz do site, sem barra no início,
 // para funcionar igual em subpasta (github.io/Site_gremio_poli/) ou num domínio próprio.
 
-import { encontrar, destino } from "./ramificacoes.js?v=202610072351";
+import { encontrar, destino } from "./ramificacoes.js?v=202610080015";
 
 const doRegistro = (id, rotulo) => {
   const { no } = encontrar(id);
@@ -25,6 +25,7 @@ export const site = {
   // `local: true` mantém o link na própria página (o rodapé com #contato existe em todas).
   menu: [
     doRegistro("representacao", "Representação"),
+    doRegistro("parcerias", "Parcerias"),
     doRegistro("loja", "Loja"),
     { rotulo: "O Grêmio", href: "#gremio" },
     { rotulo: "Contato", href: "#contato", local: true },
@@ -45,7 +46,7 @@ export const site = {
   // Passo a passo em ferramentas/supabase/LEIA-ME.md.
   contas: {
     supabaseUrl: "https://axansbhajygavlihtuaa.supabase.co",
-    supabaseChave: "",
+    supabaseChave: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF4YW5zYmhhanlnYXZsaWh0dWFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE0MjQ2NjIsImV4cCI6MjEwNzAwMDY2Mn0.IBEMZTvoymEGLmhLZjXWqRTfka-3OK97Kj22-gB1NeQ",
   },
 
   contato: {

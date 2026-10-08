@@ -4,8 +4,9 @@
 // sem ele, mostra o passo a passo. A permissão real está nas regras do banco (contas.sql).
 // Uso: <div class="painel-contas" id="painelContas"></div> e <div data-componente="contas-admin"></div>.
 
-import { supabase, configurado, carregar, extrato, reais, dataBR, CATEGORIAS, INICIO_CONTAS } from "../dados/contas.js?v=202610072351";
-import { hojeSP } from "../dados/tempo.js?v=202610072351";
+import { supabase, configurado, carregar, extrato, reais, dataBR, CATEGORIAS, INICIO_CONTAS } from "../dados/contas.js?v=202610080015";
+import { hojeSP } from "../dados/tempo.js?v=202610080015";
+import { projetosAdmin, avisoProjetos } from "./projetos-admin.js?v=202610080015";
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
@@ -33,19 +34,28 @@ export default async function contasAdmin(_alvo, contexto) {
     return;
   }
 
+  // Volta do e-mail de "esqueci a senha": o Supabase abre a sessão e pede uma senha nova.
+  let recuperando = /type=recovery/.test(location.hash);
+  db.auth.onAuthStateChange((evento) => {
+    if (evento === "PASSWORD_RECOVERY") { recuperando = true; telaNovaSenha(); }
+  });
+
   async function tela() {
     const { data: { session } } = await db.auth.getSession();
+    if (recuperando && session) return telaNovaSenha();
     if (!session) return telaEntrar();
     const { data: lista } = await db.from("administradores").select("email").eq("email", session.user.email);
     if (!lista || !lista.length) {
-      painel.innerHTML = `<p>Você entrou como <b>${esc(session.user.email)}</b>, mas esta conta não está na lista de administradores das contas. Peça à diretoria responsável para incluir o seu e-mail.</p><button type="button" class="botao botao--linha botao--pequeno" id="sair">Sair</button>`;
+      avisoProjetos("Só administradores lançam projetos.");
+      painel.innerHTML = `<p>Você entrou como <b>${esc(session.user.email)}</b>, mas esta conta não está na lista de administradores. Peça à diretoria responsável para incluir o seu e-mail.</p><button type="button" class="botao botao--linha botao--pequeno" id="sair">Sair</button>`;
       painel.querySelector("#sair").onclick = async () => { await db.auth.signOut(); tela(); };
       return;
     }
     return telaLancar(session.user.email);
   }
 
-  function telaEntrar(msg = "") {
+  function telaEntrar(msg = "", ok = "") {
+    avisoProjetos("Entre na área de contas acima para lançar projetos.");
     painel.innerHTML = `
       <form class="formulario" id="fEntrar">
         <p>Entre com o e-mail e a senha de administrador.</p>
@@ -54,17 +64,49 @@ export default async function contasAdmin(_alvo, contexto) {
           <div class="campo"><label for="ceSenha">Senha</label><input type="password" id="ceSenha" autocomplete="current-password" required></div>
         </div>
         <p class="formulario__erro" id="ceErro" role="alert"${msg ? "" : " hidden"}>${esc(msg)}</p>
-        <div class="formulario__fim"><button class="botao" type="submit">Entrar</button></div>
+        <div class="formulario__fim"><button class="botao" type="submit">Entrar</button><button class="chip" type="button" id="esqueci">Esqueci a senha</button>${ok ? `<p class="ok-msg">${esc(ok)}</p>` : ""}</div>
       </form>`;
+    const email = () => painel.querySelector("#ceEmail").value.trim();
     painel.querySelector("#fEntrar").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const { error } = await db.auth.signInWithPassword({ email: painel.querySelector("#ceEmail").value.trim(), password: painel.querySelector("#ceSenha").value });
-      if (error) return telaEntrar("E-mail ou senha incorretos.");
+      const { error } = await db.auth.signInWithPassword({ email: email(), password: painel.querySelector("#ceSenha").value });
+      if (error) {
+        return telaEntrar(/confirm/i.test(error.message) ? "Este e-mail ainda não foi confirmado. Abra o link que o Supabase enviou para ele, ou confirme o usuário no painel do Supabase."
+          : /invalid/i.test(error.message) ? "E-mail ou senha incorretos."
+          : "Não deu para entrar agora. Tente de novo em alguns minutos.");
+      }
+      tela();
+    });
+    painel.querySelector("#esqueci").addEventListener("click", async () => {
+      if (!email()) return telaEntrar("Escreva o seu e-mail no campo acima e toque em Esqueci a senha.");
+      const { error } = await db.auth.resetPasswordForEmail(email(), { redirectTo: location.origin + location.pathname });
+      telaEntrar(error ? "Não deu para enviar o e-mail agora. Tente de novo em alguns minutos." : "", error ? "" : `Se ${email()} for de um administrador, chega nele um link para criar uma senha nova.`);
+    });
+  }
+
+  function telaNovaSenha(msg = "") {
+    avisoProjetos("Crie a senha nova acima para continuar.");
+    painel.innerHTML = `
+      <form class="formulario" id="fSenha">
+        <p>Crie a sua senha nova de administrador.</p>
+        <div class="campo"><label for="cnSenha">Senha nova (mínimo de 8 caracteres)</label><input type="password" id="cnSenha" autocomplete="new-password" minlength="8" required></div>
+        <p class="formulario__erro" role="alert"${msg ? "" : " hidden"}>${esc(msg)}</p>
+        <div class="formulario__fim"><button class="botao" type="submit">Salvar e entrar</button></div>
+      </form>`;
+    painel.querySelector("#fSenha").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const senha = painel.querySelector("#cnSenha").value;
+      if (senha.length < 8) return telaNovaSenha("A senha precisa ter pelo menos 8 caracteres.");
+      const { error } = await db.auth.updateUser({ password: senha });
+      if (error) return telaNovaSenha("Não deu para salvar a senha. Peça um novo link e tente de novo.");
+      recuperando = false;
+      history.replaceState(null, "", location.pathname);
       tela();
     });
   }
 
   async function telaLancar(email, aviso = "") {
+    projetosAdmin(db, site);
     const r = await carregar(site, raiz);
     const ex = extrato(r.lancamentos, r.parametros);
     const recentes = r.lancamentos.slice().sort((a, b) => String(b.criado_em).localeCompare(String(a.criado_em))).slice(0, 15);

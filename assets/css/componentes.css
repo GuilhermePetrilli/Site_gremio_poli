@@ -380,3 +380,49 @@
 .indice .indice__fim a.botao--transparencia { display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 16px; border-radius: var(--raio); line-height: 1; }
 .indice .indice__fim a.botao--transparencia:hover { background: var(--vermelho-forte); }
 .indice .indice__fim a.botao--transparencia[aria-current="page"] { background: var(--vermelho-forte); color: #fff; box-shadow: 0 0 0 3px var(--vermelho-claro), 0 4px 0 var(--tinta); }
+
+/* ---------- página inicial institucional ---------- */
+.inicio--instituicao h1 { max-width: 20ch; font-size: clamp(2.3rem, 5.6vw, 4rem); }
+.inicio__selo { display: inline-block; margin-bottom: 16px; padding: 4px 12px; border: var(--borda); border-radius: 999px; background: var(--papel); font: 800 .85rem var(--fonte); }
+.portas { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 16px; margin-top: clamp(28px, 4vw, 44px); }
+@media (max-width: 900px) { .portas { grid-template-columns: 1fr; } }
+.porta { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: clamp(22px, 3vw, 30px); border: var(--borda); border-radius: var(--raio); background: var(--papel); }
+.porta--aluno { box-shadow: 0 6px 0 var(--azul); }
+.porta__para { font: 800 .9rem var(--fonte); color: var(--azul); }
+.porta h2 { font-size: clamp(1.4rem, 2.8vw, 1.9rem); max-width: 24ch; }
+.porta > p:not(.porta__para) { color: var(--tinta-suave); max-width: 52ch; }
+.porta .botao--grande, .porta .acoes { margin-top: 8px; }
+.porta__atalhos { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 6px; font-size: .92rem; }
+.porta__atalhos a { font-weight: 700; }
+.inicio--instituicao .inicio__navegar { position: relative; z-index: 1; }
+
+.faixa-impacto { background: var(--azul); color: #fff; padding-block: clamp(28px, 4vw, 56px) clamp(48px, 7vw, 88px); }
+.faixa-impacto h2 { font-size: var(--t-grande); max-width: 24ch; }
+.impacto { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 32px; margin: 30px 0 0; }
+@media (max-width: 860px) { .impacto { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .impacto { grid-template-columns: 1fr; } }
+.impacto div { padding-top: 14px; border-top: 2px solid rgba(255, 255, 255, .35); }
+.impacto dt { font: 800 clamp(2.4rem, 5vw, 3.4rem)/1 var(--fonte-titulo); color: var(--sol); }
+.impacto dd { margin: 8px 0 0; color: rgba(255, 255, 255, .85); max-width: 30ch; }
+
+.sociais { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.social { padding: 20px; border: var(--borda); border-radius: var(--raio); background: var(--fundo); }
+.social h3 { font-size: 1.2rem; }
+.social p { margin-top: 8px; color: var(--tinta-suave); }
+.sociais__mais { margin-top: 18px; font-weight: 700; }
+
+.compromissos { list-style: none; margin: 0; padding: 0; counter-reset: comp; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 760px) { .compromissos { grid-template-columns: 1fr; } }
+.compromissos li { counter-increment: comp; }
+.compromissos a { position: relative; display: flex; flex-direction: column; gap: 6px; height: 100%; padding: 22px 22px 22px 72px; border: var(--borda); border-radius: var(--raio); background: var(--papel); color: var(--tinta); text-decoration: none; }
+.compromissos a:hover { box-shadow: 0 4px 0 var(--tinta); }
+.compromissos a::before { content: counter(comp); position: absolute; left: 20px; top: 18px; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; background: var(--sol); border: var(--borda); font: 800 1rem var(--fonte-titulo); }
+.compromissos b { font: 700 1.2rem var(--fonte-titulo); }
+.compromissos span { color: var(--tinta-suave); }
+
+.convite { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px 40px; align-items: center; padding: clamp(24px, 4vw, 40px); border-radius: var(--raio); background: var(--tinta); color: #fff; box-shadow: 0 6px 0 var(--sol); }
+@media (max-width: 760px) { .convite { grid-template-columns: 1fr; } }
+.convite h2 { font-size: var(--t-grande); }
+.convite p { margin-top: 10px; color: rgba(255, 255, 255, .82); max-width: 56ch; }
+.convite .botao:not(.botao--claro) { background: var(--sol); color: var(--tinta); }
+.convite .botao:not(.botao--claro):hover { background: #fff; }

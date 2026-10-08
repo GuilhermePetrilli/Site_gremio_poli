@@ -121,6 +121,17 @@ export const ramificacoes = [
     filhos: [],
   },
   {
+    id: "parcerias",
+    grupo: "frentes",
+    titulo: "Parcerias",
+    caminho: "parcerias/",
+    resumo: "Projetos com os grupos de extensão da Poli e parcerias com empresas, cada um com prazo, objetivo e atualizações.",
+    filhos: [
+      { id: "gex", titulo: "Com os grupos de extensão", texto: "O que o Grêmio busca construir com os GEX e os projetos já lançados." },
+      { id: "empresas", titulo: "Com empresas", texto: "O que uma parceria pode apoiar e o compromisso com as contas abertas." },
+    ],
+  },
+  {
     id: "aluno",
     grupo: "acessos",
     titulo: "Área do aluno",
@@ -219,9 +230,11 @@ export const ramificacoes = [
     grupo: "acessos",
     titulo: "Área dos administradores",
     caminho: "admin/",
-    construcao: true,
-    resumo: "O portal interno do Grêmio: as tarefas e os e-mails de cada diretoria numa só tela.",
-    filhos: [],
+    resumo: "O portal interno do Grêmio: contas, projetos e parcerias lançados pela gestão e publicados na hora.",
+    filhos: [
+      { id: "contas", titulo: "Contas do Grêmio", texto: "Receitas, despesas, dívida e saldo inicial, publicados na Transparência." },
+      { id: "projetos", titulo: "Projetos e parcerias", texto: "Projetos com GEX e empresas, com prazo e atualizações, publicados em Parcerias." },
+    ],
   },
   {
     id: "loja",

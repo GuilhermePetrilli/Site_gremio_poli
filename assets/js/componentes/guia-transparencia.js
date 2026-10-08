@@ -2,7 +2,7 @@
 // com o saldo acumulado. Os lançamentos vêm de dados/contas.js (banco Supabase ou arquivo).
 // Uso: marcação em transparencia/index.html e <div data-componente="guia-transparencia"></div>.
 
-import { carregar, ouvir, extrato, reais, dataBR, INICIO_CONTAS } from "../dados/contas.js?v=202610072351";
+import { carregar, ouvir, extrato, reais, dataBR, INICIO_CONTAS } from "../dados/contas.js?v=202610080015";
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -106,11 +106,11 @@ export default async function guiaTransparencia(_alvo, { site, raiz }) {
   }
 
   /* ---------- saldo acumulado x dívida, com ajuste de curva ---------- */
-  // Mínimos quadrados para um polinômio de grau g (equações normais + eliminação de Gauss).
-  function polinomio(xs, ys, g) {
-    const n = g + 1, A = Array.from({ length: n }, () => Array(n + 1).fill(0));
+  // Mínimos quadrados lineares nos coeficientes: S(t) = Σ cᵢ·fᵢ(t), por equações normais e Gauss.
+  function minimosQuadrados(xs, ys, bases) {
+    const n = bases.length, A = Array.from({ length: n }, () => Array(n + 1).fill(0));
     xs.forEach((x, i) => {
-      const p = Array.from({ length: n }, (_, k) => x ** k);
+      const p = bases.map((f) => f(x));
       for (let r = 0; r < n; r++) { for (let c = 0; c < n; c++) A[r][c] += p[r] * p[c]; A[r][n] += p[r] * ys[i]; }
     });
     for (let c = 0; c < n; c++) {
@@ -121,36 +121,65 @@ export default async function guiaTransparencia(_alvo, { site, raiz }) {
     }
     return A.map((linha, i) => linha[n] / linha[i]);
   }
-  const avaliar = (coef, t) => coef.reduce((s, a, k) => s + a * t ** k, 0);
-  // Escolhe o grau (1 a 3) pelo critério AICc, que pune complexidade com poucos pontos.
+  const num = (v) => Math.abs(v).toLocaleString("pt-BR", { maximumFractionDigits: Math.abs(v) >= 100 ? 0 : Math.abs(v) >= 1 ? 2 : 3 });
+  const sinal = (v, primeiro) => (primeiro ? (v < 0 ? "−" : "") : v < 0 ? " − " : " + ");
+  const SOB = ["", "", "²", "³"];
+
+  // Famílias candidatas. Cada uma devolve { nome, k (parâmetros), f(t), formula } ou null.
+  const familias = [
+    ...[1, 2, 3].map((g) => (xs, ys) => {
+      const c = minimosQuadrados(xs, ys, Array.from({ length: g + 1 }, (_, k) => (t) => t ** k)); if (!c) return null;
+      const termos = c.map((a, k) => ({ a, k })).filter(({ a }) => Math.abs(a) > 1e-9);
+      return { nome: g === 1 ? "reta" : `polinômio de grau ${g}`, k: g + 1, f: (t) => c.reduce((s, a, k) => s + a * t ** k, 0),
+        formula: "S(t) ≈ " + termos.map(({ a, k }, i) => `${sinal(a, !i)}${num(a)}${k ? "·t" + SOB[k] : ""}`).join("") };
+    }),
+    (xs, ys) => { // logarítmica: cresce rápido no começo e desacelera
+      const c = minimosQuadrados(xs, ys, [() => 1, (t) => Math.log(t)]); if (!c) return null;
+      return { nome: "logarítmica", k: 2, f: (t) => c[0] + c[1] * Math.log(t), formula: `S(t) ≈ ${sinal(c[0], true)}${num(c[0])}${sinal(c[1])}${num(c[1])}·ln t` };
+    },
+    (xs, ys) => { // exponencial: S = a + b·e^(c·t); busca c numa grade e resolve a, b por mínimos quadrados
+      let melhor = null;
+      for (let i = -200; i <= 200; i++) {
+        const cc = Math.sign(i) * 0.005 * Math.abs(i) ** 1.2; if (Math.abs(cc) < 1e-4) continue;
+        const c = minimosQuadrados(xs, ys, [() => 1, (t) => Math.exp(cc * t)]); if (!c) continue;
+        const rss = xs.reduce((s, x, j) => s + (ys[j] - c[0] - c[1] * Math.exp(cc * x)) ** 2, 0);
+        if (!melhor || rss < melhor.rss) melhor = { rss, a: c[0], b: c[1], cc };
+      }
+      if (!melhor) return null;
+      const { a, b, cc } = melhor;
+      return { nome: "exponencial", k: 3, f: (t) => a + b * Math.exp(cc * t),
+        formula: `S(t) ≈ ${sinal(a, true)}${num(a)}${sinal(b)}${num(b)}·e<sup>${cc < 0 ? "−" : ""}${num(cc)}·t</sup>` };
+    },
+  ];
+
+  // Escolhe a família pelo critério AICc (pune parâmetros a mais com poucos pontos).
+  // Se uma família mais simples ficar a menos de 2 pontos da melhor, fica a mais simples.
   function melhorAjuste(xs, ys) {
     const n = xs.length, media = ys.reduce((a, b) => a + b, 0) / n;
     const tss = ys.reduce((s, y) => s + (y - media) ** 2, 0);
-    let melhor = null;
-    for (let g = 1; g <= 3; g++) {
-      const k = g + 2; if (n - k - 1 <= 0) continue;
-      const coef = polinomio(xs, ys, g); if (!coef) continue;
-      const rss = xs.reduce((s, x, i) => s + (ys[i] - avaliar(coef, x)) ** 2, 0);
-      const aicc = n * Math.log(Math.max(rss, 1e-9) / n) + 2 * k + (2 * k * (k + 1)) / (n - k - 1);
-      if (!melhor || aicc < melhor.aicc - 2) melhor = { g, coef, aicc, r2: tss > 0 ? 1 - rss / tss : 1 };
+    const candidatos = [];
+    for (const fam of familias) {
+      const m = fam(xs, ys); if (!m) continue;
+      const k = m.k + 1; if (n - k - 1 <= 0) continue;
+      const rss = xs.reduce((s, x, i) => s + (ys[i] - m.f(x)) ** 2, 0);
+      if (!isFinite(rss)) continue;
+      candidatos.push({ ...m, aicc: n * Math.log(Math.max(rss, 1e-9) / n) + 2 * k + (2 * k * (k + 1)) / (n - k - 1), r2: tss > 0 ? 1 - rss / tss : 1 });
     }
-    return melhor;
+    if (!candidatos.length) return null;
+    const minimo = Math.min(...candidatos.map((c) => c.aicc));
+    return candidatos.filter((c) => c.aicc <= minimo + 2).sort((a, b) => a.k - b.k || a.aicc - b.aicc)[0];
   }
-  const num = (v) => Math.abs(v).toLocaleString("pt-BR", { maximumFractionDigits: Math.abs(v) >= 100 ? 0 : 2 });
-  const SOB = ["", "", "²", "³"];
-  function formula(coef) {
-    return "S(t) ≈ " + coef.map((a, k) => ({ a, k })).filter(({ a }) => Math.abs(a) > 1e-9)
-      .map(({ a, k }, i) => `${i ? (a < 0 ? " − " : " + ") : a < 0 ? "−" : ""}${num(a)}${k ? "·t" + SOB[k] : ""}`).join("");
-  }
+
+  // Data de referência (permite conferir o gráfico em outra data com ?hoje=AAAA-MM-DD).
+  const hojeRef = () => { const q = new URLSearchParams(location.search).get("hoje"); return q && /^\d{4}-\d{2}-\d{2}$/.test(q) ? new Date(q + "T12:00:00") : new Date(); };
 
   function graficoAcumulado() {
     const svg = $("#grafAcum");
     const w = Math.max(320, svg.clientWidth || 800), h = 280, esq = 8, dir = 8, topo = 16, baixo = 26;
     const ano = INICIO_CONTAS.slice(0, 4);
-    // saldo no fim de cada mês (carrega o anterior), até o mês atual ou o último com conta
-    const agora = new Date(), mesAtual = agora.getFullYear() == ano ? agora.getMonth() + 1 : agora.getFullYear() > ano ? 12 : 0;
-    const ultimoComConta = dados.linhas.length ? +dados.linhas[dados.linhas.length - 1].data.slice(5, 7) : 0;
-    const M = Math.max(mesAtual, ultimoComConta);
+    // Só meses já encerrados: a barra e o recálculo da curva entram quando o mês termina.
+    const ref = hojeRef();
+    const M = ref.getFullYear() == ano ? ref.getMonth() : ref.getFullYear() > ano ? 12 : 0;
     const pontos = [];
     let saldo = dados.inicial;
     for (let m = 1; m <= M; m++) {
@@ -159,7 +188,7 @@ export default async function guiaTransparencia(_alvo, { site, raiz }) {
     }
     const ajuste = pontos.length >= 3 ? melhorAjuste(pontos.map((p) => p[0]), pontos.map((p) => p[1])) : null;
     const D = dados.divida.total;
-    const curva = ajuste ? Array.from({ length: 111 }, (_, i) => { const t = 1 + i * 0.1; return [t, avaliar(ajuste.coef, t)]; }) : [];
+    const curva = ajuste ? Array.from({ length: 111 }, (_, i) => { const t = 1 + i * 0.1; return [t, ajuste.f(t)]; }) : [];
     const vals = [0, ...pontos.map((p) => p[1]), ...(D != null ? [D] : []), ...curva.map((p) => p[1])];
     const max = Math.max(1, ...vals), min = Math.min(0, ...vals);
     const col = (w - esq - dir) / 12, bw = Math.max(8, col * 0.5);
@@ -170,28 +199,30 @@ export default async function guiaTransparencia(_alvo, { site, raiz }) {
     for (const [t, v] of pontos) s += `<rect class="barra-s${v < 0 ? " neg" : ""}" x="${x(t) - bw / 2}" y="${Math.min(y(v), y(0))}" width="${bw}" height="${Math.abs(y(0) - y(v))}" rx="3"><title>${MESES[t - 1]}: saldo ${reais(v)}</title></rect>`;
     if (D != null) s += `<line class="linha-divida" x1="${esq}" x2="${w - dir}" y1="${y(D)}" y2="${y(D)}"/><text class="rot-divida" x="${w - dir - 4}" y="${y(D) - 6}" text-anchor="end">dívida: ${reais(D)}</text>`;
     else s += `<text class="rot-divida" x="${w - dir - 4}" y="${topo + 12}" text-anchor="end">dívida: valor a confirmar</text>`;
-    if (curva.length) s += `<polyline class="curva-ajuste" points="${curva.map(([t, v]) => `${x(t).toFixed(1)},${y(v).toFixed(1)}`).join(" ")}"/>`;
+    if (curva.length) s += `<polyline class="curva-ajuste" points="${curva.map(([t, v]) => `${x(t).toFixed(1)},${y(Math.max(min, Math.min(max, v))).toFixed(1)}`).join(" ")}"/>`;
+    if (!pontos.length) s += `<text class="rot" x="${w / 2}" y="${h / 2}" text-anchor="middle">A primeira barra entra quando janeiro de 2027 terminar.</text>`;
     svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
     svg.innerHTML = s;
 
     // canto do ajuste
     const caixa = $("#ajuste");
     if (!ajuste) {
-      caixa.innerHTML = `<span class="ajuste__titulo">ajuste de curva</span><span class="ajuste__formula">S(t) = ?</span><small>Aparece com 3 meses de contas.</small>`;
+      caixa.innerHTML = `<span class="ajuste__titulo">ajuste de curva</span><span class="ajuste__formula">S(t) = ?</span><small>Aparece com 3 meses encerrados.</small>`;
+      caixa.title = "";
       $("#ajustePrevisao").hidden = true;
       return;
     }
     let previsao = "";
     if (D != null && pontos[pontos.length - 1][1] < D) {
       let tCruz = null;
-      for (let t = M; t <= M + 36; t += 0.05) if (avaliar(ajuste.coef, t) >= D) { tCruz = t; break; }
+      for (let t = M; t <= M + 36; t += 0.05) if (ajuste.f(t) >= D) { tCruz = t; break; }
       if (tCruz) { const mes = Math.ceil(tCruz), mm = ((mes - 1) % 12), aa = +ano + Math.floor((mes - 1) / 12); previsao = `Extrapolando (com toda a cautela de engenheiro), o saldo alcançaria a dívida por volta de ${MESES[mm]}/${aa}.`; }
       else previsao = "No ritmo do ajuste, o saldo não alcança a dívida nos próximos três anos.";
     }
     caixa.innerHTML = `<span class="ajuste__titulo">mínimos quadrados</span>
-      <span class="ajuste__formula">${formula(ajuste.coef)}</span>
-      <small>grau ${ajuste.g} (AICc) · R² = ${ajuste.r2.toLocaleString("pt-BR", { maximumFractionDigits: 3 })} · t em meses</small>`;
-    caixa.title = `Polinômio de grau ${ajuste.g} escolhido pelo critério AICc entre os graus 1 a 3. t = meses desde dez/${+ano - 1}; S em reais.`;
+      <span class="ajuste__formula">${ajuste.formula}</span>
+      <small>${ajuste.nome} (AICc) · R² = ${ajuste.r2.toLocaleString("pt-BR", { maximumFractionDigits: 3 })} · t em meses</small>`;
+    caixa.title = `Melhor entre reta, polinômios de grau 2 e 3, logarítmica e exponencial, pelo critério AICc. Recalculado a cada mês encerrado. t = meses desde dez/${+ano - 1}; S em reais.`;
     const prev = $("#ajustePrevisao");
     prev.hidden = !previsao;
     prev.textContent = previsao;
