@@ -1,9 +1,9 @@
 {
- "atualizadoEm": "2026-10-07T19:02:25.665Z",
+ "atualizadoEm": "2026-10-08T15:24:54.125Z",
  "fonte": "Cardápio+ USP (uspdigital.usp.br/rucard)",
  "restaurantes": {
   "central": {
-   "atualizadoEm": "2026-10-07T19:02:25.665Z",
+   "atualizadoEm": "2026-10-08T15:24:54.125Z",
    "dias": {
     "2026-10-05": {
      "almoco": [
@@ -116,7 +116,7 @@
    }
   },
   "prefeitura": {
-   "atualizadoEm": "2026-10-07T19:02:25.665Z",
+   "atualizadoEm": "2026-10-08T15:24:54.125Z",
    "dias": {
     "2026-10-05": {
      "almoco": [
@@ -189,7 +189,7 @@
    }
   },
   "fisica": {
-   "atualizadoEm": "2026-10-07T19:02:25.665Z",
+   "atualizadoEm": "2026-10-08T15:24:54.125Z",
    "dias": {
     "2026-10-05": {
      "almoco": [
@@ -255,7 +255,7 @@
      "almoco": [
       "Arroz / feijão / arroz integral",
       "Filé de peito de frango com molho de laranja",
-      "Opção: Lentilha com champignon",
+      "Opção: Lentilha com alho-poró",
       "Chuchu refogado",
       "Salada acelga",
       "Pudim de coco",
@@ -265,7 +265,7 @@
       "Arroz / feijão / arroz integral",
       "Lagarto com molho ferrugem",
       "Opção: PVT com vagem",
-      "Macarrão ao sugo",
+      "Macarrão ao alho e óleo",
       "Salada de rúcula com alfcae",
       "Laranja",
       "Minipão / refresco"
@@ -277,7 +277,7 @@
       "Carne em tiras aceboladas",
       "Opção: Hambúrguer de PVT",
       "Polenta",
-      "Salada de catalônia",
+      "Salada de folhas mistas ( repolho, escarola e almeirão)",
       "Mexerica",
       "Minipão / refresco"
      ],
@@ -302,7 +302,7 @@
    }
   },
   "quimica": {
-   "atualizadoEm": "2026-10-07T19:02:25.665Z",
+   "atualizadoEm": "2026-10-08T15:24:54.125Z",
    "dias": {
     "2026-10-05": {
      "almoco": [
