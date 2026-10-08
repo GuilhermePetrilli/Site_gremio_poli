@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Salas | Grêmio Politécnico da USP</title>
+  <title>Salas e grade horária | Grêmio Politécnico da USP</title>
   <meta name="description" content="Salas livres agora em cada prédio da Poli, onde é a sua aula e a sua grade com as salas, com os dados do USPolis.">
   <meta name="theme-color" content="#fbfbfe">
   <link rel="icon" href="../../assets/img/marca/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Nunito:wght@400;600;700;800&display=swap">
-  <link rel="stylesheet" href="../../assets/css/tokens.css?v=202610080034">
-  <link rel="stylesheet" href="../../assets/css/base.css?v=202610080034">
-  <link rel="stylesheet" href="../../assets/css/componentes.css?v=202610080034">
-  <link rel="stylesheet" href="../../assets/css/portal.css?v=202610080034">
-  <link rel="stylesheet" href="../../assets/css/salas.css?v=202610080034">
-  <script type="module" src="../../assets/js/site.js?v=202610080034"></script>
+  <link rel="stylesheet" href="../../assets/css/tokens.css?v=202610080045">
+  <link rel="stylesheet" href="../../assets/css/base.css?v=202610080045">
+  <link rel="stylesheet" href="../../assets/css/componentes.css?v=202610080045">
+  <link rel="stylesheet" href="../../assets/css/portal.css?v=202610080045">
+  <link rel="stylesheet" href="../../assets/css/salas.css?v=202610080045">
+  <script type="module" src="../../assets/js/site.js?v=202610080045"></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -29,7 +29,7 @@
       <!-- Abertura: o pulso do campus agora -->
       <section class="abertura abertura--noite salas-abertura" aria-labelledby="salas-titulo">
         <div class="salas-abertura__texto">
-          <h1 id="salas-titulo">Salas</h1>
+          <h1 id="salas-titulo">Salas e grade horária</h1>
           <p class="abertura__lead">Quais salas da Poli estão livres agora, onde é a sua aula e a sua grade com as salas certas.</p>
           <p class="salas-gex"><span class="selo-gex">GEX, deem uma olhada</span> Precisa de um lugar para reunião, estudo ou processo seletivo? Filtre pelo tamanho do grupo e veja o que está livre.</p>
         </div>
@@ -76,6 +76,7 @@
             <span class="controles__sep" aria-hidden="true"></span>
             <button type="button" class="chip chip--alterna" id="fAcess" aria-pressed="false">Acessível</button>
             <button type="button" class="chip chip--alterna" id="fAr" aria-pressed="false">Ar-condicionado</button>
+            <button type="button" class="chip chip--alterna" id="fReserva" aria-pressed="false" title="Salas que aceitam reserva pelo USPolis">Reservável</button>
             <button type="button" class="chip chip--alterna" id="fLivres" aria-pressed="false">Só as livres</button>
           </div>
         </div>
@@ -105,6 +106,7 @@
       <section class="bloco-portal" id="minha-aula" aria-labelledby="aula-titulo">
         <h2 id="aula-titulo">Onde é a minha aula?</h2>
         <p class="bloco-portal__intro">Digite o código ou o nome da disciplina. Encontre a sua turma e adicione à sua grade.</p>
+        <p class="nota">A sua grade oficial, com as turmas em que você está matriculado, fica no <a href="https://uspdigital.usp.br/jupiterweb/" target="_blank" rel="noopener">JupiterWeb</a>. Consulte lá os códigos e as turmas e monte a grade aqui para ver as salas.</p>
         <div class="busca">
           <label class="sr" for="busca">Código ou nome da disciplina</label>
           <input type="search" id="busca" placeholder="Ex.: MAC0122 ou Cálculo" autocomplete="off" spellcheck="false">
@@ -120,7 +122,22 @@
             <h2 id="grade-titulo">Minha grade</h2>
             <p class="bloco-portal__intro">As turmas que você adicionar aparecem aqui, com a sala de cada aula. A grade fica salva só neste navegador.</p>
           </div>
-          <button type="button" class="botao botao--linha botao--pequeno" id="gradeLimpar" hidden>Limpar a grade</button>
+          <div class="grade-acoes" id="gradeAcoes" hidden>
+            <button type="button" class="botao botao--pequeno" id="gradePdf">Baixar em PDF</button>
+            <button type="button" class="botao botao--linha botao--pequeno" id="gradeAgenda">Adicionar ao Google Agenda</button>
+            <button type="button" class="botao botao--linha botao--pequeno" id="gradeLimpar">Limpar a grade</button>
+          </div>
+        </div>
+        <p class="grade-aviso" id="gradeAviso" hidden><b>No Google Agenda, cada aula se repete toda semana</b>, no mesmo dia e horário, a partir desta semana. No fim do semestre, abra uma das aulas e escolha <i>Excluir</i> e depois <i>Todos os eventos</i> para tirar a série inteira.</p>
+        <div class="grade-importar" id="gradeImportar" hidden>
+          <p><b>O arquivo <code>minha-grade-poli.ics</code> foi baixado.</b> Para colocar as aulas no seu Google Agenda:</p>
+          <ol>
+            <li>Abra a página de importação do Google Agenda, no computador.</li>
+            <li>Em <i>Selecionar arquivo do computador</i>, escolha o arquivo baixado.</li>
+            <li>Escolha em qual agenda as aulas vão entrar e toque em <i>Importar</i>.</li>
+          </ol>
+          <a class="botao botao--pequeno" href="https://calendar.google.com/calendar/r/settings/export" target="_blank" rel="noopener">Abrir a importação do Google Agenda</a>
+          <p class="nota">No iPhone e no Outlook, abrir o arquivo já oferece adicionar as aulas à agenda. As cores da grade ficam no site e no PDF: o Google Agenda usa a cor da agenda escolhida.</p>
         </div>
         <div class="grade" id="gradeQuadro"></div>
       </section>

@@ -208,7 +208,7 @@ export const ramificacoes = [
       },
       {
         id: "salas",
-        titulo: "Salas",
+        titulo: "Salas e grade horária",
         caminho: "aluno/salas/",
         estado: "no-ar",
         destaque: "GEX, deem uma olhada: salas livres para o seu grupo",

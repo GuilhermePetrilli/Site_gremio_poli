@@ -6,7 +6,8 @@
 //   turmas     [disciplina, turma, [[dia da semana (0 = seg), início, fim, sala|null]], professores]
 // A grade do aluno fica só no navegador dele (localStorage), sem ir a lugar nenhum.
 
-import { hora, agoraSP, hojeSP } from "../dados/tempo.js?v=202610080034";
+import { hora, agoraSP, hojeSP } from "../dados/tempo.js?v=202610080045";
+import { CORES, carregarJsPdf, desenharPdf, gerarIcs, baixar } from "./grade-exportar.js?v=202610080045";
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -90,10 +91,10 @@ export default async function guiaSalas(_alvo, { raiz }) {
 
   /* ---------- estado da tela ---------- */
   const agoraMin = () => Math.min(FIM, Math.max(INICIO, Math.round(agoraSP().minuto / 10) * 10));
-  const S = { dia: dias.includes(hoje) ? hoje : dias[0], min: agoraMin(), predio: "todos", cap: 0, acess: false, ar: false, soLivres: false, seguindo: true };
+  const S = { dia: dias.includes(hoje) ? hoje : dias[0], min: agoraMin(), predio: "todos", cap: 0, acess: false, ar: false, reserva: false, soLivres: false, seguindo: true };
 
   const filtradas = () => salas.filter((s) =>
-    (S.predio === "todos" || s.p === S.predio) && (!S.cap || s.cap >= S.cap) && (!S.acess || s.f & 1) && (!S.ar || s.f & 2));
+    (S.predio === "todos" || s.p === S.predio) && (!S.cap || s.cap >= S.cap) && (!S.acess || s.f & 1) && (!S.ar || s.f & 2) && (!S.reserva || s.f & 8));
 
   /* ---------- controles ---------- */
   const elDias = $("#dias"), elHora = $("#hora"), elSaida = $("#horaSaida");
@@ -107,7 +108,7 @@ export default async function guiaSalas(_alvo, { raiz }) {
     elDias.querySelectorAll("[data-dia]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.dia === S.dia));
     $("#predios").querySelectorAll("[data-predio]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.predio === String(S.predio)));
     $("#capacidades").querySelectorAll("[data-cap]").forEach((b) => b.setAttribute("aria-pressed", +b.dataset.cap === S.cap));
-    $("#fAcess").setAttribute("aria-pressed", S.acess); $("#fAr").setAttribute("aria-pressed", S.ar); $("#fLivres").setAttribute("aria-pressed", S.soLivres);
+    $("#fAcess").setAttribute("aria-pressed", S.acess); $("#fAr").setAttribute("aria-pressed", S.ar); $("#fReserva").setAttribute("aria-pressed", S.reserva); $("#fLivres").setAttribute("aria-pressed", S.soLivres);
     elHora.value = S.min; elSaida.textContent = hora(S.min);
   };
   elDias.addEventListener("click", (e) => { const b = e.target.closest("[data-dia]"); if (!b) return; S.dia = b.dataset.dia; S.seguindo = false; tudo(); });
@@ -115,6 +116,7 @@ export default async function guiaSalas(_alvo, { raiz }) {
   $("#capacidades").addEventListener("click", (e) => { const b = e.target.closest("[data-cap]"); if (!b) return; S.cap = +b.dataset.cap; tudo(); });
   $("#fAcess").onclick = () => { S.acess = !S.acess; tudo(); };
   $("#fAr").onclick = () => { S.ar = !S.ar; tudo(); };
+  $("#fReserva").onclick = () => { S.reserva = !S.reserva; tudo(); };
   $("#fLivres").onclick = () => { S.soLivres = !S.soLivres; tudo(); };
   elHora.addEventListener("input", () => { S.min = +elHora.value; S.seguindo = false; tudo(); });
   $("#agora").onclick = () => { S.dia = dias.includes(hoje) ? hoje : dias[0]; S.min = agoraMin(); S.seguindo = true; tudo(); };
@@ -280,17 +282,23 @@ export default async function guiaSalas(_alvo, { raiz }) {
 
   /* ---------- minha grade ---------- */
   const PX_HORA = 44;
+  let aulas = []; // a grade montada, para o PDF e a agenda
   function desenharGrade() {
     const quadro = $("#gradeQuadro");
-    $("#gradeLimpar").hidden = !grade.length;
+    $("#gradeAcoes").hidden = $("#gradeAviso").hidden = !grade.length;
+    $("#gradeImportar").hidden = true;
+    aulas = [];
     if (!grade.length) { quadro.innerHTML = `<p class="grade__vazia">Sua grade está vazia. Procure uma disciplina acima e toque em "Adicionar à grade".</p>`; return; }
     const blocos = [];
     const faltando = [];
-    grade.forEach((k, i) => {
+    // uma cor por disciplina: as aulas da mesma disciplina saem todas da mesma cor
+    const codigos = [...new Set(grade.map((k) => k.split("|")[0]))];
+    grade.forEach((k) => {
       const [c, t] = k.split("|");
       const turma = (turmasPor.get(c) || []).find((x) => x[1] === t);
       if (!turma) { faltando.push(`${c} (turma ${t})`); return; }
-      for (const h of turma[2]) blocos.push({ c, t, cor: i % 6, wd: h[0], a: h[1], b: h[2], sala: h[3] != null ? porId.get(h[3]) : null });
+      const cor = CORES[codigos.indexOf(c) % CORES.length];
+      for (const h of turma[2]) blocos.push({ c, t, cor, prof: turma[3] || [], wd: h[0], a: h[1], b: h[2], sala: h[3] != null ? porId.get(h[3]) : null });
     });
     for (const x of blocos) x.conflito = blocos.some((y) => y !== x && y.wd === x.wd && y.c + y.t !== x.c + x.t && y.a < x.b && x.a < y.b);
     const minutosSemana = blocos.reduce((s, x) => s + (x.b - x.a), 0);
@@ -299,17 +307,51 @@ export default async function guiaSalas(_alvo, { raiz }) {
     for (let wd = 0; wd < 6; wd++) {
       html += `<div class="grade__dia">${blocos.filter((x) => x.wd === wd).map((x) => {
         const top = ((Math.max(INICIO, x.a) - INICIO) / 60) * PX_HORA, alt = Math.max(28, ((Math.min(FIM, x.b) - Math.max(INICIO, x.a)) / 60) * PX_HORA - 2);
-        return `<div class="bloco-aula cor-${x.cor}${x.conflito ? " conflito" : ""}" style="top:${top}px;height:${alt}px" title="${esc(`${x.c} ${D.disciplinas[x.c] || ""}, turma ${x.t}`)}">
+        return `<div class="bloco-aula${x.conflito ? " conflito" : ""}" style="top:${top}px;height:${alt}px;background:${x.cor}" title="${esc(`${x.c} ${D.disciplinas[x.c] || ""}, turma ${x.t}`)}">
           <b>${esc(x.c)}</b>${hora(x.a)}–${hora(x.b)}<br>${x.sala ? esc(`${x.sala.predio} ${x.sala.nome}`) : "sala a definir"}</div>`;
       }).join("")}</div>`;
     }
     html += `</div>`;
-    const notas = [`${grade.length - faltando.length} turma${grade.length - faltando.length === 1 ? "" : "s"}, ${(minutosSemana / 60).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} horas de aula por semana.`];
+    // duração em horas e minutos e, depois, em créditos (cada crédito-aula vale 50 minutos)
+    const hs = Math.floor(minutosSemana / 60), mins = minutosSemana % 60, creditos = Math.round(minutosSemana / 50);
+    const duracao = [hs ? `${hs} hora${hs === 1 ? "" : "s"}` : "", mins ? `${mins} minuto${mins === 1 ? "" : "s"}` : ""].filter(Boolean).join(" e ") || "0 minutos";
+    const notas = [`${grade.length - faltando.length} turma${grade.length - faltando.length === 1 ? "" : "s"}, ${duracao} de aula por semana, ${creditos} crédito${creditos === 1 ? "" : "s"}.`];
     if (blocos.some((x) => x.conflito)) notas.push("Os blocos com contorno tracejado têm conflito de horário.");
     if (faltando.length) notas.push(`Não estão mais nos dados do USPolis: ${faltando.join(", ")}.`);
-    quadro.innerHTML = html + `<p class="grade__nota">${esc(notas.join(" "))}</p>`;
+    // as turmas da grade, com a cor de cada uma e o botão para tirar só aquela
+    const lista = grade.map((k) => {
+      const [c, t] = k.split("|"), cor = CORES[codigos.indexOf(c) % CORES.length];
+      return `<li><i style="background:${cor}"></i><span><b>${esc(c)}</b> ${esc(D.disciplinas[c] || "")} <small>turma ${esc(t)}</small></span>
+        <button type="button" class="chip" data-tirar="${esc(k)}" aria-label="Tirar ${esc(c)} da grade">Tirar da grade</button></li>`;
+    }).join("");
+    quadro.innerHTML = html + `<p class="grade__nota">${esc(notas.join(" "))}</p><ul class="grade__turmas">${lista}</ul>`;
+    aulas = blocos.filter((x) => x.wd >= 0 && x.wd < 6).sort((x, y) => x.wd - y.wd || x.a - y.a).map((x) => ({
+      c: x.c, nome: D.disciplinas[x.c] || "", t: x.t, prof: x.prof, cor: x.cor, wd: x.wd, a: x.a, b: x.b, conflito: x.conflito,
+      local: x.sala ? `${x.sala.predio}, ${x.sala.nome}` : "Sala a definir",
+    }));
   }
   $("#gradeLimpar").onclick = () => { grade = []; salvarGrade(grade); desenharGrade(); buscar(); };
+  $("#gradeQuadro").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-tirar]"); if (!b) return;
+    grade = grade.filter((x) => x !== b.dataset.tirar); salvarGrade(grade); desenharGrade(); buscar();
+  });
+
+  // PDF e Google Agenda
+  const geradaEm = () => new Date().toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
+  $("#gradePdf").onclick = async (e) => {
+    if (!aulas.length) return;
+    const b = e.currentTarget, rotulo = b.textContent;
+    b.disabled = true; b.textContent = "Gerando o PDF…";
+    try { baixar(desenharPdf(await carregarJsPdf(), aulas, { geradaEm: geradaEm() }).output("blob"), "minha-grade-poli.pdf"); }
+    catch { alert("Não deu para gerar o PDF agora. Confira a sua conexão e tente de novo."); }
+    b.disabled = false; b.textContent = rotulo;
+  };
+  $("#gradeAgenda").onclick = () => {
+    if (!aulas.length) return;
+    baixar(gerarIcs(aulas, { hoje }), "minha-grade-poli.ics", "text/calendar;charset=utf-8");
+    $("#gradeImportar").hidden = false;
+    $("#gradeImportar").scrollIntoView({ behavior: "smooth", block: "nearest" });
+  };
 
   /* ---------- tudo ---------- */
   function tudo() { marcar(); desenharMapa(); desenharCurva(); }
