@@ -1,9 +1,9 @@
 {
- "atualizadoEm": "2026-10-08T18:57:47.369Z",
+ "atualizadoEm": "2026-10-09T15:07:33.479Z",
  "fonte": "Cardápio+ USP (uspdigital.usp.br/rucard)",
  "restaurantes": {
   "central": {
-   "atualizadoEm": "2026-10-08T18:57:47.369Z",
+   "atualizadoEm": "2026-10-09T15:07:33.479Z",
    "dias": {
     "2026-10-05": {
      "almoco": [
@@ -88,9 +88,9 @@
     "2026-10-09": {
      "almoco": [
       "Arroz / feijão / arroz integral",
-      "Carne assada com molho ferrugem",
-      "Opção: Quibe de PVT",
-      "Abóbora com leite de coco",
+      "Frango em tiras com molho de tomate e ervilha",
+      "Opção: Torta de PVT com escarola",
+      "Abóbora refogada",
       "Salada de acelga",
       "Sorvete",
       "Minipão / refresco"
@@ -116,7 +116,7 @@
    }
   },
   "prefeitura": {
-   "atualizadoEm": "2026-10-08T18:57:47.369Z",
+   "atualizadoEm": "2026-10-09T15:07:33.479Z",
    "dias": {
     "2026-10-05": {
      "almoco": [
@@ -189,7 +189,7 @@
    }
   },
   "fisica": {
-   "atualizadoEm": "2026-10-08T18:57:47.369Z",
+   "atualizadoEm": "2026-10-09T15:07:33.479Z",
    "dias": {
     "2026-10-05": {
      "almoco": [
@@ -275,7 +275,7 @@
      "almoco": [
       "Arroz / feijão preto / arroz integral",
       "Carne em tiras aceboladas",
-      "Opção: Hambúrguer de PVT",
+      "Opção: PVT com espinafre",
       "Polenta",
       "Salada de folhas mistas ( repolho, escarola e almeirão)",
       "Mexerica",
@@ -287,7 +287,7 @@
       "Opção: Moqueca de PVT (leite de coco)",
       "Brócolis com vagem",
       "Salada de beterraba",
-      "Gelatina de morango",
+      "Maria Mole",
       "Minipão / refresco"
      ]
     },
@@ -302,7 +302,7 @@
    }
   },
   "quimica": {
-   "atualizadoEm": "2026-10-08T18:57:47.369Z",
+   "atualizadoEm": "2026-10-09T15:07:33.479Z",
    "dias": {
     "2026-10-05": {
      "almoco": [
